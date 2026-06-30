@@ -74,14 +74,14 @@ func advance_line() -> void:
 func _show_line() -> void:
 	var line: Dictionary = _lines[_idx]
 	var speaker := str(line.get("speaker", ""))
-	var name_lbl := get_node_or_null("Panel/VBox/Speaker")
+	var name_lbl := get_node_or_null("Panel/Margin/VBox/Speaker")
 	if name_lbl != null:
 		name_lbl.text = speaker.capitalize()
 		name_lbl.add_theme_color_override("font_color", _tint(speaker))
-	var swatch := get_node_or_null("Panel/VBox/Tint")
+	var swatch := get_node_or_null("Panel/Margin/VBox/Tint")
 	if swatch != null:
 		swatch.color = _tint(speaker)
-	var line_lbl := get_node_or_null("Panel/VBox/Line")
+	var line_lbl := get_node_or_null("Panel/Margin/VBox/Line")
 	if line_lbl != null:
 		line_lbl.text = str(line.get("line", ""))
 	var hint := get_node_or_null("Hint")
