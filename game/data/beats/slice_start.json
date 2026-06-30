@@ -1,0 +1,10 @@
+{
+  "id": "SLICE-START",
+  "act": 1,
+  "location": "havenreach",
+  "scene": "overworld",
+  "branch": null,
+  "effects": [],
+  "next": [],
+  "_note": "R3a integration-shell bootstrap beat. New Game routes here (scene 'overworld' -> SceneRouter OVERWORLD). The real Act-1 opening beat + slice content land in R3b."
+}

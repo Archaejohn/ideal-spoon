@@ -20,6 +20,12 @@ EventBus="*res://src/core/event_bus.gd"
 ContentDB="*res://src/data/content_db.gd"
 SettingsService="*res://src/core/settings_service.gd"
 GameState="*res://src/core/game_state.gd"
+; Round 3 coordinators (depend on the above): SaveManager owns persistence; SceneRouter owns
+; scene transitions; GameCoordinator owns the run + StoryDirector; BattleController bridges battles.
+SaveManager="*res://src/save/save_manager.gd"
+SceneRouter="*res://src/core/scene_router.gd"
+GameCoordinator="*res://src/core/game_coordinator.gd"
+BattleController="*res://src/battle/battle_controller.gd"
 
 [display]
 

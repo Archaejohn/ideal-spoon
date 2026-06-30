@@ -33,6 +33,12 @@ var _state                       # GameState (injected)
 var _bus                         # EventBus (injected, optional — may be null when headless)
 var _graph: StoryGraph
 var _open_branch_id: String = "" # the branch awaiting choose() ("" when none)
+## Per-branch "already resolved" ledger (REVIEW_phase3_round2 N3): branch_id -> chosen option_id.
+## Once a branch is resolved, re-entering its trigger (via goto_beat back-navigation, possible
+## once the SceneRouter exists) re-opens it, but choose() will NOT apply a SECOND option's
+## identity flags — SET never clears the first, so without this guard a second branch-identity
+## flag could be set. Mirrors GameState.applied_beats for branch choices.
+var _resolved_branches: Dictionary = {}
 
 func _init(content_db, game_state, event_bus = null) -> void:
 	_db = content_db
@@ -129,9 +135,17 @@ func choose(branch_id: String, option_id: String) -> Result:
 	var goto := str(opt.get("goto", ""))
 	if goto == "":
 		return Result.make_err("choose: option '%s' has no goto" % option_id)
-	var r := FlagOps.apply_effects(_state.flags, opt.get("effects", []))
-	if r.is_err():
-		return r
+	# Per-branch resolution guard (N3): a branch's identity flags are applied at most once. If the
+	# branch was already resolved with a DIFFERENT option, refuse — re-choosing must not set a
+	# second option's identity flags. Re-choosing the SAME option is idempotent (re-routes only).
+	var prior := str(_resolved_branches.get(branch_id, ""))
+	if prior != "" and prior != option_id:
+		return Result.make_err("choose: branch '%s' already resolved with option '%s'" % [branch_id, prior])
+	if prior == "":
+		var r := FlagOps.apply_effects(_state.flags, opt.get("effects", []))
+		if r.is_err():
+			return r
+		_resolved_branches[branch_id] = option_id
 	_open_branch_id = ""   # branch resolved; the goto target drives toward the merge beat
 	return goto_beat(goto)
 

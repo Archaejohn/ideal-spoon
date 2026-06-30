@@ -181,6 +181,30 @@ func test_load_latest_false_when_no_save():
 	var mgr := _make_manager(gs)
 	assert_false(mgr.load_latest(), "no save -> load_latest returns false (start fresh)")
 
+# --- N1: checkpoint-tier recovery (REVIEW_phase3_round2 N1, ADR-0005 §c) ---
+
+func test_load_latest_recovers_from_checkpoint_when_main_and_bak_corrupt():
+	var gs := _make_game_state(555)
+	var mgr := _make_manager(gs)
+	watch_signals(mgr)
+	# A valid pre-battle checkpoint captures a known state.
+	gs.current_beat_id = "CKPT-STATE"
+	gs.flags.set_flag("CHECKPOINT_FLAG")
+	assert_true(mgr.write_checkpoint("pre_battle"), "checkpoint write succeeds")
+	# Both main and its .bak exist but are corrupt on disk (the last-ditch recovery scenario).
+	var main_path := _dir.path_join("save_main.sav")
+	for p in [main_path, main_path + ".bak"]:
+		var f := FileAccess.open(p, FileAccess.WRITE)
+		f.store_string("corrupt}}}")
+		f.close()
+	# Mutate live state, then load: main+bak fail validation -> recover from the checkpoint.
+	gs.current_beat_id = "WIPED"
+	gs.flags.set_flag("CHECKPOINT_FLAG", false)
+	assert_true(mgr.load_latest(), "load_latest recovers from the checkpoint tier")
+	assert_eq(gs.current_beat_id, "CKPT-STATE", "state restored from the checkpoint")
+	assert_true(gs.flags.get_flag("CHECKPOINT_FLAG"), "checkpoint flag restored")
+	assert_signal_emitted_with_parameters(mgr, "save_recovered", ["checkpoint"], 0)
+
 # --- has_save / delete_all ---
 
 func test_has_save_and_delete_all():
