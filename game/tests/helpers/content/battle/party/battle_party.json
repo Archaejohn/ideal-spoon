@@ -1,0 +1,11 @@
+[
+  { "id": "hero", "name": "Hero", "role": "tank",
+    "base_stats": { "hp": 80, "atk": 20, "def": 8, "mag": 6, "res": 6, "spd": 12 },
+    "resource": "NONE", "growth": "test_curve",
+    "abilities": [ { "id": "enemy_strike", "learn_level": 1 } ] },
+
+  { "id": "mage", "name": "Mage", "role": "support",
+    "base_stats": { "hp": 50, "atk": 6, "def": 4, "mag": 24, "res": 10, "spd": 14 },
+    "resource": "BREATH", "growth": "test_curve",
+    "abilities": [ { "id": "steady", "learn_level": 1 }, { "id": "zap", "learn_level": 1 } ] }
+]

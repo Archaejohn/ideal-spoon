@@ -23,8 +23,13 @@ signal battle_started(encounter_id: String)
 signal battle_event(event: Variant)           # typed BattleEvent (battle/battle_event.gd)
 signal battle_over(result: int, xp: int, loot: Array)
 
-# --- Scene flow (ARCHITECTURE §7.9) ---
+# --- Scene flow (ARCHITECTURE §7.9, ADR-0008) ---
 signal state_changed(old_state: int, new_state: int)
+## StoryDirector -> SceneRouter decoupling (ADR-0008 "how the story engine drives scene
+## loads"). The director emits a scene INTENT (a target state key + ctx with beat/encounter/
+## location) instead of holding a hard ref to SceneRouter or touching the scene tree; the
+## SceneRouter (Round 3) listens and performs the actual transition.
+signal scene_intent(state_key: String, ctx: Dictionary)
 
 # --- Content ---
 signal content_loaded()

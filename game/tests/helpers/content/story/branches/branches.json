@@ -1,0 +1,12 @@
+[
+  {
+    "id": "FX-BR1",
+    "trigger_beat": "FX-BR-TRIGGER",
+    "merge_beat": "FX-MERGE",
+    "options": [
+      { "id": "left",  "label_key": "fx.left",  "effects": [ { "op": "SET", "flag": "FX_LEFT_TAKEN" } ],  "goto": "FX-LEFT" },
+      { "id": "right", "label_key": "fx.right", "effects": [ { "op": "SET", "flag": "FX_RIGHT_TAKEN" } ], "goto": "FX-RIGHT" },
+      { "id": "secret", "label_key": "fx.secret", "if_flag": "HAS_KEY", "effects": [ { "op": "SET", "flag": "FX_SECRET_TAKEN" } ], "goto": "FX-LEFT" }
+    ]
+  }
+]

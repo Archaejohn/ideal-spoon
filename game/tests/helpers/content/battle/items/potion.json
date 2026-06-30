@@ -1,0 +1,5 @@
+{
+  "id": "potion", "name": "Potion", "category": "consumable",
+  "effect": { "type": "HEAL", "power": 100, "target_kind": "ALLY_SINGLE" },
+  "stack_max": 99, "value": 20
+}

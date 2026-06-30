@@ -1,0 +1,31 @@
+[
+  { "id": "enemy_strike", "name": "Strike", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "ATK", "defense_stat": "DEF", "power": 100,
+    "element": "physical", "effects": [ { "type": "DAMAGE" } ], "accuracy": 100, "crit_permille": 0 },
+
+  { "id": "screech", "name": "Hollow Screech", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_ALL",
+    "power_stat": "ATK", "defense_stat": "DEF", "power": 80,
+    "element": "physical", "effects": [ { "type": "DAMAGE" } ], "accuracy": 100, "crit_permille": 0 },
+
+  { "id": "mend", "name": "Mend", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ALLY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 100,
+    "effects": [ { "type": "HEAL" } ], "accuracy": 100 },
+
+  { "id": "zap", "name": "Resonant Zap", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 120,
+    "element": "resonance", "effects": [ { "type": "DAMAGE" } ], "accuracy": 100, "crit_permille": 0 },
+
+  { "id": "steady", "name": "Steady", "kind": "ABILITY",
+    "cost": { "resource": "BREATH", "amount": 2 }, "target_kind": "ALLY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 100,
+    "effects": [ { "type": "HEAL" }, { "type": "CLEANSE", "count": 1 } ], "accuracy": 100 },
+
+  { "id": "hex", "name": "Hex", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 1,
+    "effects": [ { "type": "APPLY_STATUS", "status": "slow" } ], "accuracy": 100 }
+]

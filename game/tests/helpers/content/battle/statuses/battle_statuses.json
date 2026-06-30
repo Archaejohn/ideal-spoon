@@ -1,0 +1,23 @@
+[
+  { "id": "poison", "name": "Poison", "category": "ailment", "duration_turns": 3,
+    "stack_rule": "STACK", "tick_effect": { "type": "DAMAGE", "amount": 10 } },
+
+  { "id": "regen", "name": "Regen", "category": "buff", "duration_turns": 3,
+    "stack_rule": "REFRESH", "tick_effect": { "type": "HEAL", "amount": 15 } },
+
+  { "id": "haste", "name": "Haste", "category": "buff", "duration_turns": 5,
+    "stack_rule": "REFRESH", "atb_modifier_permille": 1300 },
+
+  { "id": "slow", "name": "Slow", "category": "debuff", "duration_turns": 5,
+    "stack_rule": "REFRESH", "atb_modifier_permille": 700 },
+
+  { "id": "attack_up", "name": "Attack Up", "category": "buff", "duration_turns": 3,
+    "stack_rule": "REFRESH", "stat_mod": { "stat": "ATK", "permille": 1500 } },
+
+  { "id": "defense_down", "name": "Defense Down", "category": "debuff", "duration_turns": 3,
+    "stack_rule": "REFRESH", "stat_mod": { "stat": "DEF", "permille": 500 } },
+
+  { "id": "songsick", "name": "Songsickness", "category": "ailment", "duration_turns": 3,
+    "stack_rule": "REFRESH", "tick_effect": { "type": "NONE" },
+    "atb_modifier_permille": 700, "on_apply": { "block_resource": "BREATH" } }
+]

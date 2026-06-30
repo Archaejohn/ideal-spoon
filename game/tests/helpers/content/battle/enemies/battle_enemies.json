@@ -1,0 +1,32 @@
+[
+  { "id": "dummy", "name": "Training Dummy",
+    "stats": { "hp": 30, "atk": 10, "def": 2, "mag": 0, "res": 0, "spd": 8 },
+    "xp": 25,
+    "ai": { "policy": "basic", "aggression_permille": 1000,
+      "abilities": [ { "ability": "enemy_strike", "weight": 100, "target_rule": "lowest_hp" } ] } },
+
+  { "id": "brute", "name": "Brute",
+    "stats": { "hp": 60, "atk": 14, "def": 4, "mag": 0, "res": 0, "spd": 6 },
+    "xp": 40,
+    "ai": { "policy": "basic", "aggression_permille": 1000,
+      "abilities": [ { "ability": "enemy_strike", "weight": 100, "target_rule": "lowest_hp" } ] } },
+
+  { "id": "crane", "name": "The Sleepless Crane", "is_boss": true,
+    "stats": { "hp": 120, "atk": 12, "def": 8, "mag": 0, "res": 4, "spd": 10 },
+    "weaknesses": ["resonance"], "resistances": ["physical"], "xp": 450,
+    "loot": [ { "item": "potion", "chance_permille": 1000 } ],
+    "ai": { "policy": "boss_phased", "aggression_permille": 700,
+      "abilities": [
+        { "ability": "enemy_strike", "weight": 60, "target_rule": "lowest_hp", "intent": "offense" },
+        { "ability": "screech", "weight": 40, "target_rule": "all_enemies",
+          "condition": { "type": "self_hp_below_permille", "value": 500 } } ] } },
+
+  { "id": "healer_bot", "name": "Mender",
+    "stats": { "hp": 50, "atk": 6, "def": 3, "mag": 18, "res": 6, "spd": 9 },
+    "xp": 60,
+    "ai": { "policy": "caster", "aggression_permille": 300,
+      "abilities": [
+        { "ability": "mend", "weight": 100, "target_rule": "lowest_hp_ally", "intent": "support",
+          "condition": { "type": "ally_down", "value": 0 } },
+        { "ability": "enemy_strike", "weight": 100, "target_rule": "lowest_hp", "intent": "offense" } ] } }
+]
