@@ -1,0 +1,12 @@
+{
+  "id": "A",
+  "name": "The Shared Dawn",
+  "final_choice": "SHARE",
+  "divergence_beat": "A4-06",
+  "requires": {
+    "unity_min": 5,
+    "flags_all": ["KESTREL_RECRUITED"],
+    "flags_any": ["ORDER_ALLIED", "TRUTH_SHARED"]
+  },
+  "epilogue_set": "ending_a_shared_dawn"
+}

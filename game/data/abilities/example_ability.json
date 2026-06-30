@@ -1,0 +1,18 @@
+{
+  "id": "steady",
+  "name": "Steady",
+  "owner": "wren",
+  "kind": "ABILITY",
+  "cost": { "resource": "BREATH", "amount": 2 },
+  "target_kind": "ALLY_SINGLE",
+  "power_stat": "MAG",
+  "defense_stat": "RES",
+  "power": 90,
+  "element": "resonance",
+  "effects": [
+    { "type": "HEAL" },
+    { "type": "CLEANSE", "count": 1 }
+  ],
+  "accuracy": 100,
+  "tags": ["song", "relight_downed_ally"]
+}

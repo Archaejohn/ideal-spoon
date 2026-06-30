@@ -1,0 +1,30 @@
+[
+  { "name": "RESONANT_REVEALED", "gating": true, "kind": "story", "set_at": ["A1-04"] },
+  { "name": "KESTREL_DOUBT", "gating": true, "kind": "branch", "set_at": ["A2-08"] },
+  { "name": "KESTREL_RECRUITED", "gating": true, "kind": "story", "set_at": ["A2-10"] },
+  { "name": "ORDER_ALLIED", "gating": true, "kind": "branch", "set_at": ["A3-09"] },
+  { "name": "TRUTH_SHARED", "gating": true, "kind": "branch", "set_at": ["A3-09"] },
+  { "name": "ROOKWISE_RECRUITED", "gating": true, "kind": "story", "set_at": ["A3-06"] },
+  { "name": "MARROW_REDEEMED", "gating": true, "kind": "story", "set_at": ["A4-03"] },
+  { "name": "BRAMBLE_SHARD_DEPARTURE", "gating": true, "kind": "story", "set_at": ["A2-03"] },
+  { "name": "BRAMBLE_SHARD_PROMISE", "gating": true, "kind": "story", "set_at": ["A2-04"] },
+
+  { "name": "SAVED_GLASSWASTES_REFUGEES", "gating": true, "kind": "unity_source", "set_at": ["A2-03"] },
+  { "name": "SAVED_VERDANCE_VILLAGERS", "gating": true, "kind": "unity_source", "set_at": ["A2-04"] },
+  { "name": "CONSCRIPTS_FREED", "gating": true, "kind": "unity_source", "set_at": ["A2-06"] },
+  { "name": "HUSH_SURVIVORS_SAVED", "gating": true, "kind": "unity_source", "set_at": ["A3-02"] },
+  { "name": "ALLIES_RALLIED", "gating": true, "kind": "unity_source", "set_at": ["A3-11"] },
+
+  { "name": "WARDEN_TRUTH_WHOLE", "gating": true, "kind": "derived" },
+  { "name": "FACTIONS_UNITED", "gating": true, "kind": "derived" },
+  { "name": "FINAL_CHOICE", "gating": true, "kind": "final_choice", "set_at": ["A4-06"] },
+  { "name": "ENDING", "gating": true, "kind": "ending", "set_at": ["A4-07"] },
+
+  { "name": "PELL_RITUAL_TAUGHT", "gating": false, "kind": "emotional", "set_at": ["A1-06b"] },
+  { "name": "FIRST_FLIGHT_WON", "gating": false, "kind": "emotional", "set_at": ["A1-06a"] },
+  { "name": "RELIGHTING_SHARED", "gating": false, "kind": "emotional", "set_at": ["A2-10b"] },
+  { "name": "HAVEN_RELIT", "gating": false, "kind": "emotional", "set_at": ["A3-04b"] },
+  { "name": "BRAMBLE_SACRIFICE", "gating": false, "kind": "emotional", "set_at": ["A4-06b"] },
+  { "name": "PIGGY_RECRUITED", "gating": false, "kind": "emotional", "set_at": ["SQ-PIGGY", "A3-13b"] },
+  { "name": "PIGGY_JOINED_LATE", "gating": false, "kind": "emotional", "set_at": ["A3-13b"] }
+]

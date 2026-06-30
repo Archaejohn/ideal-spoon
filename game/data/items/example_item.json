@@ -1,0 +1,9 @@
+{
+  "id": "lamp_herb",
+  "name": "Lamp-herb",
+  "category": "consumable",
+  "effect": { "type": "HEAL", "power": 120, "target_kind": "ALLY_SINGLE" },
+  "stack_max": 99,
+  "value": 30,
+  "tags": ["verdance_harvest"]
+}
