@@ -3,10 +3,16 @@
 > Live project status and resume point. Updated continuously and committed often.
 
 - **Project:** Aetherbound (working title) — offline single-player RPG, Godot 4.x, Android + Chromebook.
-- **Runtime start (Phase 0):** 2026-06-30T07:29:58Z
-- **Hard checkpoint (4h30m):** 2026-06-30T11:59:58Z
-- **Current phase:** Phase 1 — Story **COMPLETE; awaiting human "approved" at the single story gate.**
-- **Remote:** https://github.com/Archaejohn/ideal-spoon.git (origin) — push verified.
+- **Original runtime start (Phase 0):** 2026-06-30T07:29:58Z
+- **Timer RESET by Owner after story approval — new window start:** 2026-06-30T13:55:00Z
+- **Hard checkpoint (4h30m of new window):** 2026-06-30T18:25:00Z (5h window ends ~18:55Z)
+- **Current phase:** Phase 2 — Architecture (autonomous; no human gate).
+- **Story gate:** ✅ APPROVED by Owner. Story is locked; it is the game we build.
+- **Remote:** https://github.com/Archaejohn/ideal-spoon.git (origin) — push verified. Story merged to main (PR #1).
+
+## Owner functional requirements added at approval (baked into Definition of Done #13, #14)
+1. **Automatic, crash-safe saving + battle checkpoints** — no manual saves; survives phone shutoff/lock/app-kill; losing a battle resumes from a pre-battle checkpoint, not a restart.
+2. **Replayable endings** — after finishing, replay any ending from its story-divergence point (post-game selector).
 
 ## Done
 - **Phase 0 — Bootstrap:** complete.
@@ -18,12 +24,11 @@
   - Toolchain scripts (`tools/fetch_godot.sh`, `tools/run_tests.sh`).
   - ADR-0001 (tech stack), ADR-0002 (repo & remote).
 
-## In flight — AT THE HUMAN GATE
-- **Phase 1 — Story bible** on branch `story/story-bible`, PR opened. Complete deliverables in `docs/story/`:
-  `00_BRIEF` · `01_WORLD` · `02_CHARACTERS` · `03_MAIN_STORY` (beat ledger) · `04_BRANCHES_ENDINGS` (resolver) · `05_SIDEQUESTS` · `06_SCRIPT_KEY_SCENES` · `07_CONTINUITY_NOTES` · `08_REVIEW` · `STORY_BIBLE` (index) · `SUMMARY` (1-page).
-- Produced by a multi-agent writers' room (worldbuilder, character writer, plot architect, quest designer, script writer) + independent editor + content reviewer + a heart pass.
-- Independent review verdict: APPROVE WITH MINOR FIXES — all fixes applied (incl. mandatory age-appropriateness re-stage of A3-10).
-- **BLOCKED ON:** human reply "approved" (the single gate). Phase 2 (Architecture) does not begin until then.
+## Done
+- **Phase 1 — Story:** COMPLETE & APPROVED. Full bible in `docs/story/` (incl. heart pass, light & triumph pass, and mascot Piggy). Merged to main via PR #1.
+
+## In flight
+- **Phase 2 — Architecture.** Architect producing the system design package: module boundaries + ADRs for the story-graph/flag engine, ATB battle engine, **save/persistence (autosave + checkpoints + crash-safe)**, **ending-replay system**, scene/state-flow, and content-data schemas (beats/branches/flags/items/enemies/dialogue). Plus fetching a pinned Godot 4.3 + GUT for Phase 3 testing.
 
 ## Next steps
 1. Present 1-page story summary → **STOP for human "approved"** (the single human gate).
