@@ -22,3 +22,6 @@ Thumbs.db
 
 # Local Godot binary (downloaded by tools/, not committed)
 /tools/bin/
+
+# Generated AI reference images (build inputs, not shipped). Keep locally.
+art/refs/
