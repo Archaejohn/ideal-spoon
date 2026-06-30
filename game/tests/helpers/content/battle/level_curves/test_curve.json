@@ -1,0 +1,6 @@
+{
+  "id": "test_curve", "max_level": 50,
+  "xp_to_next": { "type": "poly", "base": 50, "factor": 25, "exp": 2 },
+  "growth_per_level": { "hp": 6, "atk": 1, "def": 1, "mag": 3, "res": 2, "spd": 1 },
+  "growth_overrides": { "10": { "mag": 5 }, "25": { "hp": 12 } }
+}
