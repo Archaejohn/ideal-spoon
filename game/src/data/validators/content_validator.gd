@@ -159,6 +159,8 @@ static func _validate_effects(kind: String, src: String, rid: String, effects) -
 			"INC_UNITY":
 				if not e.has("source_id"):
 					return _err(kind, src, rid, "effects", "INC_UNITY op missing 'source_id'")
+				if e.has("n") and int(e.get("n", 1)) < 1:
+					return _err(kind, src, rid, "effects", "INC_UNITY 'n' must be a positive integer (UNITY is monotonic +1)")
 			"SET_FINAL_CHOICE":
 				if not e.has("choice"):
 					return _err(kind, src, rid, "effects", "SET_FINAL_CHOICE op missing 'choice'")

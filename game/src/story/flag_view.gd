@@ -9,6 +9,20 @@
 class_name FlagView
 extends RefCounted
 
+## The underlying boolean flags that feed the resolver / derived methods. Changing any of
+## these alters the computed ending, so FlagStore must FREEZE exactly these after
+## lock_endings() (A3-13). Non-gating flavor flags (e.g. PIGGY_RECRUITED, set at A3-13b
+## AFTER the lock) are intentionally NOT here and remain writable post-lock (ADR-0003).
+const GATING_FLAGS := [
+	"KESTREL_RECRUITED",
+	"ORDER_ALLIED",
+	"TRUTH_SHARED",
+	"ROOKWISE_RECRUITED",
+	"MARROW_REDEEMED",
+	"BRAMBLE_SHARD_DEPARTURE",
+	"BRAMBLE_SHARD_PROMISE",
+]
+
 # --- gating underlying flags (read by the resolver / derived methods) ---
 var KESTREL_RECRUITED: bool = false
 var ORDER_ALLIED: bool = false

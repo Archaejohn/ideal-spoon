@@ -26,6 +26,11 @@ func get_flag(name: String) -> bool:
 	return bool(_flags.get(name, false))
 
 func set_flag(name: String, value: bool = true) -> void:
+	# A3-13 freeze: once locked, GATING flags are immutable (changing one would silently
+	# alter the computed ending). Non-gating flavor flags (e.g. PIGGY_RECRUITED set at
+	# A3-13b after the lock) remain writable. from_dict() bypasses this on purpose.
+	if _locked and FlagView.GATING_FLAGS.has(name):
+		return
 	if value:
 		_flags[name] = true
 	else:
@@ -44,6 +49,10 @@ func unity() -> int:
 ## source was already counted, or when at the 0..8 cap (ADR-0003).
 func add_unity_source(source_id: String, n: int = 1) -> void:
 	if _locked:
+		return
+	if n < 1:
+		# Non-positive increments would break the +1/monotonic invariant; ignore without
+		# burning the source slot (authored n<=0 is also rejected by the content validator).
 		return
 	if _unity_sources_applied.has(source_id):
 		return

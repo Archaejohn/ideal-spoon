@@ -37,6 +37,27 @@ func test_lock_freezes_unity():
 	s.add_unity_source("u2")             # should be ignored
 	assert_eq(s.unity(), 1, "unity frozen after lock")
 
+func test_lock_freezes_gating_flags_only():
+	var s := _store()
+	s.set_flag("KESTREL_RECRUITED")           # gating, set before lock
+	s.lock_endings()
+	# Gating flag changes are refused after lock (would alter the computed ending).
+	s.set_flag("ORDER_ALLIED")                # gating, attempted after lock
+	assert_false(s.get_flag("ORDER_ALLIED"), "gating flag cannot be set after lock")
+	s.set_flag("KESTREL_RECRUITED", false)    # clearing a gating flag also refused
+	assert_true(s.get_flag("KESTREL_RECRUITED"), "gating flag cannot be cleared after lock")
+	# Non-gating flavor flags (e.g. Piggy's A3-13b late join) still work post-lock.
+	s.set_flag("PIGGY_RECRUITED")
+	assert_true(s.get_flag("PIGGY_RECRUITED"), "non-gating flag still writable after lock")
+
+func test_add_unity_source_ignores_non_positive_n():
+	var s := _store()
+	s.add_unity_source("u_bad", 0)
+	assert_eq(s.unity(), 0, "n=0 does not change unity")
+	assert_eq(s.unity_sources_applied().size(), 0, "n=0 does not burn the source slot")
+	s.add_unity_source("u_bad", 1)            # same id can still count later with valid n
+	assert_eq(s.unity(), 1, "source still countable after a prior non-positive attempt")
+
 func test_enum_choices():
 	var s := _store()
 	assert_eq(s.final_choice(), Ids.FinalChoice.NONE, "final_choice defaults NONE")
