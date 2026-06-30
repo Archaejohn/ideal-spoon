@@ -56,9 +56,9 @@ func test_new_game_initializes_run_at_start_beat_with_party() -> void:
 	assert_eq(GameState.party.size(), 2, "starting party has Wren + Tam")
 	assert_eq(str(GameState.party[0].get("id", "")), "wren", "Wren is in the starting party")
 	assert_eq(str(GameState.party[1].get("id", "")), "tam", "Tam is in the starting party")
-	# The START beat is scene 'overworld' -> SceneRouter routed to the Overworld scene.
-	assert_true(_routed.has("res://src/ui/overworld/Overworld.tscn"),
-		"scene_intent routed New Game to the overworld; got %s" % str(_routed))
+	# The START beat is the Meadowmoor opening cutscene (scene 'dialogue') -> the Dialogue scene.
+	assert_true(_routed.has("res://src/ui/dialogue/Dialogue.tscn"),
+		"scene_intent routed New Game to the opening cutscene; got %s" % str(_routed))
 
 # --- New Game autosaves, and the run round-trips via load_latest (the Continue basis) ---
 
@@ -83,8 +83,8 @@ func test_continue_game_loads_and_routes() -> void:
 	_routed = []
 	assert_true(GameCoordinator.continue_game(), "continue_game succeeds")
 	assert_eq(GameState.current_beat_id, START_BEAT, "continue resumed the saved beat")
-	assert_true(_routed.has("res://src/ui/overworld/Overworld.tscn"),
-		"continue re-routed to the saved overworld scene")
+	assert_true(_routed.has("res://src/ui/dialogue/Dialogue.tscn"),
+		"continue re-routed to the saved opening cutscene scene")
 
 func test_has_save_false_on_a_clean_slate() -> void:
 	# No New Game performed in this test; the temp save dir is empty.

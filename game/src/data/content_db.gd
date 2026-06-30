@@ -84,6 +84,8 @@ func is_loaded() -> bool:
 # --- typed read-only accessors (ARCHITECTURE §6) ---
 
 func beat(id: String) -> Dictionary: return _catalogs["beats"].get(id, {})
+## Inline dialogue lines for a beat (R3b-2): an Array of { speaker, line }. [] when absent.
+func beat_dialogue(id: String) -> Array: return _catalogs["beats"].get(id, {}).get("dialogue", [])
 func branch(id: String) -> Dictionary: return _catalogs["branches"].get(id, {})
 func ending(id: String) -> Dictionary: return _catalogs["endings"].get(id, {})
 func item(id: String) -> Dictionary: return _catalogs["items"].get(id, {})

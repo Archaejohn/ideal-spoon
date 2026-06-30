@@ -42,6 +42,12 @@ var _turn_count: int = 0
 var _next_id: int = 0
 var _encounter: Dictionary = {}
 var _flee_allowed: bool = false
+## Rewards are rolled exactly ONCE, in _finish(), and cached here (MINOR-1, REVIEW_phase3_r3b1).
+## rewards() returns this cache once the battle is over so the in-stream BATTLE_OVER event and
+## the controller's battle_over signal report (and grant) the SAME loot — no double loot roll on
+## the `battle` RNG stream, and no divergence once any drop chance < 1000.
+var _final_rewards: Dictionary = {}
+var _rewards_rolled: bool = false
 
 func _init(rng_battle, rng_ai, content) -> void:
 	_rng_battle = rng_battle
@@ -62,6 +68,8 @@ func setup(player_combatants: Array, encounter: Dictionary) -> void:
 	_result = Result.ONGOING
 	_turn_count = 0
 	_next_id = 0
+	_final_rewards = {}
+	_rewards_rolled = false
 
 	for c in player_combatants:
 		c.side = Combatant.Side.PLAYER
@@ -405,13 +413,25 @@ func _finish() -> void:
 		_result = Result.WIN
 	elif not players_alive:
 		_result = Result.LOSE
-	_emit(BattleEvent.BATTLE_OVER, {"result": _result, "rewards": rewards()})
+	# Roll rewards exactly ONCE here (MINOR-1): the BATTLE_OVER event and every later rewards()
+	# call (incl. the controller's battle_over signal) share this cached, single loot roll.
+	_final_rewards = _roll_rewards()
+	_rewards_rolled = true
+	_emit(BattleEvent.BATTLE_OVER, {"result": _result, "rewards": _final_rewards})
 
 # --- rewards ---------------------------------------------------------------
 
-## XP + loot for a WIN (encounter rewards override enemy defaults). Loot rolled on the
-## "battle" stream here for determinism; controller may move it to "loot" in Round 3.
+## XP + loot for a WIN. Idempotent once the battle is over: returns the cache rolled in _finish()
+## so loot is never re-rolled (no double advance of the `battle` RNG cursor, no divergence between
+## the reported and granted loot). Pre-finish calls roll fresh (only used by run-to-completion tests).
 func rewards() -> Dictionary:
+	if _rewards_rolled:
+		return _final_rewards
+	return _roll_rewards()
+
+## The actual XP + loot computation (encounter rewards override enemy defaults). Loot rolled on
+## the "battle" stream for determinism (ADR-0009). Called once from _finish() (cached).
+func _roll_rewards() -> Dictionary:
 	if _result != Result.WIN:
 		return {"xp": 0, "items": []}
 	var enc_rewards: Dictionary = _encounter.get("rewards", {})

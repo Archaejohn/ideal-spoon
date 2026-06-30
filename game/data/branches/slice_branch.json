@@ -1,0 +1,24 @@
+{
+  "id": "BR-SLICE",
+  "trigger_beat": "SLICE-DOCKS",
+  "merge_beat": "SLICE-WRECK",
+  "options": [
+    {
+      "id": "help",
+      "label": "Help the stranded dock-hand",
+      "effects": [
+        { "op": "SET", "flag": "SLICE_HELPED_DOCKHAND" }
+      ],
+      "goto": "SLICE-HELP"
+    },
+    {
+      "id": "hurry",
+      "label": "Hurry to the wreck",
+      "effects": [
+        { "op": "SET", "flag": "SLICE_HURRIED_WRECK" }
+      ],
+      "goto": "SLICE-HURRY"
+    }
+  ],
+  "_note": "R3b-2 slice diverge/merge fork at the Hollowgate docks. Each option sets a distinct (non-gating) identity flag and routes to its own beat; both reconverge at merge_beat SLICE-WRECK. Single-owner: the option owns its identity flag (ADR-0003)."
+}

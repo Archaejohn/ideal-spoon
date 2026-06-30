@@ -11,5 +11,10 @@
   { "id": "enc_boss", "enemies": [ { "enemy": "crane", "count": 1 } ],
     "formation": "single_back", "flee_allowed": false, "ambush": "none",
     "victory": "all_enemies_down", "defeat": "all_party_down",
-    "rewards": { "xp": 450, "items": [ { "item": "potion", "chance_permille": 1000 } ] } }
+    "rewards": { "xp": 450, "items": [ { "item": "potion", "chance_permille": 1000 } ] } },
+
+  { "id": "enc_loot_chance", "enemies": [ { "enemy": "dummy", "count": 1 } ],
+    "formation": "single_back", "flee_allowed": false, "ambush": "none",
+    "victory": "all_enemies_down", "defeat": "all_party_down",
+    "rewards": { "xp": 10, "items": [ { "item": "potion", "chance_permille": 500 } ] } }
 ]

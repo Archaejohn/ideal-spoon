@@ -1,10 +1,20 @@
 {
   "id": "SLICE-START",
   "act": 1,
-  "location": "hollowgate_wreck",
-  "scene": "overworld",
+  "location": "meadowmoor",
+  "scene": "dialogue",
   "branch": null,
-  "effects": [],
-  "next": ["SLICE-BATTLE"],
-  "_note": "R3b-1 slice entry. New Game routes here (overworld). 'Enter the wreck' advances the spine to SLICE-BATTLE (the Sleepless Crane). The full Meadowmoor->wreck journey is R3b-2."
+  "effects": [
+    { "op": "SET", "flag": "SLICE_OPENING_SEEN" }
+  ],
+  "next": ["SLICE-HOLLOWGATE"],
+  "dialogue_set": "slice_open_lamp_bell",
+  "dialogue": [
+    { "speaker": "pell", "line": "Morning bell's rung, Wren. The island's awake. But our lamp isn't, quite. Tell me what you hear." },
+    { "speaker": "wren", "line": "It's... tired. Like a song someone's humming in their sleep. It keeps almost stopping. Then it remembers how to go." },
+    { "speaker": "pell", "line": "Most folk just see a light. You hear the whole heart of it. The light isn't ours to use up, child. It's ours to tend." },
+    { "speaker": "wren", "line": "A lamp is a garden, not a fire. You don't burn a garden to keep warm." },
+    { "speaker": "pell", "line": "A shadow on the gold. Trouble that flies a flag. Take the Driftwing to Hollowgate, Wren -- find the old wreck before they do." }
+  ],
+  "_note": "R3b-2 slice opening (A1-01 lamp-bell, adapted from 06). CUTSCENE at Meadowmoor: Wren + Keeper Pell. Dialogue completion advances the spine to Hollowgate."
 }

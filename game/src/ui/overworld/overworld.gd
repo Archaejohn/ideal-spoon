@@ -16,9 +16,9 @@ func _ready() -> void:
 	var close_btn := get_node_or_null("PauseMenu/Panel/Margin/VBox/Close")
 	if close_btn != null:
 		close_btn.pressed.connect(_close_menu)
-	# R3b-1 slice affordance: advance the story spine (e.g. SLICE-START -> SLICE-BATTLE), which
-	# the SceneRouter turns into the next scene (the Sleepless Crane battle). R3b-2 replaces this
-	# with the real Meadowmoor->wreck journey + dialogue.
+	# Generic in-flow progression: advance the story spine, which the StoryDirector turns into the
+	# next scene_intent (R3b-2). The slice journey itself runs through the Dialogue/Location scenes;
+	# this Overworld is the neutral fallback map (e.g. the post-flee return destination).
 	var advance_btn := get_node_or_null("HUD/Advance")
 	if advance_btn != null:
 		advance_btn.pressed.connect(_advance_story)

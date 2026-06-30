@@ -21,8 +21,8 @@ enum AppState { BOOT, TITLE, OVERWORLD, TOWN, DUNGEON, BATTLE, CUTSCENE, MENU, C
 const STATE_TO_SCENE := {
 	"TITLE": "res://src/ui/Title.tscn",
 	"OVERWORLD": "res://src/ui/overworld/Overworld.tscn",
-	"TOWN": "res://src/ui/overworld/Overworld.tscn",
-	"DUNGEON": "res://src/ui/overworld/Overworld.tscn",
+	"TOWN": "res://src/ui/overworld/Location.tscn",
+	"DUNGEON": "res://src/ui/overworld/Location.tscn",
 	"BATTLE": "res://src/ui/battle/Battle.tscn",
 	"CUTSCENE": "res://src/ui/dialogue/Dialogue.tscn",
 	"DIALOGUE": "res://src/ui/dialogue/Dialogue.tscn",

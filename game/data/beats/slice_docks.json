@@ -1,0 +1,15 @@
+{
+  "id": "SLICE-DOCKS",
+  "act": 1,
+  "location": "hollowgate",
+  "scene": "dialogue",
+  "branch": "BR-SLICE",
+  "effects": [],
+  "next": ["SLICE-WRECK"],
+  "dialogue_set": "slice_docks_choice",
+  "dialogue": [
+    { "speaker": "tam", "line": "Wren! That dock-hand's tangled in a mooring line -- the tide of the island's tilting and he can't get free." },
+    { "speaker": "wren", "line": "And the wreck's just past the gantry. If the harvester gets there first we lose our chance." }
+  ],
+  "_note": "R3b-2 branch trigger (BR-SLICE). A small, age-appropriate fork at the Hollowgate docks: help the stranded dock-hand vs. hurry to the wreck. Both options merge at SLICE-WRECK. next[] is the merge target so the graph is connected even if read linearly."
+}

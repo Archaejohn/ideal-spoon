@@ -40,6 +40,32 @@ func test_scripted_encounter_runs_to_victory_with_rewards():
 	var last = eng.events()[eng.events().size() - 1]
 	assert_eq(last["type"], "battle_over", "stream terminates with battle_over")
 
+## MINOR-1 (REVIEW_phase3_r3b1): a WIN's loot is rolled EXACTLY ONCE (in _finish, cached). The
+## in-stream BATTLE_OVER event and every rewards() call (incl. the controller's battle_over signal)
+## report and grant the SAME loot, and rewards() never re-advances the `battle` RNG cursor.
+func test_rewards_are_rolled_exactly_once_on_win():
+	var svc = autofree(_svc(31415))
+	var eng = _engine(svc)
+	# enc_loot_chance has a 500-permille drop, so a second roll could DIVERGE if not cached.
+	eng.setup([_hero({"hp": 80, "atk": 20, "def": 8, "spd": 12})], _db.encounter("enc_loot_chance"))
+	for _i in 12:
+		eng.queue_action(BattleAction.attack(0, 1))
+	eng.run_until_over()
+	assert_eq(eng.result(), EngineScript.Result.WIN, "hero wins => rewards available")
+
+	# The single loot roll already happened inside _finish(); the cursor must now be stable.
+	var cursor_after_finish: int = svc.stream("battle").get_cursor()
+	var r1: Dictionary = eng.rewards()
+	var r2: Dictionary = eng.rewards()
+	var cursor_after_calls: int = svc.stream("battle").get_cursor()
+	assert_eq(cursor_after_calls, cursor_after_finish, "rewards() does NOT re-roll loot (battle cursor stable)")
+	assert_eq(r1, r2, "rewards() is idempotent across calls")
+
+	# The in-stream BATTLE_OVER event reports the SAME loot rewards() grants (no divergence).
+	var over: Dictionary = eng.events()[eng.events().size() - 1]
+	assert_eq(str(over["type"]), "battle_over", "stream terminates with battle_over")
+	assert_eq(over["rewards"], r1, "BATTLE_OVER event loot == the loot rewards() grants")
+
 func test_two_runs_same_seed_produce_identical_event_streams():
 	var a = autofree(_svc(2024))
 	var b = autofree(_svc(2024))

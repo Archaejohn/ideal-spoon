@@ -18,7 +18,7 @@ const SCHEMA := {
 	"beats": {
 		"id": "id",
 		"required": {"id": "str", "act": "int", "location": "str", "scene": "str", "effects": "array", "next": "array"},
-		"enums": {"scene": ["dialogue", "battle", "overworld", "cutscene", "branch", "ending"]},
+		"enums": {"scene": ["dialogue", "battle", "overworld", "town", "dungeon", "cutscene", "branch", "ending"]},
 	},
 	"branches": {
 		"id": "id",
@@ -122,6 +122,12 @@ static func validate_record(kind: String, rec: Dictionary) -> Result:
 	# kind-specific structural checks
 	match kind:
 		"beats":
+			# Optional inline dialogue (R3b-2): an array of { speaker, line } objects rendered by
+			# the Dialogue scene for CUTSCENE/DIALOGUE beats.
+			if rec.has("dialogue"):
+				var dr := _validate_dialogue(src, rid, rec["dialogue"])
+				if dr.is_err():
+					return dr
 			return _validate_effects(kind, src, rid, rec.get("effects", []))
 		"branches":
 			for opt in rec.get("options", []):
@@ -140,6 +146,19 @@ static func validate_record(kind: String, rec: Dictionary) -> Result:
 			var req = rec.get("requires", {})
 			if not (req is Dictionary):
 				return _err(kind, src, rid, "requires", "must be an object")
+	return Result.make_ok()
+
+## Validate an optional inline dialogue list (R3b-2): an array of { speaker:str, line:str }.
+static func _validate_dialogue(src: String, rid: String, dialogue) -> Result:
+	if not (dialogue is Array):
+		return _err("beats", src, rid, "dialogue", "must be an array")
+	for d in dialogue:
+		if not (d is Dictionary):
+			return _err("beats", src, rid, "dialogue", "each line must be an object")
+		if not (d.get("speaker", null) is String) or str(d.get("speaker", "")) == "":
+			return _err("beats", src, rid, "dialogue", "each line needs a non-empty 'speaker'")
+		if not (d.get("line", null) is String) or str(d.get("line", "")) == "":
+			return _err("beats", src, rid, "dialogue", "each line needs a non-empty 'line'")
 	return Result.make_ok()
 
 ## Validate a list of effect ops (closed vocabulary, required sub-fields).

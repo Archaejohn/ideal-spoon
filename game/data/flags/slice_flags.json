@@ -1,0 +1,6 @@
+[
+  { "name": "SLICE_OPENING_SEEN", "gating": false, "kind": "story", "set_at": ["SLICE-START"] },
+  { "name": "SLICE_HELPED_DOCKHAND", "gating": false, "kind": "branch", "set_at": ["SLICE-DOCKS"] },
+  { "name": "SLICE_HURRIED_WRECK", "gating": false, "kind": "branch", "set_at": ["SLICE-DOCKS"] },
+  { "name": "SLICE_BOSS_CLEARED", "gating": false, "kind": "story", "set_at": ["SLICE-AFTER"] }
+]

@@ -39,10 +39,15 @@ enum AppState { BOOT, TITLE, OVERWORLD, TOWN, DUNGEON, BATTLE, CUTSCENE, MENU, C
 - **TITLE** — `ui/Title`: New Game, Continue (enabled iff `SaveManager.has_save()`), Settings, Credits,
   and Crossroads (enabled iff `GAME_COMPLETED`).
 - **OVERWORLD / TOWN / DUNGEON** — `overworld/*`: explorable scenes; entering/leaving each fires an
-  autosave (ADR-0005 "overworld map change").
+  autosave (ADR-0005 "overworld map change"). R3b-2: TOWN and DUNGEON share one reusable
+  `overworld/Location.tscn` (it reads `current_state()` + `ctx.location` to theme itself); OVERWORLD
+  keeps `overworld/Overworld.tscn` as the neutral fallback map.
 - **BATTLE** — `ui/battle/*`: hosts `BattleController`; entered with an encounter context.
-- **CUTSCENE** — `ui/dialogue/*`: plays a dialogue/cutscene set; covers both `scene:"dialogue"` and
-  `scene:"cutscene"` beats and branch-choice presentation (`scene:"branch"`).
+- **CUTSCENE** — `ui/dialogue/Dialogue.tscn`: renders a beat's inline `dialogue` (ADR-0007) one line
+  at a time (speaker + line, advance on click/Enter); covers `scene:"dialogue"` and `scene:"cutscene"`
+  beats and branch-choice presentation (`scene:"branch"` — it shows the offered options and calls
+  `GameCoordinator.choose_branch`). On completion it calls `GameCoordinator.advance_story()` (or routes
+  to TITLE at a terminal beat).
 - **MENU** — pause/inventory/party/settings, pushed as an **overlay** over the current base scene; its
   close fires an autosave.
 - **CROSSROADS** — `ui/crossroads/*`: post-game ending-replay selector (ADR-0006).
@@ -68,7 +73,9 @@ The beat record's `scene` field (ADR-0007) maps to a state:
 | `dialogue`, `cutscene` | `CUTSCENE` |
 | `branch` | `CUTSCENE` (presents `branch_options`, then `StoryDirector.choose`) |
 | `battle` | `BATTLE` (with `encounter` id) |
-| `overworld` | `OVERWORLD`/`TOWN`/`DUNGEON` (per `location`) |
+| `overworld` | `OVERWORLD` |
+| `town` | `TOWN` (Location scene) |
+| `dungeon` | `DUNGEON` (Location scene) |
 | `ending` | `CUTSCENE` (epilogue), then `CROSSROADS` unlock |
 
 Flow per beat:

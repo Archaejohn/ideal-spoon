@@ -1,0 +1,15 @@
+{
+  "id": "SLICE-HURRY",
+  "act": 1,
+  "location": "hollowgate",
+  "scene": "dialogue",
+  "branch": null,
+  "effects": [],
+  "next": ["SLICE-WRECK"],
+  "dialogue_set": "slice_hurry",
+  "dialogue": [
+    { "speaker": "wren", "line": "I'm sorry -- someone will come for you. We can't let them reach the wreck first." },
+    { "speaker": "tam", "line": "Straight to the hatch, then. Quick and quiet, like you like it." }
+  ],
+  "_note": "R3b-2 BR-SLICE option 'hurry' target. Sets SLICE_HURRIED_WRECK (via the branch option). Converges on SLICE-WRECK."
+}
