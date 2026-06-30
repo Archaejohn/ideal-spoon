@@ -1,0 +1,29 @@
+{
+  "id": "BR1",
+  "trigger_beat": "A2-02",
+  "merge_beat": "A2-05",
+  "options": [
+    {
+      "id": "glasswastes",
+      "label_key": "br1.glasswastes",
+      "effects": [
+        { "op": "SET", "flag": "SAVED_GLASSWASTES" },
+        { "op": "SET", "flag": "BRAMBLE_SHARD_DEPARTURE" },
+        { "op": "SET", "flag": "MIRA_RECRUITED" },
+        { "op": "INC_UNITY", "amount": 1, "if_flag": "SAVED_GLASSWASTES_REFUGEES" }
+      ],
+      "goto": "A2-03"
+    },
+    {
+      "id": "verdance",
+      "label_key": "br1.verdance",
+      "effects": [
+        { "op": "SET", "flag": "SAVED_VERDANCE" },
+        { "op": "SET", "flag": "BRAMBLE_SHARD_PROMISE" },
+        { "op": "SET", "flag": "MIRA_RECRUITED" },
+        { "op": "INC_UNITY", "amount": 1, "if_flag": "SAVED_VERDANCE_VILLAGERS" }
+      ],
+      "goto": "A2-04"
+    }
+  ]
+}

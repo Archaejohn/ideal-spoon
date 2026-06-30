@@ -1,0 +1,14 @@
+{
+  "id": "sleepless_crane",
+  "name": "The Sleepless Crane",
+  "is_boss": true,
+  "stats": { "hp": 1200, "atk": 70, "def": 40, "mag": 30, "res": 50, "spd": 18 },
+  "weaknesses": ["resonance"],
+  "resistances": ["physical"],
+  "ai": "boss_phased",
+  "abilities": ["crane_sweep", "hollow_screech"],
+  "xp": 450,
+  "loot": [
+    { "item": "wellstone_shard", "chance": 1.0 }
+  ]
+}

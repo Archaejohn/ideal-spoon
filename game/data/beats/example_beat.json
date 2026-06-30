@@ -1,0 +1,14 @@
+{
+  "id": "A1-04",
+  "act": 1,
+  "location": "meadowmoor",
+  "scene": "cutscene",
+  "branch": null,
+  "effects": [
+    { "op": "SET", "flag": "RESONANT_REVEALED" },
+    { "op": "SET", "flag": "TUT_STEADY" }
+  ],
+  "next": ["A1-05"],
+  "dialogue_set": "a1_04_lamp_relit",
+  "checkpoint": false
+}
