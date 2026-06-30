@@ -6,7 +6,7 @@
 
 **The heart of it:** This isn't good vs. evil. It's **hoarding vs. sharing in a dying world.** The villain, **High Regent Thane**, is sincere and grieving — he believes saving a few is the only mercy left. The hero's dark mirror, **Marrow**, is a fellow Resonant who lost hope. The question the whole game builds toward is not *who* lives, but *how the world chooses to live together.*
 
-**Cast (found family):** Wren (the listening heart) · **Sable** the wry skyship captain who lost her home · **Tam** the excitable young inventor · **Mira** the gentle Order healer torn between faith and evidence · **Kestrel** the defecting sky-knight · **Bramble** the small awakened machine who becomes a person · (optional) **Rookwise** the exiled scholar.
+**Cast (found family):** Wren (the listening heart) · **Sable** the wry skyship captain who lost her home · **Tam** the excitable young inventor · **Mira** the gentle Order healer torn between faith and evidence · **Kestrel** the defecting sky-knight · **Bramble** the small awakened machine who becomes a person · **Piggy** the whimsical mascot — a fluffy gray baby emperor penguin with the comic dignity of an Emperor and one true law, *"when a small one is sad, the Emperor stays"* · (optional) **Rookwise** the exiled scholar.
 
 **Shape (four acts, FF-VI-style two halves):**
 - **Act I — The Keeper's Lamp:** home, Wren's Song awakens, the flight from Meadowmoor, first companions, the hub city Hollowgate.

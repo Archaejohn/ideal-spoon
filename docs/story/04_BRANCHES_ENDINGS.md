@@ -109,6 +109,8 @@ These flags record the game's personal beats — its lows **and** its highs. **N
 | `SABLE_RIFT` | A3-03b | The Wren-vs-Sable fracture opened. |
 | `SABLE_RECONCILED` | A3-03c | The fracture healed via Sable's rescue-run. |
 | `BRAMBLE_SACRIFICE` | A4-06b | See above; set on the Share/Sleep/Take paths only. |
+| `PIGGY_RECRUITED` | SQ-PIGGY *or* A3-13b | The mascot Piggy joined the party. **Pure flavor; never gates anything** — read only for party presence and his scene/callback lines. |
+| `PIGGY_JOINED_LATE` | A3-13b | Piggy joined via the late fallback rather than SQ-PIGGY (drives the A3-13b "found in the deep" flavor). |
 
 ### 3.2 The UNITY counter
 

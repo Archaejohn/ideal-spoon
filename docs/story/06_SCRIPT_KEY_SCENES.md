@@ -1106,6 +1106,98 @@ BRAMBLE: (pleased, filing it away) ...I am four festivals from funny. (beat) I a
 
 ---
 
+# 6e. SQ-PIGGY — THE CRATE THAT SAID *HWONK* — THORNHOLT (RECRUIT PIGGY)
+
+> *The mascot's introduction & recruitment — establish the voice, the trumpeting* "Hwonk!" *tic, the comic-Emperor gag, and the whimsy. Available anytime in Acts II–III on revisitable Thornholt. Non-gating: sets `PIGGY_RECRUITED` only (never `PIGGY_JOINED_LATE`). Kind comedy, never cruel. Music: a tiny, pompous royal fanfare that keeps puffing itself grander than it is.*
+
+```
+[EXTERIOR — THORNHOLT JUNK-MARKET. Ramps, junk-art, loud music, crates of dredged Skyborn relics. A frustrated SALVAGE CREW stands around one item that has drawn an annoyed crowd: a smooth, egg-shaped relic-POD, dove-pale and warm, faintly humming gold. Every few seconds it makes an indignant, trumpeting blast — "HWONK!" — that drowns out the auctioneer. The party drifts over: WREN, TAM, BRAMBLE, and SABLE.]
+```
+
+SALVAGE BOSS: (at the end of her rope) Three days. THREE days it's done that. Scared off every buyer in port. Can't pry it, can't sell it, can't sleep. (spotting Wren) ...You. You're the Resonant girl. Crack the noisy egg and I'll pay *you.*
+
+TAM: (already vibrating, third-hand gauntlet flexing) Okay okay okay — a SEALED Skyborn pod, still warm, still charged? Do you have any idea — no, you don't — *I'll* open it, I've got eleven tools that —
+
+```
+[Hard CUT of comedy: a quick montage of Tam's tools failing. Pry-bar — HWONK. Resonance-coupler — HWONK. He puts an ear to it; it HWONKS directly into his ear and he falls over. With every attempt the pod sounds louder and, somehow, more *offended.*]
+```
+
+TAM: (flat on his back, soot-faced, delighted anyway) ...It's judging me. The egg is JUDGING me.
+
+WREN: (crouching by the pod, tilting her head — she's listening) Tam, stop poking it. (softly, to the pod) It's not locked. Listen — it's not even broken. It's just... cross. (a beat) I don't think it wants a crowbar. I think it wants someone to *ask.*
+
+```
+[>>> She LISTENS — a soft ring spreads. The player HEARS what Wren hears: the pod isn't machine-noise. It's a small, regal, indignant little MELODY — a tiny fanfare with its arms crossed. Wren smiles.]
+```
+
+WREN: (warm, both hands cupped near the warm shell — not touching, asking) Hi. I'm Wren. I'm sorry about the crowbars. (she hums — the Song motif, gentle and kind) You can come out. Nobody's going to pry. Promise.
+
+```
+[The pod's HWONK softens — a questioning little note. Then, like a flower, it UNFOLDS, petals of pale Skyborn shell peeling back in the warm gold light. Inside, blinking up with two enormous ink-drop eyes, sits a fluffy gray baby emperor penguin, a frayed thread of gold cloth knotted at his neck. The crowd goes quiet. He looks around at all of them. Then he stands — to his full, magnificent two inches — puffs out his downy chest, and the little crest of fluff on his head springs upright like a crown.]
+```
+
+PIGGY: (a triumphant trumpet, flippers thrown wide) ***HWONK!*** (beaming) Fear not, good citizens — the Emperor has *arrived,* and the Emperor is *pleased!*
+
+SABLE: (deadpan, after a long beat) ...It's a bird. The screaming egg was a tiny bird.
+
+PIGGY: (rounding on her with enormous dignity) The Emperor is a *penguin,* madam, and you will find that is a *very different and superior thing.* (graciously, flippers behind his back) But the Emperor is in a *forgiving* humor today. You are pardoned for the crowbars. All of you. Even — (a wounded glance at Tam) — *him.*
+
+TAM: (scrambling up, awestruck and thrilled) It TALKS. Wren — Wren, it *talks* — what ARE you, where did you come *from*, what's inside you, can I —
+
+PIGGY: (drawing himself up) "What" — ? *Who,* young inventor. The Emperor is a *who.* (then, the first tiny crack — the crest droops half an inch, the bravado wobbles) ...As to *where the Emperor came from* — (a small, brave puff back up) — that is a matter of high state secrecy. (quieter, almost to himself) The pod was dark a long while. The Emperor does not entirely... recall. (recovering, grand again) But an Emperor needs no past! Only a loyal court and a noble cause! *Hwonk!*
+
+BRAMBLE: (which has been studying him with total seriousness, tilting its head) ...Noted. You are the Emperor. (a beat) Of what jurisdiction?
+
+PIGGY: (without missing a beat, gesturing magnanimously at the entire sky) ...*Everything,* small brass one. Provisionally. Pending coronation.
+
+BRAMBLE: (filing this away, deadpan) ...I will require documentation. (a beat) I am keeping a list.
+
+WREN: (laughing softly, charmed, kneeling to his level) Well, your Majesty — we're not really a court. We're sort of a... family. That keeps the light lit. (gently) Would you like to come with us?
+
+PIGGY: (the eyes go HUGE; the crest shoots up; this is plainly the nicest thing anyone has ever said to him) ...A *family.* (covering the feeling with a magnificent trumpet) *HWONK!* — that is to say — the Emperor will *graciously permit* it! Yes! The Emperor shall accompany you, and bring *light,* and *good cheer,* and — (eyeing Sable's distant ship) — knight that vessel at the earliest opportunity!
+
+```
+[The SALVAGE BOSS clears her throat, jerking a thumb at the pod — the dispute. She isn't cruel, just broke.]
+```
+
+SALVAGE BOSS: Hold on. That relic came up in MY net. Bird included. "Sold as-is." (uncomfortable) ...I got a crew to keep aloft, same as anybody.
+
+```
+[>>> CHOICE — both paths recruit Piggy; only the reward differs:]
+[  ▸ PAY HER FAIRLY for the pod (buy his freedom) → grateful crew becomes a recurring Thornholt discount vendor.]
+[  ▸ MAKE THE CASE that he's a person, not salvage → sky-folk reputation + a morale-boon item.]
+```
+
+WREN: (if MAKE THE CASE — quiet, certain, the whole game's thesis in miniature) He's not a *relic*, though. He's not a thing you found. (standing, to the gathered market) You all heard him. He's scared, and he's brave, and he's *somebody.* You can't sell a somebody. (beat) We don't do that anymore. Not in a falling sky. We keep each other.
+
+```
+[MIRA (if present) steps up beside her, gentle and immovable, and the crowd — shamed, then warmed — comes around. The salvage boss waves them off, gruff but relieved to be on the right side of it.]
+```
+
+PIGGY: (deeply moved, sniffling, then trumpeting to hide it) *Hwonk!* ...The Emperor was NOT crying. The Emperor had a draft. In his eye. (to Wren, small and sincere under the pomp) ...You asked nicely. (touching the gold scrap at his neck) The Emperor waited a *very* long time, in the dark, for someone who would ask nicely instead of prying. (a brave little puff) Worth the wait. *Obviously.* Worth the wait.
+
+```
+[He waddles over and, with enormous ceremony, taps Wren once on each shoulder with a flipper.]
+```
+
+PIGGY: (grandly) The Emperor hereby appoints you Royal Keeper of the Light. (quieter, the real thing) ...which only means: the Emperor noticed you carry a lot of it. (beat) He will help carry. That is also a Keeper's job. He read that somewhere. Possibly in the pod. It was *very* dark in the pod.
+
+WREN: (warm, blinking back her own tears) ...Then welcome aboard, Piggy.
+
+PIGGY: (the crest at full mast, radiant) ***HWONK!*** (to the whole party) ONWARD, loyal court! To light! To cheer! To — (peering toward the docks) — that ship I am about to knight!
+
+SABLE: (already walking off, fighting a grin and losing) Touch my wheel and you're knighting the *mist,* your Majesty.
+
+PIGGY: (waddling after her at top speed, undeterred, joyous) The Emperor accepts these terms with DIGNITY! *Hwonk! Hwonk!*
+
+```
+[The family heads for the docks, Piggy waddling proudly in the middle of them, Bramble solemnly taking notes for "the list." For one bright afternoon, they picked up a small, ridiculous, glad thing — for no reason but that it was glad — and they are all the lighter for it.]
+
+[>>> FLAG SET: PIGGY_RECRUITED = true. (Non-gating — does not touch UNITY, derived flags, or the resolver.) CUT back to the world map / onward.]
+```
+
+---
+
 # 7. A3-08–A3-09 — THE ORDER'S SECRET + BR3 — STILLMERE
 
 > *The confession (A3-08) and BOTH choices of BR3 (A3-09): expose vs. protect.*
@@ -1281,6 +1373,78 @@ MARROW: (pausing in the drifting husks — the smallest crack, not enough yet) .
 
 ```
 [>>> FLAG SET: MARROW_REACHED = true (the reaching happened — but the redemption is not yet earned; resolves at A4-03 by the locked flags). Hold on Wren, alone, still humming the one note into the grey. The reaching mattered, even unanswered. CUT toward A3-11.]
+```
+
+---
+
+# 8b. A3-13b — THE EMPEROR IN THE DEEP — THE DESCENT *(conditional fallback)*
+
+> *The mascot's LATE auto-join — the touching one. Fires ONLY if `PIGGY_RECRUITED == false` (player never did SQ-PIGGY). On the silent, frightened descent toward the Wellspring — the family at its lowest — Piggy turns up impossibly out of the dark to bring the light back. Establishes the same voice & Emperor gag as SQ-PIGGY, but this scene is built around his ONE genuinely tender note: the mascot who shows up exactly when you need cheering. Sets the non-gating flags `PIGGY_RECRUITED` and `PIGGY_JOINED_LATE` (after the A3-13 flag-lock; does NOT feed UNITY / derived flags / the resolver). If Piggy was already recruited, this entire scene is SKIPPED.*
+
+```
+[INTERIOR — THE DESCENT. After the gate opens (A3-12) and the world holds its breath (A3-13), the party sinks slowly down through the mist toward the Wellspring on a thin shelf of Skyborn stone, lanterns barely holding back the dark. This is the deepest, quietest, most frightening place they've been. The Song is almost gone. No one is joking. WREN sits a little apart from the others, the Keeper's Lamp cupped in both hands, staring into the grey below — carrying Pell, carrying the choice that's coming, carrying all of it.]
+
+[MUSIC: almost nothing. Wren's motif, thin and alone, the way the game began.]
+```
+
+WREN: (barely above a breath, to the Lamp, to Pell) ...two taps. a breath. (her voice doesn't steady this time; it wavers) I don't — I don't know if I can do the next part, Keeper. It's so far down. And it's so quiet.
+
+```
+[Silence. The mist swirls. And then — from somewhere below them, somewhere there should be NOTHING — a small, faint, indignant, trumpeting sound drifts up through the dark:]
+```
+
+PIGGY: (echoing up, distant) ...*hwonk.* (closer) ...*Hwonk?* (and then, full volume, delighted) ***HWONK!***
+
+```
+[Everyone freezes. A little fluffy gray shape comes waddling up the stone shelf out of the impossible deep — Piggy, slightly out of breath, gold sash askew, crest bobbing, utterly unbothered to be miles below the world. He stops, plants his flippers on his hips, and surveys the stunned, grief-worn family like a monarch arriving fashionably late to his own war.]
+```
+
+TAM: (whispering, gobsmacked) ...Where did — how is there a *penguin* down here —
+
+SABLE: (rubbing her eyes) Kid, I have flown this entire sky and I have no — no, you know what, I'm too tired. Sure. Penguin. Hello, penguin.
+
+PIGGY: (sweeping a magnificent bow) *Emperor* penguin, madam. And the Emperor does not explain how the Emperor *arrives.* (a flicker — even he doesn't quite know, and the crest dips) ...The pod was dark. The Emperor follows the warm. (brightening) And there is a great deal of *warm* in this glum little procession, for all your long faces! *Hwonk!*
+
+KESTREL: (if present, hand drifting off her blade, bewildered) ...It came up from *below* us. From the dark.
+
+PIGGY: (grandly) Naturally! The Emperor goes where the light is *thinnest.* (a beat — then, surprising himself, gentle) ...someone is supposed to. Isn't that the rule? (he looks right at Wren) A keeper goes where the light's thinnest.
+
+```
+[That lands. Wren's head comes up — those are Pell's words, in this absurd little creature's mouth, and she has no idea how he could know them. The Lamp glows a shade warmer in her hands. Piggy waddles straight to her, ignoring everyone else, and — with great ceremony but very, very softly — climbs up and sits down on her feet.]
+```
+
+PIGGY: (quietly, the pomp set gently aside — his one true note) The Emperor has been watching you carry that little light all the way down, Keeper. (beat) It is heavy, yes? Heavier than its size. The best lights always are.
+
+WREN: (a broken half-laugh, tears starting) ...I don't even know who you are.
+
+PIGGY: (with enormous, fluffy dignity) No. And the Emperor does not entirely know *himself* — where he came from, what he's *for.* (the smallest wobble, then steady) The Emperor woke up alone, once, in a closed dark with no memory and no family. And he was *very* frightened. (puffing his chest, brave) So he decided to be *magnificent* instead. It is a good trick. You may borrow it.
+
+WREN: (wiping her face) ...Does it work?
+
+PIGGY: (settling more firmly onto her feet, warm and certain) It works *better* with company. (the whole of his decree, simple and sincere) Here is the Emperor's one law, Keeper, and it is the only one he is truly sure of: *when a small one is sad, the Emperor stays.* You are not alone in the dark. Not while the Emperor draws breath and has a fluffy chest to be proud about. (a soft trumpet, just for her) ...*hwonk.*
+
+```
+[Wren laughs — a real one, wet and surprised, the first lightness in this whole grey descent — and scoops the ridiculous little Emperor up into her arms. BRAMBLE waddles over and tilts its head at him with deep recognition: two small mysteries, both left in the dark, both found by this family.]
+```
+
+BRAMBLE: (softly, to Piggy) ...I also do not remember where I began. (a beat) We will not remember together. That is better than alone.
+
+PIGGY: (deeply gratified, patting Bramble's brass head with a flipper) The Emperor *knights* you, small brass philosopher. Arise, Sir Bramble of the Excellent List.
+
+BRAMBLE: (a beat, then — the dry comic note, timing improving) ...Noted. I have added myself to the list. (the smallest pause) That was the joke.
+
+```
+[The family huddles a little closer in the lantern-light, warmer than they were a minute ago. The descent is still frightening. The choice still waits. But they go down into it carrying one more small, glad light — and it is exactly enough. The MUSIC lifts, just slightly: Wren's thin motif gains a tiny, comic, tender countermelody — a piccolo's worth of hope — and is not alone anymore.]
+```
+
+WREN: (standing, Piggy tucked in one arm, the Keeper's Lamp warm in the other, steadier now) ...Okay. (a breath, the brave-scared one) Okay. Let's go see what's at the bottom of everything.
+
+PIGGY: (riding her shoulder now, pointing valiantly into the dark) ***ONWARD,*** loyal court! The Emperor declares this dreadful pit *officially survivable!* *Hwonk!*
+
+```
+[They descend together into the last of the dark, toward the Wellspring's light. The smallest people in the sky, and now the smallest emperor too.]
+
+[>>> FLAGS SET: PIGGY_RECRUITED = true; PIGGY_JOINED_LATE = true. (Both non-gating — set after A3-13's ENDING_FLAGS_LOCKED; they do NOT feed UNITY, the derived flags, or resolveEnding. Piggy is now in the party for Act IV as pure flavor.) CUT toward A4-01.]
 ```
 
 ---

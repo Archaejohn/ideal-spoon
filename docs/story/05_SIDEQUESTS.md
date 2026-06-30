@@ -123,6 +123,34 @@ Each companion quest opens when that character has been in the party a while and
 
 ---
 
+# 1b. Recruitment Side Quest (the mascot)
+
+> One special, whimsical side quest recruits the party's mascot, **Piggy** the Emperor penguin (see `02_CHARACTERS.md`). It is **available anytime after Act I** — through Acts II and III — on the freely revisitable salvager skyland **Thornholt**. If the player never finds Piggy here, he turns up on his own at the main-story fallback beat **A3-13b** (so he is always part of the family by Act IV either way). Recruiting Piggy is **pure flavor**: it sets only the non-gating flags `PIGGY_RECRUITED` (and never `PIGGY_JOINED_LATE`, which marks the fallback path) and **does not** touch UNITY, the derived flags, or the ending resolver (see `04`).
+
+---
+
+## SQ-PIGGY — "The Crate That Said *Hwonk*"
+- **Recruits:** **Piggy** the penguin (mascot; Luck / Morale / Whimsy battle role).
+- **Location:** **Thornholt** (the free salvagers' shantytown — junk-markets, ramps, the best black-market relics in the sky).
+- **Act:** **II–III** (available anytime after Act I; Thornholt is freely revisitable by ship from when it is first reached).
+- **Hook:** Thornholt's loudest argument is over a smooth, **egg-shaped Skyborn relic-pod** a salvage crew dredged from a deep wreck. It is warm to the touch, hums faintly with old aether — and it will not stop making an indignant, trumpeting **"*Hwonk!*"** at anyone who comes near. No tool has opened it; it has out-trumpeted the auctioneer for three days running and scared off every buyer. The frustrated crew want it gone — and someone hears that there's a *Resonant* girl in port who might "crack the noisy egg."
+- **Steps:**
+  1. Find the trumpeting pod in Thornholt's junk-market; hear out the salvage crew (sincere, broke, just want their haul to sell). **Tam** begs for first crack and tries every gadget he owns on it — a comedic, escalating failure; the pod *Hwonks* louder with each attempt, plainly offended.
+  2. Wren **Listens.** The pod doesn't read like a machine — it answers her Song with a small, *regal, indignant little melody.* It isn't locked. It's **waiting** — and it will only open to a kind voice, not a crowbar.
+  3. Wren **Steadies/Shapes** a warm, gentle note into the pod (no force). It unfolds like a flower — and out waddles **Piggy**: a fluffy gray baby emperor penguin who rises to his full two inches, sounds a triumphant *"Hwonk!,"* and graciously *pardons* his rescuers for the "regrettable crowbar incident."
+  4. A complication: the salvage crew (or a black-market buyer who put money down) claims **salvage rights** — "that relic's ours, sold as-is, bird included." A small dispute flares; optionally a bold **Hollow** drifts in toward the pod's lingering warmth and must be calmed/driven off while the argument rages.
+  5. Resolve the dispute (the choice below). Either way, Piggy — who has decided this crew is now his court — **joins the party.**
+- **Choice / twist:** The twist is the same gentle one at the heart of the game (and of Bramble): **Piggy is not salvage — he's a someone.** He has no idea where he came from; the Emperor's memory is "a closed pod," and all he knows is that he waited a long, dark time for *"someone who would ask nicely instead of prying."* Choice:
+  - **Pay the salvagers fairly** for the "crate" (buy Piggy's freedom outright — generosity under scarcity, echoing SQ-04/SQ-08). The grateful crew becomes a **recurring discount vendor** at Thornholt.
+  - **Make the public case that he's a person, not a haul** (Wren and Mira argue his personhood to the gathered market; the crew, shamed but won over, let him go free). Earns **sky-folk reputation** and a small morale-boon item.
+  - *(Both paths recruit Piggy — the choice only shapes the reward, never whether you get him.)*
+- **Reward:**
+  - *Story:* The family gains its mascot — and a living argument that a small, glad thing nobody can "use" is worth saving for its own sake. Piggy's origin stays a smiling, deliberate **mystery** (a soft cousin to Bramble's, never settled here).
+  - *Gameplay:* **Piggy joins** (unlocks his Luck/Morale/Whimsy kit — *Penguin Dance, Imperial Belly-Slide, Royal Decree of Good Cheer, Finders-Keepers-Emperors*). Gear: **The Emperor's Sash** (the frayed Skyborn-gold scrap from his pod — a party-wide luck/treasure-find charm and a small resist-fear morale aura). Generous path adds the Thornholt vendor discount; personhood path adds sky-folk reputation.
+- **Theme tie-in:** **Whimsy and hope as their own kind of light.** Piggy does no "work" — he lifts nothing, mends nothing, drains nothing — and that is exactly the point: like the festival lanterns Bramble marvels at (*"I did not know light was allowed to be only glad"*), a glad thing is worth keeping aloft for no reason but joy. In a dying, rationing world, choosing to save the *delightful* and the *useless-but-loved* is its own quiet act of stewardship and hope.
+
+---
+
 # 2. World / Town Side Quests (eight, across the canon skylands)
 
 ---
@@ -258,6 +286,7 @@ Each companion quest opens when that character has been in the party a while and
 | CQ-MIRA | The Bell That Lied | Companion | Stillmere | II–III | After first Stillmere visit | Ability: Steady Hands (cures Songsickness); Candle-Boat Censer |
 | CQ-KESTREL | The Names on the Wall | Companion | Cinderworks | III | After recruiting Kestrel (branch) | Ability: Knight's Vow; Reforged Crest |
 | CQ-BRAMBLE | The Unfinished Song | Companion | Verdance | III | Enough Song Fragments collected (MA-01) | Ability: Maker's Memory; Completed Heart-Stone (supports Ending D / flavor) |
+| SQ-PIGGY | The Crate That Said *Hwonk* | Recruitment (mascot) | Thornholt | II–III | Anytime after Act I; visit Thornholt (else Piggy auto-joins at A3-13b) | **Recruits Piggy** (Luck/Morale/Whimsy); The Emperor's Sash (luck/treasure + morale aura). Non-gating: sets `PIGGY_RECRUITED` only |
 | SQ-01 | The Last Inch | World (rescue) | Edge-island (near Meadowmoor) | I–II | Available early via Hollowgate | Tether-sheep mascot; supplies; sky-folk rep |
 | SQ-02 | Quiet the Quiet | World (Hollow-calming) | Hollowgate | II | Reach Hollowgate undermarket | Vendor discount; Wellstone Shard; lamp-moth follower |
 | SQ-03 | What the Mirror Kept | World (relic mystery) | Glasswastes | II | Meet wandering scholar | Bramble memory-fragment; Mirror-Ward charm |
@@ -276,4 +305,5 @@ Each companion quest opens when that character has been in the party a while and
 - **Ending hooks:** MA-01 (full Song) and CQ-BRAMBLE *accompany and support* **Ending D** as flavor — the **authoritative unlock lives only in `04`'s resolver** (`WARDEN_TRUTH_WHOLE AND ROOKWISE_RECRUITED AND MARROW_REDEEMED`); these quests are not hard gates. MA-02 (shared light) nudges **Ending A**; SQ-05/CQ-MIRA feed the Stillmere expose-vs-protect branch; SQ-08/CQ-KESTREL feed the Ascendancy/Kestrel branches.
 - **Revisitable skylands (timing rule):** All eight skylands are freely revisitable by ship for *side content* from when first reached; only the **main-quest** Stillmere reservoir/secret/gate-key beat gates at **A3-07** (`STILLMERE_UNLOCKED`). So Act II Stillmere-adjacent side content (CQ-MIRA, SQ-05, the Stillmere MA-01 fragment) is consistent, and CQ-WREN's Act III return to Meadowmoor follows the same global "side content stays revisitable" rule.
 - **Tone:** all loss is "the Long Quiet" / fading to light; no gore; antagonists are frightened or grieving, never cruel; every quest offers a kind, non-violent best answer.
+- **Piggy / SQ-PIGGY (non-gating):** the mascot recruitment quest at Thornholt is pure flavor — it sets only `PIGGY_RECRUITED` and never feeds UNITY, the derived flags, or `resolveEnding` (see `04`). If skipped, Piggy auto-joins at the main-story fallback **A3-13b** (`PIGGY_JOINED_LATE`), so he is always present by Act IV without ever changing which endings unlock. His origin (a Skyborn relic-pod) is planted as a *light, smiling mystery* and, like the deeper Skyborn questions, is **never settled.**
 - **Buildability:** all quests reuse the eight canon skylands and existing systems (Listen/Steady/Shape, Hollow encounters, collectible flags, ship travel). No new maps or mechanics are required beyond what the brief and world bible already establish.

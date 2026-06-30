@@ -62,6 +62,7 @@
 | **Bramble** | unknown (Skyborn-era) | Awakened Skyborn tender-construct. Adaptive / Relic loadout | A1-10 | Pronoun "it"; non-human |
 | **Kestrel** | 27 | Defecting Ascendancy sky-knight. Tank / Counter-bruiser | A2-10 **(optional, BR2 "show her the truth")** | Former squire: **Finch** |
 | **Rookwise** | 71 | Exiled scholar of forbidden Skyborn lore. Lore-Mage / Debuff | A3-06 **(optional, BR4)** | 7th member when recruited |
+| **Piggy** | unknown (a hatchling by looks; an "Emperor" by his own accounting) | Talking gray baby emperor-penguin **mascot**. **Luck / Morale / Whimsy** (resource: **Pomp**) | **SQ-PIGGY** (Acts II–III, **Thornholt**) **or** auto-joins at **A3-13b** | Comic relief with heart; verbal tic *"Hwonk!"*; refers to self as "the Emperor." **Pure non-gating flavor** — always in the party by Act IV, never changes any ending. Origin (a Skyborn relic-pod) is a deliberate, unsettled, *light* mystery. |
 
 ### C2. Antagonists / key NPCs
 | Name | Age | Role |
@@ -112,6 +113,8 @@
 
 **Light & Triumph flags (non-gating — same rule: they do NOT feed UNITY, the derived flags, or `resolveEnding`; flavor/callback only):** `FIRST_FLIGHT_WON` (A1-06a) · `RELIGHTING_SHARED` (A2-10b) · `HAVEN_RELIT` (A3-04b). These mark the game's structured HIGHS and are deliberately separate from the eight UNITY sources (which are unchanged at eight). No existing flag name or ending-unlock condition was changed.
 
+**Mascot flags (non-gating — same rule: they do NOT feed UNITY, the derived flags, or `resolveEnding`; party-presence + flavor/callback only):** `PIGGY_RECRUITED` (set at **SQ-PIGGY** *or* the fallback beat **A3-13b**) · `PIGGY_JOINED_LATE` (set only at **A3-13b**, when Piggy was not recruited earlier). Piggy is always in the party by Act IV but is **pure flavor** to the resolver; these flags are read only for his presence and his scene/callback lines. No existing flag name, UNITY source, derived flag, or ending-unlock condition was changed.
+
 ---
 
 ## D. Open issues for the Owner
@@ -158,6 +161,20 @@ A "light & triumph" pass added real **highs** and a comedy engine to give the st
 5. **Soaring payoffs + music** — Ending A amplified with a sky-wide dawn celebration (lanterns, cheers, fanfare) layered over Bramble's gentle fade (triumph AND grief held at once); Ending D keeps its hopeful grin and pays off Bramble's joke-arc (its first clean landed joke). `01` §8 gains a **victory fanfare** and the Song **soaring** on triumphs/festivals; `01` §6 Relighting enriched as a marquee joy scene.
 
 All three new beats slot between existing beats and renumber nothing. The three new flags are non-gating flavor (see C7): they do **not** feed UNITY, the derived flags, or `resolveEnding`. The melancholy threads (the heart pass, §E) are fully intact — this pass adds contrast, not subtraction.
+
+---
+
+## G. Mascot pass (Lead Writer)
+
+A "mascot pass" added a new party character — **Piggy**, the talking gray baby emperor-penguin (a Mog/moogle-style mascot: comic relief, secretly capable, lightly mysterious) — and the content to recruit him, **without touching the engine contract** (no existing beat ID, flag name, UNITY source, derived flag, or ending-unlock condition changed):
+
+1. **Character entry** added to `02_CHARACTERS.md` (snapshot, look, voice + the *"Hwonk!"* tic, backstory/origin mystery, arc, the Luck/Morale/Whimsy battle role + four signature abilities, bonds), plus a "Levity & running gags" entry for his comic-Emperor dignity gag, an art/music casting note, and a Party-dynamics line.
+2. **Recruitment side quest** `SQ-PIGGY` — "The Crate That Said *Hwonk*" — added to `05_SIDEQUESTS.md` (new §1b + master-table row), at **Thornholt**, **available anytime after Act I** (Acts II–III, revisitable). Recruits Piggy; reward includes **The Emperor's Sash** (luck/treasure + morale aura).
+3. **Fallback beat** `A3-13b` — "The Emperor in the deep" — added to `03_MAIN_STORY.md` (Act III beats + Beat Ledger). **Conditional:** fires only if `PIGGY_RECRUITED == false`; **skipped** if SQ-PIGGY was completed. Slots after A3-13, renumbers nothing. Ensures Piggy is always in the party by Act IV.
+4. **Two scripted scenes** in `06_SCRIPT_KEY_SCENES.md`: §6e (SQ-PIGGY recruitment — establishes voice + Emperor gag + whimsy) and §8b (the touching A3-13b late auto-join — Piggy finds the family at their lowest in the descent and brings light back). Both tagged to their beat/quest IDs; kind comedy throughout.
+5. **Flags** `PIGGY_RECRUITED` (set at SQ-PIGGY **or** A3-13b) and `PIGGY_JOINED_LATE` (A3-13b only) added to `03`'s ledger and `04`'s non-gating "Emotional-thread flags" block (and C7 above). **Explicitly non-gating:** they do **not** feed UNITY, the derived flags (`WARDEN_TRUTH_WHOLE`, `FACTIONS_UNITED`, etc.), or `resolveEnding`. `A3-13b` deliberately sets `PIGGY_RECRUITED` **after** A3-13's `ENDING_FLAGS_LOCKED`, which is harmless precisely because the flag is non-gating.
+
+**Contract integrity confirmed:** every pre-existing beat ID, flag name, UNITY source, derived flag, and ending-unlock condition (Sleep/Take always; Share = `FACTIONS_UNITED`; Wake = `WARDEN_TRUTH_WHOLE AND ROOKWISE_RECRUITED AND MARROW_REDEEMED`) is unchanged. Piggy is always in the party by Act IV and is **pure flavor** to the resolver; any Act IV / ending references to him are optional background reactions only.
 
 ---
 

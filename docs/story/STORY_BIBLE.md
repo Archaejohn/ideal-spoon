@@ -18,7 +18,7 @@ The complete, approved-pending story bible for the RPG. Read in order; each buil
 On a dying world of floating islands, a 14-year-old lamp-keeper who can *hear* the fading magic must decide what to do with the sleeping machine-heart that powers everything — before a grieving empire drains it to lift their own cities and let the rest of the world fall.
 
 ## Canonical quick reference
-- **Party:** Wren (Resonant support), Sable Vance (gunner), Tam Brightgear (gadgets), Mira (healer), Kestrel (knight/tank, branch-recruited), Bramble (adaptive construct), Rookwise (scholar/debuff, optional). **Ship:** the *Driftwing*.
+- **Party:** Wren (Resonant support), Sable Vance (gunner), Tam Brightgear (gadgets), Mira (healer), Kestrel (knight/tank, branch-recruited), Bramble (adaptive construct), Piggy the Penguin (luck/morale/whimsy mascot — via SQ-PIGGY or auto-joins end of Act III), Rookwise (scholar/debuff, optional). **Ship:** the *Driftwing*.
 - **Skylands:** Meadowmoor · Hollowgate (hub) · Glasswastes · Verdance · Cinderworks · Thornholt · Stillmere · The Hush.
 - **Branches:** BR1 (which dying island) · BR2 (recruit Kestrel) · BR3 (expose/protect the Order's secret) · BR4 (recruit Rookwise).
 - **Endings:** A *The Shared Dawn* (best/hardest) · B *The Long Quiet* (bittersweet) · C *The Ascendant Throne* (cautionary) · D *The Wandering Star* (secret).
