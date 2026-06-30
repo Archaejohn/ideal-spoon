@@ -6,7 +6,7 @@
 - **Original runtime start (Phase 0):** 2026-06-30T07:29:58Z
 - **Timer RESET by Owner after story approval — new window start:** 2026-06-30T13:55:00Z
 - **Hard checkpoint (4h30m of new window):** 2026-06-30T18:25:00Z (5h window ends ~18:55Z)
-- **Current phase:** Phase 2 — Architecture (autonomous; no human gate).
+- **Current phase:** Phase 3 — Vertical slice (autonomous). Phase 2 architecture merged (PR #2, ADR-0003..0009, independent review APPROVE).
 - **Story gate:** ✅ APPROVED by Owner. Story is locked; it is the game we build.
 - **Remote:** https://github.com/Archaejohn/ideal-spoon.git (origin) — push verified. Story merged to main (PR #1).
 
@@ -27,8 +27,14 @@
 ## Done
 - **Phase 1 — Story:** COMPLETE & APPROVED. Full bible in `docs/story/` (incl. heart pass, light & triumph pass, and mascot Piggy). Merged to main via PR #1.
 
+## Done
+- **Phase 2 — Architecture:** COMPLETE & merged (PR #2). ARCHITECTURE.md + ADR-0003..0009 + data schemas. Independent review APPROVE after one NEEDS-WORK round (8 must-fixes resolved). Godot 4.3 + GUT toolchain installed (`tools/bin/`, `game/addons/gut`).
+
 ## In flight
-- **Phase 2 — Architecture.** Architect producing the system design package: module boundaries + ADRs for the story-graph/flag engine, ATB battle engine, **save/persistence (autosave + checkpoints + crash-safe)**, **ending-replay system**, scene/state-flow, and content-data schemas (beats/branches/flags/items/enemies/dialogue). Plus fetching a pinned Godot 4.3 + GUT for Phase 3 testing.
+- **Phase 3 — Vertical slice.** Build order:
+  - R1 Foundation (in progress): `core/` (RngService, EventBus, Log), `types/`, `data/` (ContentDB + validators), `GameState`, `FlagStore`+`FlagView`, `EndingResolver` + golden test, autoload wiring, runnable Boot/Title, green GUT suite. Branch `feat/phase3-foundation`.
+  - R2 (parallel after R1): `story/` engine, `battle/` engine (+EnemyBrain), `save/` system — each with GUT tests.
+  - R3: scene/UI layer (Title→Town→Dungeon→Battle→Dialogue), slice content (Meadowmoor→Hollowgate wreck→Sleepless Crane→autosave/checkpoint→one branch), integration playtest.
 
 ## Next steps
 1. Present 1-page story summary → **STOP for human "approved"** (the single human gate).
