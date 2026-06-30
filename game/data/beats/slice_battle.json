@@ -1,0 +1,12 @@
+{
+  "id": "SLICE-BATTLE",
+  "act": 1,
+  "location": "hollowgate_wreck",
+  "scene": "battle",
+  "branch": null,
+  "encounter": "sleepless_crane",
+  "checkpoint": true,
+  "effects": [],
+  "next": ["SLICE-AFTER"],
+  "_note": "R3b-1 slice battle beat (A1-11). scene 'battle' -> SceneRouter BATTLE with encounter 'sleepless_crane'. A pre-battle checkpoint is written on entry; LOSE restores it and routes back here (retry); WIN advances to SLICE-AFTER."
+}

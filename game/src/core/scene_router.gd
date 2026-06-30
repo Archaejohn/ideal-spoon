@@ -42,6 +42,7 @@ const STATE_KEY_TO_ENUM := {
 var _loader: Callable = Callable()         # injectable scene-swap seam; default change_scene_to_file
 var _current_state: int = AppState.BOOT
 var _last_scene_path: String = ""          # last path the router asked to load (for tests/QA)
+var _last_ctx: Dictionary = {}             # ctx of the last transition (beat/encounter/location)
 
 func _ready() -> void:
 	var bus := get_node_or_null("/root/EventBus")
@@ -57,6 +58,12 @@ func current_state() -> int:
 
 func last_scene_path() -> String:
 	return _last_scene_path
+
+## The ctx of the most recent transition. Scenes that need their entry payload (e.g. the
+## Battle scene reading its `encounter` id) read it here, since change_scene_to_file cannot
+## pass arguments to the incoming scene.
+func current_ctx() -> Dictionary:
+	return _last_ctx
 
 # --- transition API (ADR-0008) ---
 
@@ -78,6 +85,7 @@ func goto(state_key: String, ctx: Dictionary = {}) -> void:
 	var old := _current_state
 	_current_state = int(STATE_KEY_TO_ENUM.get(key, AppState.OVERWORLD))
 	_last_scene_path = path
+	_last_ctx = ctx.duplicate(true)
 	_change_scene(path)
 	var bus := get_node_or_null("/root/EventBus")
 	if bus != null:

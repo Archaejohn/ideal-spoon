@@ -1,7 +1,8 @@
 {
-  "id": "enc_a1_11_crane",
+  "id": "sleepless_crane",
   "enemies": [
-    { "enemy": "sleepless_crane", "count": 1, "slot": "center" }
+    { "enemy": "sleepless_crane", "count": 1, "slot": "center" },
+    { "enemy": "hollow_husk", "count": 1, "slot": "left" }
   ],
   "formation": "single_back",
   "flee_allowed": false,
@@ -11,8 +12,9 @@
   "rewards": {
     "xp": 450,
     "items": [
-      { "item": "wellstone_shard", "chance_permille": 1000 }
+      { "item": "lamp_herb", "chance_permille": 1000 }
     ]
   },
-  "seed_salt": 1111
+  "seed_salt": 1111,
+  "_note": "A1-11 — the Sleepless Crane boss fight in the Hollowgate wreck (boss + one Hollow Husk add). No flee: the wreck is collapsing. Reachable via the SLICE-BATTLE beat."
 }

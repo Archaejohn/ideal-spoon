@@ -142,6 +142,23 @@ func process_next_turn() -> Array:
 	_take_turn(ready)
 	return _events.slice(start)
 
+## Peek the combatant who will act NEXT, advancing ATB time to them without taking the turn.
+## Mirrors the time-advance in process_next_turn (same ticks_until_next_ready), so a subsequent
+## process_next_turn resolves exactly this actor — determinism is unchanged. Returns null when
+## the battle is over or nobody can ever advance. Used by the WAIT-mode UI to decide whether to
+## open a player's action menu (player turn) or auto-resolve (enemy turn).
+func peek_next_actor():
+	if is_over():
+		return null
+	var ready = TurnScheduler.next_ready(_combatants)
+	if ready == null:
+		var t = TurnScheduler.ticks_until_next_ready(_combatants)
+		if t <= 0:
+			return null
+		TurnScheduler.advance(_combatants, t)
+		ready = TurnScheduler.next_ready(_combatants)
+	return ready
+
 ## Run to completion (tests). `max_turns` guards against a stall. Returns the full stream.
 func run_until_over(max_turns: int = 10000) -> Array:
 	var guard = 0
@@ -188,8 +205,24 @@ func _take_turn(actor) -> void:
 
 func _post_turn() -> void:
 	_sweep_downs()
-	if is_over():
+	if _is_decided():
 		_finish()
+
+## True once the battle has a foregone outcome: a side is fully down, a flee succeeded, or the
+## result is already set. Drives turn-by-turn termination so process_next_turn()/advance() detect
+## WIN/LOSE the moment it happens (not only run_until_over's trailing _finish()).
+func _is_decided() -> bool:
+	if _result != Result.ONGOING:
+		return true
+	var players_alive := false
+	var enemies_alive := false
+	for c in _combatants:
+		if c.is_alive():
+			if c.side == Combatant.Side.PLAYER:
+				players_alive = true
+			else:
+				enemies_alive = true
+	return not players_alive or not enemies_alive
 
 func _resolve(action, actor) -> void:
 	match action.kind:

@@ -1,0 +1,188 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4ttleaether0001"]
+
+[ext_resource type="Script" path="res://src/ui/battle/battle_ui.gd" id="1_battle"]
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_battle")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.08, 0.13, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 12.0
+offset_right = 300.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "The Hollowgate Wreck"
+horizontal_alignment = 1
+
+[node name="EnemyRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_top = 64.0
+offset_right = 440.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Log" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -24.0
+offset_right = 440.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PartyRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -440.0
+offset_top = -260.0
+offset_right = 440.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ActionMenu" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -260.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBox" type="VBoxContainer" parent="ActionMenu"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Attack" type="Button" parent="ActionMenu/VBox"]
+layout_mode = 2
+text = "Attack"
+
+[node name="Ability" type="Button" parent="ActionMenu/VBox"]
+layout_mode = 2
+text = "Ability"
+
+[node name="Item" type="Button" parent="ActionMenu/VBox"]
+layout_mode = 2
+text = "Item"
+
+[node name="Defend" type="Button" parent="ActionMenu/VBox"]
+layout_mode = 2
+text = "Defend"
+
+[node name="Flee" type="Button" parent="ActionMenu/VBox"]
+layout_mode = 2
+text = "Flee"
+
+[node name="ChoiceList" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -340.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="VictoryPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="VictoryPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VictoryPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="VictoryPanel/VBox"]
+layout_mode = 2
+text = "Continue"
+
+[node name="DefeatPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="DefeatPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="DefeatPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Defeated"
+horizontal_alignment = 1
+
+[node name="TryAgain" type="Button" parent="DefeatPanel/VBox"]
+layout_mode = 2
+text = "Try Again"

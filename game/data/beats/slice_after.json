@@ -1,0 +1,12 @@
+{
+  "id": "SLICE-AFTER",
+  "act": 1,
+  "location": "hollowgate",
+  "scene": "overworld",
+  "branch": null,
+  "effects": [
+    { "op": "SET", "flag": "SLICE_BOSS_CLEARED" }
+  ],
+  "next": [],
+  "_note": "R3b-1 post-battle beat. Reached only after a WIN. Sets SLICE_BOSS_CLEARED (a marker R3b-2 can branch on). The escape-upward scene + Act-1 continuation are R3b-2."
+}

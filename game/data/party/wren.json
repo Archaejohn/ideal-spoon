@@ -2,8 +2,11 @@
   "id": "wren",
   "name": "Wren",
   "role": "lead",
-  "base_stats": { "hp": 100, "atk": 18, "def": 8, "mag": 12, "res": 8, "spd": 12 },
+  "base_stats": { "hp": 100, "atk": 18, "def": 8, "mag": 14, "res": 10, "spd": 12 },
   "resource": "BREATH",
   "growth": "support_curve",
-  "abilities": []
+  "abilities": [
+    { "id": "song_lash", "learn_level": 1 },
+    { "id": "steady", "learn_level": 1 }
+  ]
 }
