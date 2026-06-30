@@ -1,0 +1,44 @@
+[
+  { "id": "song_lash", "name": "Song-Lash", "owner": "wren", "kind": "ABILITY",
+    "cost": { "resource": "BREATH", "amount": 2 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 220,
+    "element": "resonance", "effects": [ { "type": "DAMAGE" } ],
+    "accuracy": 100, "crit_permille": 60, "tags": ["song"] },
+
+  { "id": "tam_bolt", "name": "Bottle-Bolt", "owner": "tam", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "ATK", "defense_stat": "DEF", "power": 120,
+    "element": "physical",
+    "effects": [ { "type": "DAMAGE" }, { "type": "APPLY_STATUS", "status": "rattled" } ],
+    "accuracy": 95, "crit_permille": 50, "cooldown_turns": 2, "tags": ["gadget", "vs_machine"] },
+
+  { "id": "tinker_mend", "name": "Tinker's Kit", "owner": "tam", "kind": "ABILITY",
+    "cost": { "resource": "POMP", "amount": 3 }, "target_kind": "ALLY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 140,
+    "effects": [ { "type": "HEAL" } ], "accuracy": 100, "tags": ["gadget"] },
+
+  { "id": "crane_sweep", "name": "Wing-Sweep", "owner": "sleepless_crane", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_ALL",
+    "power_stat": "ATK", "defense_stat": "DEF", "power": 90,
+    "element": "physical", "effects": [ { "type": "DAMAGE" } ],
+    "accuracy": 95, "crit_permille": 0 },
+
+  { "id": "hollow_screech", "name": "Hollow Screech", "owner": "sleepless_crane", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 70,
+    "element": "resonance",
+    "effects": [ { "type": "DAMAGE" }, { "type": "APPLY_STATUS", "status": "songsick" } ],
+    "accuracy": 100, "crit_permille": 0 },
+
+  { "id": "husk_peck", "name": "Husk Peck", "owner": "hollow_husk", "kind": "ABILITY",
+    "cost": { "resource": "NONE", "amount": 0 }, "target_kind": "ENEMY_SINGLE",
+    "power_stat": "ATK", "defense_stat": "DEF", "power": 100,
+    "element": "physical", "effects": [ { "type": "DAMAGE" } ],
+    "accuracy": 95, "crit_permille": 0 },
+
+  { "id": "use_lamp_herb", "name": "Lamp-herb", "owner": "party", "kind": "ITEM",
+    "cost": { "resource": "ITEM", "amount": 1 }, "target_kind": "ALLY_SINGLE",
+    "power_stat": "MAG", "defense_stat": "RES", "power": 160,
+    "effects": [ { "type": "HEAL" } ], "accuracy": 100,
+    "_note": "The battle-action behind the Item button: consumes one lamp_herb (Inventory handled by the UI) and heals an ally." }
+]

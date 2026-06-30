@@ -16,6 +16,17 @@ func _ready() -> void:
 	var close_btn := get_node_or_null("PauseMenu/Panel/Margin/VBox/Close")
 	if close_btn != null:
 		close_btn.pressed.connect(_close_menu)
+	# R3b-1 slice affordance: advance the story spine (e.g. SLICE-START -> SLICE-BATTLE), which
+	# the SceneRouter turns into the next scene (the Sleepless Crane battle). R3b-2 replaces this
+	# with the real Meadowmoor->wreck journey + dialogue.
+	var advance_btn := get_node_or_null("HUD/Advance")
+	if advance_btn != null:
+		advance_btn.pressed.connect(_advance_story)
+
+func _advance_story() -> void:
+	var gc := get_node_or_null("/root/GameCoordinator")
+	if gc != null:
+		gc.advance_story()
 
 func _open_menu() -> void:
 	var pause := get_node_or_null("PauseMenu")

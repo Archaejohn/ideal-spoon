@@ -63,6 +63,11 @@ func advance() -> Array:
 		emit_signal("battle_over", _engine.result(), _engine.rewards())
 	return ev
 
+## Peek whose turn is next (advances ATB time, does not resolve). Lets the WAIT-mode UI decide
+## to open a player's action menu vs. auto-resolve an enemy turn. Null when over / no engine.
+func peek_next_actor():
+	return _engine.peek_next_actor() if _engine != null else null
+
 func is_over() -> bool:
 	return _engine != null and _engine.is_over()
 

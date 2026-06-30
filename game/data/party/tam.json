@@ -1,0 +1,12 @@
+{
+  "id": "tam",
+  "name": "Tam",
+  "role": "support",
+  "base_stats": { "hp": 85, "atk": 20, "def": 7, "mag": 10, "res": 6, "spd": 11 },
+  "resource": "POMP",
+  "growth": "support_curve",
+  "abilities": [
+    { "id": "tam_bolt", "learn_level": 1 },
+    { "id": "tinker_mend", "learn_level": 1 }
+  ]
+}

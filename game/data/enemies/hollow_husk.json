@@ -1,0 +1,19 @@
+{
+  "id": "hollow_husk",
+  "name": "Hollow Husk",
+  "is_boss": false,
+  "stats": { "hp": 45, "atk": 7, "def": 3, "mag": 0, "res": 2, "spd": 8 },
+  "weaknesses": ["resonance"],
+  "resistances": [],
+  "tags": ["machine", "hollow"],
+  "xp": 30,
+  "loot": [],
+  "ai": {
+    "policy": "basic",
+    "aggression_permille": 900,
+    "abilities": [
+      { "ability": "husk_peck", "weight": 100, "target_rule": "lowest_hp", "intent": "offense" }
+    ]
+  },
+  "_note": "A1-11 minor add — a lesser husk shaken loose from the wreck when the Crane wakes."
+}

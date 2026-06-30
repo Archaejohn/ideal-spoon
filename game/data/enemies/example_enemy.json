@@ -2,20 +2,22 @@
   "id": "sleepless_crane",
   "name": "The Sleepless Crane",
   "is_boss": true,
-  "stats": { "hp": 1200, "atk": 70, "def": 40, "mag": 30, "res": 50, "spd": 18 },
+  "stats": { "hp": 200, "atk": 12, "def": 6, "mag": 14, "res": 8, "spd": 12 },
   "weaknesses": ["resonance"],
   "resistances": ["physical"],
+  "tags": ["machine", "hollow", "skyborn"],
   "xp": 450,
   "loot": [
-    { "item": "wellstone_shard", "chance_permille": 1000 }
+    { "item": "lamp_herb", "chance_permille": 1000 }
   ],
   "ai": {
     "policy": "boss_phased",
     "aggression_permille": 700,
     "abilities": [
-      { "ability": "crane_sweep", "weight": 60, "target_rule": "all_enemies" },
-      { "ability": "hollow_screech", "weight": 40, "target_rule": "lowest_hp",
-        "condition": { "type": "self_hp_below_permille", "value": 300 } }
+      { "ability": "crane_sweep", "weight": 60, "target_rule": "all_enemies", "intent": "offense" },
+      { "ability": "hollow_screech", "weight": 80, "target_rule": "lowest_hp", "intent": "offense",
+        "condition": { "type": "self_hp_below_permille", "value": 500 } }
     ]
-  }
+  },
+  "_note": "A1-11 boss — the hollowed Skyborn crane-construct guarding the Hollowgate wreck. A construct: resists physical, weak to Wren's resonance Song. Below half HP it enters a desperate phase and adds Hollow Screech (Songsickness)."
 }

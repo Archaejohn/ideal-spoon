@@ -1,10 +1,10 @@
 {
   "id": "SLICE-START",
   "act": 1,
-  "location": "havenreach",
+  "location": "hollowgate_wreck",
   "scene": "overworld",
   "branch": null,
   "effects": [],
-  "next": [],
-  "_note": "R3a integration-shell bootstrap beat. New Game routes here (scene 'overworld' -> SceneRouter OVERWORLD). The real Act-1 opening beat + slice content land in R3b."
+  "next": ["SLICE-BATTLE"],
+  "_note": "R3b-1 slice entry. New Game routes here (overworld). 'Enter the wreck' advances the spine to SLICE-BATTLE (the Sleepless Crane). The full Meadowmoor->wreck journey is R3b-2."
 }

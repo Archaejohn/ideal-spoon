@@ -53,8 +53,9 @@ func _rmrf(dir: String) -> void:
 func test_new_game_initializes_run_at_start_beat_with_party() -> void:
 	GameCoordinator.new_game()
 	assert_eq(GameState.current_beat_id, START_BEAT, "run is at the START beat")
-	assert_eq(GameState.party.size(), 1, "starting party has one member")
+	assert_eq(GameState.party.size(), 2, "starting party has Wren + Tam")
 	assert_eq(str(GameState.party[0].get("id", "")), "wren", "Wren is in the starting party")
+	assert_eq(str(GameState.party[1].get("id", "")), "tam", "Tam is in the starting party")
 	# The START beat is scene 'overworld' -> SceneRouter routed to the Overworld scene.
 	assert_true(_routed.has("res://src/ui/overworld/Overworld.tscn"),
 		"scene_intent routed New Game to the overworld; got %s" % str(_routed))
@@ -71,7 +72,7 @@ func test_new_game_autosaves_and_continue_round_trips() -> void:
 	GameState.party = []
 	assert_true(SaveManager.load_latest(), "load_latest restores the saved run")
 	assert_eq(GameState.current_beat_id, START_BEAT, "Continue resumes at the saved beat")
-	assert_eq(GameState.party.size(), 1, "party restored from save")
+	assert_eq(GameState.party.size(), 2, "party restored from save")
 	assert_eq(str(GameState.party[0].get("id", "")), "wren", "Wren restored from save")
 
 func test_continue_game_loads_and_routes() -> void:

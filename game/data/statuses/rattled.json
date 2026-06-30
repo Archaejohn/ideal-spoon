@@ -1,0 +1,11 @@
+{
+  "id": "rattled",
+  "name": "Rattled",
+  "category": "debuff",
+  "duration_turns": 3,
+  "stack_rule": "REFRESH",
+  "tick_effect": { "type": "NONE" },
+  "atb_modifier_permille": 1000,
+  "stat_mod": { "stat": "DEF", "permille": 700 },
+  "_note": "Tam's Bottle-Bolt rattles a construct's plating: -30% DEF for 3 turns."
+}

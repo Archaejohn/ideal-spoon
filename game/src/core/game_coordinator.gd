@@ -9,6 +9,7 @@
 extends Node
 
 const StoryDirectorScript := preload("res://src/story/story_director.gd")
+const LevelSystemScript := preload("res://src/leveling/level_system.gd")
 
 ## The integration-shell start beat (R3a slice bootstrap; real Act-1 opening lands in R3b).
 const START_BEAT := "SLICE-START"
@@ -18,6 +19,14 @@ const HEARTBEAT_SECS := 45.0
 var _director                              # StoryDirector (RefCounted, owned here)
 var _heartbeat: Timer
 
+# --- battle flow (Owner #13 checkpoint loop) ---
+## The beat we were sitting on when the current battle was entered (the resume unit). The
+## pre-battle checkpoint snapshots GameState here; LOSE restores it and re-enters.
+var _pre_battle_beat: String = ""
+## Outcome of the last finished battle ({result:int, rewards:Dictionary}); consumed by
+## after_battle() so the scene can show its victory/defeat panel before the route happens.
+var _battle_outcome: Dictionary = {}
+
 func _ready() -> void:
 	_build_director()
 	var bus := get_node_or_null("/root/EventBus")
@@ -25,6 +34,14 @@ func _ready() -> void:
 		bus.beat_entered.connect(_on_beat_entered)
 		# Content loads asynchronously at Boot; rebuild the director's graph once it is ready.
 		bus.content_loaded.connect(_build_director)
+	# Battle flow wiring (ADR-0005 §c / PHASE2_OWNER_RULINGS #2 / Owner #13). The BattleController
+	# bridge emits these; the coordinator owns the checkpoint + reward + lose-restore + routing.
+	var bc := _battle_controller()
+	if bc != null:
+		if not bc.checkpoint_requested.is_connected(_on_checkpoint_requested):
+			bc.checkpoint_requested.connect(_on_checkpoint_requested)
+		if not bc.battle_over.is_connected(_on_battle_over):
+			bc.battle_over.connect(_on_battle_over)
 	# Heartbeat backstop autosave (debounced by SaveManager).
 	_heartbeat = Timer.new()
 	_heartbeat.name = "Heartbeat"
@@ -81,6 +98,108 @@ func has_save() -> bool:
 	var sm := _save_manager()
 	return sm != null and sm.has_save()
 
+# --- overworld -> battle flow (R3b-1 slice) ---
+
+## Walk the story spine one step (the overworld "Enter the wreck" affordance uses this to reach
+## the SLICE-BATTLE beat, which the SceneRouter turns into the Battle scene). Returns true if it
+## moved. Refused while a branch is open (R3b-2 dialogue territory).
+func advance_story() -> bool:
+	if _director == null:
+		return false
+	var r: Result = _director.advance()
+	if r != null and r.is_err():
+		_log("warn", "advance_story: %s" % r.error)
+		return false
+	return r != null and bool(r.value)
+
+## Start the fight for `encounter_id` against the live GameState party. Called by the Battle
+## scene's _ready (which reads the encounter from SceneRouter.current_ctx) and by tests. Remembers
+## the current beat as the pre-battle resume unit, then drives BattleController.start — which
+## emits checkpoint_requested("pre_battle") that we turn into a SaveManager checkpoint.
+func start_battle(encounter_id: String) -> void:
+	var gs := _game_state()
+	_pre_battle_beat = gs.current_beat_id if gs != null else ""
+	_battle_outcome = {}
+	var bc := _battle_controller()
+	if bc == null:
+		_log("error", "start_battle: no BattleController")
+		return
+	bc.configure()
+	bc.start(encounter_id, gs.party if gs != null else [])
+
+## Resolve the post-battle flow once the scene's panel button is pressed (victory "Continue" or
+## defeat "Try again"). Kept separate from _on_battle_over so the scene can SHOW its panel before
+## the route happens. WIN advances the spine; LOSE restores the pre-battle checkpoint and re-enters
+## the fight (never a game-over to title, ADR-0005 §c); FLEE returns to the overworld with no reward.
+func after_battle() -> void:
+	var result := int(_battle_outcome.get("result", -1))
+	match result:
+		BattleEngine.Result.WIN:
+			# Rewards were already applied + autosaved on battle_over; advance the story spine.
+			if not advance_story():
+				_log("info", "after_battle(WIN): no successor beat from '%s'." % _pre_battle_beat)
+		BattleEngine.Result.LOSE:
+			var sm := _save_manager()
+			if sm != null and sm.restore_checkpoint("pre_battle"):
+				_log("info", "after_battle(LOSE): restored pre_battle checkpoint; retrying.")
+			# Re-enter the (restored) pre-battle beat so the player retries from just before the
+			# fight — routes back to BATTLE, never to the Title.
+			_build_director()
+			var beat: String = _game_state().current_beat_id
+			if beat == "":
+				beat = _pre_battle_beat
+			_director.goto_beat(beat)
+		BattleEngine.Result.FLED:
+			# Flee returns to the overworld with no reward (R3b-2 supplies real fleeable encounters
+			# + a proper destination; the slice boss has flee_allowed=false so this is rare).
+			var router := _scene_router()
+			if router != null:
+				router.goto("OVERWORLD", {"beat": _pre_battle_beat})
+		_:
+			_log("warn", "after_battle: no finished battle to resolve.")
+
+func last_battle_result() -> int:
+	return int(_battle_outcome.get("result", -1))
+
+# --- battle signal handlers (Owner #13) ---
+
+func _on_checkpoint_requested(tag: String) -> void:
+	var sm := _save_manager()
+	if sm != null:
+		var ok: bool = sm.write_checkpoint(tag)
+		_log("info", "pre-battle checkpoint '%s' written: %s" % [tag, str(ok)])
+
+func _on_battle_over(result: int, rewards: Dictionary) -> void:
+	_battle_outcome = {"result": result, "rewards": rewards.duplicate(true)}
+	if result == BattleEngine.Result.WIN:
+		_apply_rewards(rewards)
+		_autosave("battle_win")
+		_log("info", "battle WON: +%d xp, items %s" % [int(rewards.get("xp", 0)), str(rewards.get("items", []))])
+	elif result == BattleEngine.Result.LOSE:
+		_log("info", "battle LOST: pre-battle checkpoint restore available (Try Again).")
+
+## Apply a WIN's rewards to the persistent run: XP -> LevelSystem per party member (level-ups
+## fold in), loot items -> inventory. Pure GameState mutation; the engine never touched it.
+func _apply_rewards(rewards: Dictionary) -> void:
+	var gs := _game_state()
+	var content := _content()
+	if gs == null or content == null:
+		return
+	var xp := int(rewards.get("xp", 0))
+	if xp > 0:
+		for member in gs.party:
+			var def: Dictionary = content.party_member(str(member.get("id", "")))
+			var curve: Dictionary = content.level_curve(str(def.get("growth", "")))
+			var res := LevelSystemScript.grant_xp(member, xp, curve)
+			member["xp"] = int(res.get("xp", member.get("xp", 0)))
+			member["level"] = int(res.get("level", member.get("level", 1)))
+	var items: Dictionary = gs.inventory.get("items", {})
+	for item_id in rewards.get("items", []):
+		var key := str(item_id)
+		if key != "":
+			items[key] = int(items.get(key, 0)) + 1
+	gs.inventory["items"] = items
+
 # --- ending replay (ADR-0006) — thin wrapper around SaveManager's sandbox (stub for R3b) ---
 
 func begin_ending_replay() -> void:
@@ -96,8 +215,12 @@ func end_ending_replay() -> void:
 # --- internals ---
 
 func _set_starting_party(gs) -> void:
-	# Minimal R3a party: Wren at level 1. Full roster + stats land with R3b slice content.
-	gs.party = [ { "id": "wren", "level": 1, "xp": 0 } ]
+	# R3b slice party: Wren (lead, Song) + Tam (gadgets), both at level 1. PartyMemberState is
+	# data-only {id, level, xp}; BattleController builds Combatants from these + ContentDB stats.
+	gs.party = [
+		{ "id": "wren", "level": 1, "xp": 0 },
+		{ "id": "tam", "level": 1, "xp": 0 },
+	]
 
 func _on_beat_entered(_beat_id: String) -> void:
 	_autosave("beat")
@@ -121,6 +244,12 @@ func _event_bus() -> Node:
 
 func _save_manager() -> Node:
 	return get_node_or_null("/root/SaveManager")
+
+func _battle_controller() -> Node:
+	return get_node_or_null("/root/BattleController")
+
+func _scene_router() -> Node:
+	return get_node_or_null("/root/SceneRouter")
 
 func _log(level: String, msg: String) -> void:
 	var log := get_node_or_null("/root/Log")
