@@ -1,0 +1,39 @@
+; Engine configuration file.
+; Godot 4.x project for the RPG (working title: Aetherbound).
+
+config_version=5
+
+[application]
+
+config/name="Aetherbound"
+config/description="Single-player offline fantasy/sci-fi RPG. ATB battles, branching story, multiple endings."
+run/main_scene="res://src/ui/Boot.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+; Core singletons registered as we build them (see ADRs in docs/decisions).
+; GameState="*res://src/core/game_state.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation="landscape"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+
+[importer_defaults]
+
+texture={
+"compress/mode": 0,
+"mipmaps/generate": false,
+"svg/scale": 1.0
+}
