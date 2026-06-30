@@ -387,3 +387,94 @@ re-validate, typed `BattleEvent` vocabulary, ability `cooldown_turns` economy, r
 `encounter` RNG cursor saved, compound/negation dialogue conditions, and the §6/§7 doc-drift reconciled.
 
 *Architect requests re-review for sign-off.*
+
+---
+
+## Re-review (2026-06-30, independent verification) — **APPROVE**
+
+I re-read every changed file and the new data, and verified each of the 8 must-fixes against the
+actual source (not the addendum's claims). All eight are genuinely resolved; the resolver logic is
+unchanged and still line-for-line with `04 §5`; no new blocking issues were introduced.
+
+### Per-item verification
+
+1. **Enemy AI — RESOLVED.** New pure `EnemyBrain` (`battle/enemy_ai.gd`) is *wired into the turn
+   flow*: ADR-0004 §"Enemy AI" states "When an **enemy** combatant becomes ready, `BattleEngine` calls
+   `EnemyBrain.choose_action(...)` and queues the returned action" (mirrored in ARCHITECTURE §7.6b
+   line 410). It draws from a **separate injected `ai` stream** (not `battle`), is on the
+   no-nondeterminism guard (ADR-0009 line 74, `battle/ incl. enemy_ai.gd`), and has a test
+   (`test_enemy_ai.gd`, ADR-0009 line 97). Data-authored policy (`basic|caster|boss_phased`,
+   weights, conditions, target_rules) in `enemies/example_enemy.json`. Enemy turns are now produced.
+
+2. **`encounter` schema — RESOLVED.** ADR-0007 §"Encounter" (line 331) defines enemies/formation/
+   flee/ambush/victory/defeat/rewards/`seed_salt`; `data/encounters/` in layout; referential
+   integrity added ("a beat's `encounter` is a real encounter," line 41). `encounters/example_
+   encounter.json` + `beats/example_beat_battle.json` (A1-11) conform; `BattleController.start(
+   encounter_id)` wired (ADR-0004 line 171, ARCHITECTURE §5).
+
+3. **`level_curve` schema — RESOLVED.** ADR-0007 §"Level curve" (line 358): integer `xp_to_next`
+   formula + `growth_per_level` + `growth_overrides`. `party.growth` integrity-checked (line 41).
+   `level_curves/example_level_curve.json` conforms.
+
+4. **Web durability — RESOLVED (now physically honest).** ADR-0005 §a explicitly **drops the
+   "completes-before-return" claim for web** and states `FS.syncfs` "is asynchronous with a callback
+   that cannot be awaited inside a dying `_notification` handler." §e replaces it with: flush on DOM
+   `visibilitychange→hidden`/`pagehide`, a bounded periodic `syncfs` (~10–15s), an explicitly
+   **documented residual-loss window** (≤ the interval), and **no OPFS assumption** (IDBFS confirmed
+   for Godot 4.x web). Native Android retains the synchronous before-return guarantee. The
+   physically-impossible claim is gone.
+
+5. **Enum state — RESOLVED.** `FINAL_CHOICE`/`ENDING` are scalars in a dedicated **enum store** on
+   `FlagStore` (ADR-0003 flag model; ARCHITECTURE §7.3), serialized under `story.choices` ("ENUM
+   store — NOT booleans", ADR-0005 §d line 123), never in the boolean dict. `BRAMBLE_SACRIFICE` is
+   documented as the single, deliberate **hard-coded derived non-gating** exception with the reason
+   stated (the closed op vocab cannot express enum membership) and proven harmless by the resolver
+   lint (ADR-0003 lines 75–79).
+
+6. **Synthesized replay — RESOLVED (cannot produce an invalid Ending-D state).** ADR-0006
+   `_canonical_state_for` sets **only underlying flags** from `requires`, then the builder **re-runs
+   the derive step via `FlagView`** to compute `WARDEN_TRUTH_WHOLE`/`FACTIONS_UNITED` — it "NEVER
+   sets a derived flag." `endings/example_ending_d.json` `requires` is authored in underlying flags
+   (`flags_all:[ROOKWISE_RECRUITED, MARROW_REDEEMED]`, `flags_any:[BRAMBLE_SHARD_DEPARTURE,
+   BRAMBLE_SHARD_PROMISE]`), and the ADR-0007 validator **rejects a derived flag name in `requires`**
+   (line 49), so the contradiction "WARDEN_TRUTH_WHOLE=true but no shards" is structurally
+   impossible. **Real save protected on the lifecycle path:** `enter_replay_mode()` hard-blocks all
+   `save_main` writes, and the guard is enforced in `autosave()`, `write_checkpoint()` **and**
+   `_notification()` (ADR-0005 §b "Replay-mode guard (every write path)", ADR-0006 sandbox section).
+
+7. **FlagStore access + integer ATB — RESOLVED.** New typed `FlagView` (ARCHITECTURE §7.3a) exposes
+   the gating flags as **real bool properties** and the derived flags as computed methods, so
+   `EndingResolver` compiles against it. I checked the rewritten resolver (ADR-0003 lines 177–196)
+   against `04 §5`: `factions_united`, `can_wake`, `offered_options`, and the SHARE→A / SLEEP→B /
+   TAKE→C / WAKE→D mapping are **identical in logic** — only the access syntax changed (`v.PROP`).
+   ATB is integer: `speed_rate = base_rate(SPD) * haste_permille / 1000` (ADR-0004 line 36) and
+   status `atb_modifier_permille` is an integer (ADR-0007 line 236; `statuses/example_status.json`
+   `700`). No float touches turn order.
+
+8. **No double-count UNITY + backup safety — RESOLVED.** `INC_UNITY` now **requires a unique
+   `source_id`** and is **idempotent per source** via a `unity_sources_applied` set (ADR-0003 op
+   table + §"Flag & UNITY ownership"); single-owner rule (branch option XOR beat) with a validator
+   that forbids the same `source_id` on **co-reachable** beats. `branches/example_branch.json`
+   correctly **moved `INC_UNITY` out of the option to the destination beat**, and the previously
+   unregistered sub-objective flags (`SAVED_*_REFUGEES`/`_VILLAGERS`, etc.) are now in
+   `flags/example_flags.json` (`kind: unity_source`) with `flags/example_unity_sources.json` listing
+   `u1…u8`. `AtomicFileIO.write` (ADR-0005 §b) **validates the current main before promoting it to
+   `.bak`** (step 4: "Only if it validates, copy it to `path.bak`") — a torn main can no longer
+   destroy a good backup.
+
+### Nice-to-haves (all folded in)
+
+Verified present: checkpoint as last recovery tier (ADR-0005 §c), pre-migration `save_main.v{n}.bak`
++ post-migration re-validate (§d), typed `BattleEvent` vocabulary, ability `cooldown_turns` economy
+(ADR-0004/0007), retarget/fizzle + `accuracy` miss roll (ADR-0004 §"Damage formula"), all six RNG
+cursors incl. `ai`/`encounter` saved (ADR-0005 §d), compound/negation dialogue conditions, and the
+§6/§7 doc-drift reconciled (stream list, GameState fields, computed-not-stored derived flags).
+
+### Final verdict: **APPROVE**
+
+All 8 blocking must-fixes are genuinely resolved at the source, the nice-to-haves are incorporated,
+and the high-stakes resolver remains faithful to `04 §5`. I found **no remaining blocking issues and
+no minor fixes that need to gate the merge** — the design is internally consistent and buildable
+against. **PR #2 is approved to merge.**
+
+*Re-reviewed independently against the locked story contracts and DoD. Sign-off granted.*
