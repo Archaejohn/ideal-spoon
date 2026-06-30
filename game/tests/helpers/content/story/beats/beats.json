@@ -1,0 +1,89 @@
+[
+  { "id": "FX-A1", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "SET", "flag": "FX_VISITED" } ],
+    "next": ["FX-BR-TRIGGER"] },
+
+  { "id": "FX-BR-TRIGGER", "act": 1, "location": "fixtureville", "scene": "branch",
+    "effects": [],
+    "next": ["FX-MERGE"] },
+
+  { "id": "FX-LEFT", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "INC_UNITY", "source_id": "u_left" } ],
+    "next": ["FX-MERGE"] },
+
+  { "id": "FX-RIGHT", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "INC_UNITY", "source_id": "u_right" } ],
+    "next": ["FX-MERGE"] },
+
+  { "id": "FX-MERGE", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [
+      { "op": "SET", "flag": "FX_MERGED" },
+      { "op": "SET", "flag": "KESTREL_RECRUITED", "if_flag": "FX_LEFT_TAKEN" }
+    ],
+    "next": [] },
+
+  { "id": "FX-GATE", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [],
+    "next": [
+      { "beat": "FX-SECRET", "if_flag": "HAS_KEY" },
+      "FX-PLAIN"
+    ] },
+
+  { "id": "FX-SECRET", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "SET", "flag": "REACHED_SECRET" } ],
+    "next": [] },
+
+  { "id": "FX-PLAIN", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "SET", "flag": "REACHED_PLAIN" } ],
+    "next": [] },
+
+  { "id": "FX-UNITY", "act": 1, "location": "fixtureville", "scene": "cutscene",
+    "effects": [
+      { "op": "INC_UNITY", "source_id": "u_solo" },
+      { "op": "SET", "flag": "FX_ONCE" }
+    ],
+    "next": [] },
+
+  { "id": "FX-LOCK", "act": 3, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "LOCK_ENDINGS" } ],
+    "next": ["FX-POSTLOCK"] },
+
+  { "id": "FX-POSTLOCK", "act": 3, "location": "fixtureville", "scene": "cutscene",
+    "effects": [
+      { "op": "SET", "flag": "KESTREL_RECRUITED" },
+      { "op": "INC_UNITY", "source_id": "u_post" }
+    ],
+    "next": [] },
+
+  { "id": "FX-SET-A", "act": 3, "location": "fixtureville", "scene": "cutscene",
+    "effects": [
+      { "op": "SET", "flag": "KESTREL_RECRUITED" },
+      { "op": "SET", "flag": "ORDER_ALLIED" },
+      { "op": "INC_UNITY", "source_id": "u1" },
+      { "op": "INC_UNITY", "source_id": "u2" },
+      { "op": "INC_UNITY", "source_id": "u3" },
+      { "op": "INC_UNITY", "source_id": "u4" },
+      { "op": "INC_UNITY", "source_id": "u5" }
+    ],
+    "next": ["FX-LOCK-A"] },
+
+  { "id": "FX-LOCK-A", "act": 3, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "LOCK_ENDINGS" } ],
+    "next": ["FX-CHOICE-A"] },
+
+  { "id": "FX-CHOICE-A", "act": 4, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "SET_FINAL_CHOICE", "choice": "SHARE" } ],
+    "next": ["FX-RECORD-A"] },
+
+  { "id": "FX-RECORD-A", "act": 4, "location": "fixtureville", "scene": "ending",
+    "effects": [ { "op": "RECORD_ENDING" } ],
+    "next": [] },
+
+  { "id": "FX-CHOICE-B", "act": 4, "location": "fixtureville", "scene": "cutscene",
+    "effects": [ { "op": "SET_FINAL_CHOICE", "choice": "SLEEP" } ],
+    "next": ["FX-RECORD-B"] },
+
+  { "id": "FX-RECORD-B", "act": 4, "location": "fixtureville", "scene": "ending",
+    "effects": [ { "op": "RECORD_ENDING" } ],
+    "next": [] }
+]
