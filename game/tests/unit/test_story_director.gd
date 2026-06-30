@@ -165,6 +165,31 @@ func test_advance_refuses_while_branch_open():
 	var r: Result = _dir.advance()
 	assert_true(r.is_err(), "advance refuses while a branch is open")
 
+# --- N3: per-branch resolution ledger (REVIEW_phase3_round2 N3) ---
+
+func test_reentering_resolved_branch_cannot_apply_second_option_identity_flags():
+	# Resolve the branch via the LEFT option, setting its identity flag.
+	_dir.goto_beat("FX-BR-TRIGGER")
+	assert_true(_dir.choose("FX-BR1", "left").is_ok(), "first choose (left) succeeds")
+	assert_true(_gs.flags.get_flag("FX_LEFT_TAKEN"), "left identity flag applied")
+	# Back-navigate to the trigger (re-opens the branch) and try the OTHER option.
+	_dir.goto_beat("FX-BR-TRIGGER")
+	assert_eq(_dir.current_branch_id(), "FX-BR1", "branch re-opens on re-entry")
+	var second: Result = _dir.choose("FX-BR1", "right")
+	assert_true(second.is_err(), "re-resolving with a different option is refused")
+	assert_false(_gs.flags.get_flag("FX_RIGHT_TAKEN"), "second option identity flag NOT applied")
+	assert_true(_gs.flags.get_flag("FX_LEFT_TAKEN"), "original identity flag still the only one set")
+
+func test_rechoosing_same_resolved_option_is_idempotent_and_reroutes():
+	_dir.goto_beat("FX-BR-TRIGGER")
+	assert_true(_dir.choose("FX-BR1", "left").is_ok(), "first choose (left) succeeds")
+	# Re-enter the trigger and choose the SAME option again: allowed, idempotent, re-routes.
+	_dir.goto_beat("FX-BR-TRIGGER")
+	var again: Result = _dir.choose("FX-BR1", "left")
+	assert_true(again.is_ok(), "re-choosing the same option is allowed")
+	assert_eq(_dir.current_beat_id(), "FX-LEFT", "re-choosing re-routes to the option goto")
+	assert_true(_gs.flags.get_flag("FX_LEFT_TAKEN"), "identity flag remains set")
+
 func test_director_logic_does_not_reference_the_scene_tree():
 	# Guard (ADR-0008): the director is headless logic — no scene-tree coupling.
 	var src := FileAccess.get_file_as_string("res://src/story/story_director.gd")

@@ -15,7 +15,10 @@
 ##     NOT claim "completes before return" on web. Instead we request a syncfs after every
 ##     write and on the reliable visibilitychange/pagehide events, accepting a small,
 ##     bounded residual-loss window. A prior committed beat/battle transition is never lost.
-class_name SaveManager
+##
+## NOTE: no `class_name` — this script is registered as the `SaveManager` autoload (project.godot),
+## and a global class of the same name would "hide the autoload singleton". Tests instantiate it
+## via `preload("res://src/save/save_manager.gd")` rather than a global class name.
 extends Node
 
 signal saved(reason: String)

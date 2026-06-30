@@ -11,6 +11,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_title")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.08, 0.12, 1)
+
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -20,13 +29,25 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Menu" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 
 [node name="TitleLabel" type="Label" parent="Center/Menu"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 48
 text = "AETHERBOUND"
 horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Center/Menu"]
+layout_mode = 2
+modulate = Color(0.7, 0.74, 0.85, 1)
+text = "An offline fantasy RPG"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Center/Menu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 
 [node name="NewGame" type="Button" parent="Center/Menu"]
 layout_mode = 2
@@ -35,3 +56,11 @@ text = "New Game"
 [node name="Continue" type="Button" parent="Center/Menu"]
 layout_mode = 2
 text = "Continue"
+
+[node name="Settings" type="Button" parent="Center/Menu"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Center/Menu"]
+layout_mode = 2
+text = "Quit"

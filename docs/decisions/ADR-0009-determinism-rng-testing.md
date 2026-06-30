@@ -71,8 +71,18 @@ The six saved streams are `battle` (damage/crit/accuracy/loot rolls), `ai` (Enem
    for cosmetic/animation, never for outcomes.
 2. **No wall-clock / OS entropy in logic.** Logic modules must not call `Time.*`, `OS.*`, global
    `randi/randf`, or `randomize()`. A **guard test** (`tests/unit/test_no_nondeterminism.gd`) greps the
-   `battle/` (incl. `enemy_ai.gd`), `story/`, `save/`, `inventory/`, `leveling/` sources and fails on
+   `battle/` (incl. `enemy_ai.gd`), `story/`, `leveling/`, and the **save serializer-tier**
+   (`save/atomic_file_io.gd`, `save/save_serializer.gd`, `save/save_migrator.gd`) sources and fails on
    any such reference.
+   - **Documented exclusion — `save/save_manager.gd`.** The `SaveManager` is a tree-resident
+     *coordinator* Node, not outcome logic. It legitimately uses `Time` for its debounce window and
+     `OS.has_feature("web")`/`JavaScriptBridge` for the web durable-flush seam (ADR-0005 §e). Both affect
+     only *when* a write happens and *which* platform flush runs — **never the save content**, which is
+     produced deterministically by the serializer-tier. The clock is injectable (`SaveManager.set_clock`)
+     and tests drive it explicitly, so `SaveManager` stays functionally deterministic. The guard test
+     therefore scopes `save/` to the three serializer-tier files above and **excludes `save_manager.gd`**.
+     (The same applies to the `battle/battle_controller.gd` bridge Node, excluded from the
+     module-boundary guard for the analogous reason.)
 3. **Stable ordering.** Turn ties, AI target ties (`lowest_hp`/`highest_threat`), and any iteration that
    affects outcomes use deterministic keys (stable indices), never `Dictionary` iteration order.
 4. **Stream discipline.** Damage/accuracy/crit/loot from `"battle"`; enemy choices from `"ai"`; Piggy's

@@ -48,9 +48,16 @@ don't stall I/O on low-end devices; lifecycle triggers **bypass debounce**. A li
 but the pending timer is explicitly cleared so the lifecycle write is the one that lands), then writes.
 
 **Durability guarantee differs by platform (stated honestly):**
-- **Native (Android):** the lifecycle write is **synchronous** — the temp-write + `fsync` + atomic
-  rename all complete *before the `_notification` handler returns*, so progress is durable even if the
-  OS suspends/kills the app immediately after. This is the full DoD-#13 guarantee on native.
+- **Native (Android):** Godot 4's `FileAccess` exposes **no `fsync`**, so a lifecycle write does
+  temp-write + `flush` + `close` + atomic `rename`, all **synchronously before the `_notification`
+  handler returns**. `close()` hands the bytes to the OS **page cache**; the atomic rename is durable
+  against an **app kill / background / lock** (the page cache survives the process — the common DoD-#13
+  case). On a true **power-off** immediately after the write, durability depends on the OS flushing the
+  page cache to storage; if it has not, the renamed `save_main.sav` may reference unflushed blocks. The
+  hard DoD-#13 requirement — **"no corrupted saves"** — still holds **via recovery**, never as a lost or
+  corrupt game: the checksum + validate-before-backup + `.bak`/checkpoint recovery tier (§b/§c) means the
+  worst case is recovery to a slightly older *valid* save. A platform `fsync` via JNI is a possible
+  future hardening; it is not required to meet #13 given the recovery tier.
 - **Web (Chromebook):** the file write is synchronous to the in-memory FS, but the flush to durable
   storage (IndexedDB via `syncfs`, or OPFS) is **asynchronous and cannot be awaited inside a dying
   handler** — see §(e). Web durability is therefore **best-effort with a small, bounded residual-loss
@@ -63,7 +70,9 @@ but the pending timer is explicitly cleared so the lifecycle write is the one th
 main):
 
 1. Write payload + header + checksum to `path.tmp`.
-2. `flush` + `fsync` + close `path.tmp`.
+2. `flush` + `close` `path.tmp`. (Godot 4 `FileAccess` has no `fsync`; `close` flushes to the OS page
+   cache. Durability against a power-off then relies on the OS flush + the recovery tier below, not on a
+   forced sync — see §(a)/§(e).)
 3. **Validate `path.tmp`** (re-read header + checksum). If invalid → abort, keep everything as-is, return `Err`.
 4. **Validate the *current* `path`** (header + checksum). **Only if it validates**, copy it to `path.bak`.
    (A torn/corrupt main is *not* promoted — so the last good `.bak` survives.)
@@ -151,9 +160,13 @@ The save payload is a dict produced by `SaveSerializer.to_dict(GameState)`:
 
 ### (e) Platform persistence
 
-- **Android (native):** `user://` maps to the app's private storage; atomic `rename` + `fsync` are
-  supported. Lifecycle-hook writes are **synchronous and durable before the handler returns**, so
-  progress survives backgrounding/kill/lock. Full DoD-#13 guarantee.
+- **Android (native):** `user://` maps to the app's private storage; atomic `rename` is supported.
+  Godot 4 `FileAccess` exposes **no `fsync`**, so lifecycle-hook writes are synchronous (temp-write +
+  flush + close + atomic rename complete before the handler returns) and the rename is durable against
+  **backgrounding / kill / lock** via the OS page cache. A true **power-off** mid-flush falls back to the
+  checksum + `.bak`/checkpoint recovery tier (§b/§c), so the result is at worst recovery to an older
+  *valid* save — **never a corrupt save**. This satisfies DoD-#13 ("no corrupted saves") via recovery
+  rather than a forced-sync before-return promise.
 - **Chromebook / web export — honest strategy (the async-flush reality):** Godot 4.x's web export backs
   `user://` with **Emscripten IDBFS over IndexedDB**. (We **do not assume OPFS** — the build verifies
   what the pinned Godot 4.x web export actually provides before relying on anything beyond IDBFS.) The

@@ -1,8 +1,8 @@
 ## boot.gd — first scene (ARCHITECTURE §5 app data flow).
 ##
-## Loads + validates content, then routes to Title. Phase-3 minimal: it drives the
-## ContentDB load and reports a clear error if validation fails, then changes to Title.tscn.
-## (Full SceneRouter / SettingsService / SaveManager wiring lands in later phases.)
+## Loads + validates content, emits content_loaded, then hands off to the SceneRouter to enter
+## the Title screen. The SceneRouter (autoload) owns the actual transition (ADR-0008); Boot only
+## kicks it off so there is one home for scene swaps.
 extends Node
 
 func _ready() -> void:
@@ -20,11 +20,16 @@ func _ready() -> void:
 				log.error("Content load failed: %s" % r.error, "Boot")
 			else:
 				push_error("Content load failed: %s" % r.error)
-	# Route to the title screen.
+	# Hand off to the SceneRouter for the Title transition (deferred so this _ready returns first).
 	call_deferred("_goto_title")
 
 func _goto_title() -> void:
-	get_tree().change_scene_to_file("res://src/ui/Title.tscn")
+	var router := get_node_or_null("/root/SceneRouter")
+	if router != null:
+		router.goto("TITLE")
+	else:
+		# Fallback if the router autoload is somehow absent (keeps Boot resilient).
+		get_tree().change_scene_to_file("res://src/ui/Title.tscn")
 
 func _node(name: String) -> Node:
 	return get_node_or_null("/root/" + name)
