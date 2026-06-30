@@ -5,7 +5,7 @@
 - **Project:** Aetherbound (working title) — offline single-player RPG, Godot 4.x, Android + Chromebook.
 - **Runtime start (Phase 0):** 2026-06-30T07:29:58Z
 - **Hard checkpoint (4h30m):** 2026-06-30T11:59:58Z
-- **Current phase:** Phase 1 — Story (awaiting human story sign-off)
+- **Current phase:** Phase 1 — Story **COMPLETE; awaiting human "approved" at the single story gate.**
 - **Remote:** https://github.com/Archaejohn/ideal-spoon.git (origin) — push verified.
 
 ## Done
@@ -18,13 +18,12 @@
   - Toolchain scripts (`tools/fetch_godot.sh`, `tools/run_tests.sh`).
   - ADR-0001 (tech stack), ADR-0002 (repo & remote).
 
-## In flight
-- **Phase 1 — Story bible** on branch `story/story-bible`. Writers' room active:
-  - `00_BRIEF.md` — committed (Owner). The binding creative anchor.
-  - `01_WORLD.md` — Worldbuilder (Opus) in progress.
-  - Next (parallel, after world): Character Writer → `02_CHARACTERS.md`; Plot Architect → `03_MAIN_STORY.md` + `04_BRANCHES_ENDINGS.md`; Quest Designer → `05_SIDEQUESTS.md`.
-  - Then: Script Writers → `06_SCRIPT_KEY_SCENES.md`; Editor → `07_CONTINUITY_NOTES.md`; Reviewers → `08_REVIEW.md`.
-  - Then Owner assembles `STORY_BIBLE.md` + `SUMMARY.md` → **human story gate**.
+## In flight — AT THE HUMAN GATE
+- **Phase 1 — Story bible** on branch `story/story-bible`, PR opened. Complete deliverables in `docs/story/`:
+  `00_BRIEF` · `01_WORLD` · `02_CHARACTERS` · `03_MAIN_STORY` (beat ledger) · `04_BRANCHES_ENDINGS` (resolver) · `05_SIDEQUESTS` · `06_SCRIPT_KEY_SCENES` · `07_CONTINUITY_NOTES` · `08_REVIEW` · `STORY_BIBLE` (index) · `SUMMARY` (1-page).
+- Produced by a multi-agent writers' room (worldbuilder, character writer, plot architect, quest designer, script writer) + independent editor + content reviewer + a heart pass.
+- Independent review verdict: APPROVE WITH MINOR FIXES — all fixes applied (incl. mandatory age-appropriateness re-stage of A3-10).
+- **BLOCKED ON:** human reply "approved" (the single gate). Phase 2 (Architecture) does not begin until then.
 
 ## Next steps
 1. Present 1-page story summary → **STOP for human "approved"** (the single human gate).
