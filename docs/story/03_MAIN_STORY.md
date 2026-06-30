@@ -26,6 +26,7 @@ On the dying sky-world of Aetheris, where floating islands sink one quiet inch a
 4. **A1-04 — The Song awakens.** During the standoff the over-stressed great-lamp gutters and dies. Without thinking, Wren *Steadies* it — relighting it for one impossible minute in front of everyone. She is revealed, publicly, as a **Resonant**.
 5. **A1-05 — Conscription.** Ascendancy doctrine: Resonants are too valuable to leave free. The officer moves to take Wren. Keeper Pell stalls them; Wren is hurried toward the docks, where the salvager **Sable Vance** is loading scrap. Sable introduced (reluctant, wry).
 6. **A1-06 — Leaving home.** Wren, Tam, and Sable flee aboard Sable's ship, **the Driftwing**. Keeper Pell stays behind to keep the lamp lit, pressing the **Keeper's Lamp** (a special wellstone) into Wren's hands. *Emotional turn:* the cost of the first goodbye.
+   - **A1-06b — The keeper's habit.** That first night on the Sky-Roads the *Driftwing*'s keel-stone runs nervous and thin. Wren settles it the way Pell taught her — *two taps on the cradle, one slow breath, and the words "the lamp is lit, we're aloft, all's well."* It is the first light she has ever kept without him, and she understands, quietly, that the habit is how she gets to carry him along. *Plants Pell's ritual, his saying, and the Keeper's Lamp as the personal thread Acts III–IV pay off.*
 7. **A1-07 — The Sky-Roads.** First voyage; tutorial of skyship travel and the wind-roads. A Hollow swarm attacks mid-route; Wren's *Listen* spots the danger early and saves the ship. Sable's cynicism begins to crack.
 8. **A1-08 — Hollowgate.** Arrival at the patchwork hub-city built around a beached Skyborn cathedral-ship. Wonder beat. Sable is broke and owes the salvagers' guild; she takes a job diving the old wreck beneath the city.
 9. **A1-09 — Into the wreck.** The party descends into the humming Skyborn hull-undermarket. Tam is giddy at the relics. Deep inside they find a small, dormant construct curled like a sleeping cat.
@@ -81,7 +82,11 @@ On the dying sky-world of Aetheris, where floating islands sink one quiet inch a
 
 1. **A3-01 — After.** Wren and Bramble alone in a dim, half-Fading world where the Hollow are bold and the Song is nearly deaf. Tone shift to melancholy. Bramble steadies Wren when her courage fails. (Bramble's arc: tool → the world's conscience.)
 2. **A3-02 — The Hush.** They cross to **The Hush**, a skyland nearly claimed by the Fading — a glimpse of what *all* the sky becomes if no one acts. Wren learns the kindest, hardest answer: to **re-tune** Hollow and calm them rather than fight. (Optional: rescue the survivors — a unity choice.)
+   - **A3-02b — The keeper kept a light.** Among the last of The Hush's holdouts, Wren finds **Keeper Pell** — evacuated here when Meadowmoor was emptied, and now too frail to fly out, keeping the island's failing chapel-lamp lit by hand so stragglers can find their way to the boats. Reunion: warmth, his old sayings, the relief of a found-again father. *Emotional turn:* the loved one she thought lost, returned — briefly.
+   - **A3-02c — Into the Long Quiet.** As the last survivors are carried off, the chapel-lamp will not hold for both the leaving and the staying. Pell chooses to keep it lit himself — a keeper's plain hand-craft, no Song — so no one is left in the dark, and fades gently into the **Long Quiet** as the light he tended outlasts him. Wren keeps his ritual at his side. *A gentle, permanent loss; the personal wound the finale answers.*
 3. **A3-03 — The captain returns.** They find **Sable** running rescue-runs for refugees in a patched-together hull. Her arc lands: the cynic who lost her home now spends herself saving others. The party has a ship again.
+   - **A3-03b — The tax of hope.** Raw from losing Pell, Wren insists they can still save *everyone*; Sable, who has now lost a home twice, snaps that "hope is a tax I can't pay" and that trying to save all of them is how you watch all of them sink. A real rift opens between the two people who anchor the family. *The game's theme — hoarding vs. sharing — fought out between two who love each other.*
+   - **A3-03c — Worth the tax.** On a desperate rescue-run that should not work, Sable spends herself for strangers and it *holds* — and she admits, gruff and shaking, that Wren's stubborn hope is the only thing that ever got her to fly *toward* people instead of away. The rift reconciles; the captain chooses belief out loud. *Sable's arc lands through the family, not a speech.*
 4. **A3-04 — Thornholt haven.** The salvager shantytown has become a crowded refugee haven. **Tam** is reunited here, churning out Hollow-wards and rescue gadgets; his recklessness has become responsibility.
 5. **A3-05 — Mira's crisis.** **Mira** rejoins as the Lantern Order fractures under the disaster it swore could never come. Her faith is shaken; supporting her here (a small choice) keeps her trust through the chapter.
 6. **A3-06 — The exile in the wreck. ⟶ BRANCH BR4.** Deep in Thornholt's relic-wrecks, the party can find and free **Rookwise**, an exiled scholar of forbidden Skyborn lore. **Branch point BR4 (optional recruit):** pursue and recruit Rookwise, or leave the exile be. Rookwise can reconstruct the Skyborn truth the lost island took with it.
@@ -119,6 +124,7 @@ On the dying sky-world of Aetheris, where floating islands sink one quiet inch a
    - Let the Wellspring **sleep** forever → **Ending B "The Long Quiet"**
    - **Take** the power for the chosen few → **Ending C "The Ascendant Throne"**
    - **Wake** the Warden as a partner and go to find the vanished Skyborn → **Ending D "The Wandering Star"** *(secret; offered only if the deepest truth was earned)*
+   - **A4-06b — Bramble steps forward.** Once Wren commits the choice, the moment lands through **Bramble**. On the **Share / Sleep / Take** paths, the Song needs one more true thing to complete or quiet it, and Bramble — the tool that became a person — gives the last of itself freely ("I am not afraid"), the emotional fulcrum of the finale. On the secret **Wake** path it is the opposite: Bramble is made **whole** and travels on, the reward for the deepest road. *The world-choice is felt through the one who loved the world most.*
 7. **A4-07 — Resolution.** The chosen ending plays out and the Song resolves (or quiets) accordingly. *(Full endings and exact unlock conditions in `04_BRANCHES_ENDINGS.md`.)*
 
 **Boss / encounter highlights:** Marrow / Ascendancy guardian-construct (A4-03) · the Warden as the final *choice*, not a fight.
@@ -152,6 +158,7 @@ On the dying sky-world of Aetheris, where floating islands sink one quiet inch a
 | A1-04 | I | Meadowmoor | Lamp dies; Wren Steadies it; Resonant revealed. | `RESONANT_REVEALED`; `TUT_STEADY` |
 | A1-05 | I | Meadowmoor | Conscription attempt; meet Sable at the docks. | `SABLE_MET` |
 | A1-06 | I | Meadowmoor→Sky-Roads | Flee on the Driftwing; Pell gives the Keeper's Lamp. | `SABLE_RECRUITED`; `TAM_RECRUITED`; `HAS_KEEPERS_LAMP` |
+| A1-06b | I | Sky-Roads | Wren keeps a light alone for the first time using Pell's ritual/saying. | `PELL_RITUAL_TAUGHT` |
 | A1-07 | I | Sky-Roads | First voyage; Hollow swarm; Listen saves the ship. | `TUT_SKYSHIP` |
 | A1-08 | I | Hollowgate | Arrive at the hub; Sable takes a wreck-diving job. | `HOLLOWGATE_UNLOCKED` |
 | A1-09 | I | Hollowgate wreck | Descend the Skyborn hull; find a dormant construct. | `WRECK_ENTERED` |
@@ -173,7 +180,11 @@ On the dying sky-world of Aetheris, where floating islands sink one quiet inch a
 | A2-13 | II | broken fragment | Wren wakes alone with Bramble; party scattered. | `PARTY_SCATTERED`; `ACT3_UNLOCKED` |
 | A3-01 | III | broken fragment | Greyed world; bold Hollow; Bramble steadies Wren. | `ACT3_START` |
 | A3-02 | III | The Hush | Re-tune Hollow (kind answer); future of the sky shown. | `TUT_RETUNE`; `±UNITY (+1 if survivors rescued)` → `HUSH_SURVIVORS_SAVED` |
+| A3-02b | III | The Hush | Reunite with Keeper Pell, evacuated here, keeping the chapel-lamp lit. | `PELL_FOUND` |
+| A3-02c | III | The Hush | Pell keeps the last lamp lit by hand and fades into the Long Quiet. | `PELL_LOST`; `PELL_REMEMBERED` |
 | A3-03 | III | The Hush→sky | Reunite with Sable on rescue-runs; a ship again. | `SABLE_REJOINED`; `HAS_SHIP` |
+| A3-03b | III | The Hush→sky | Wren-vs-Sable fracture: "save everyone" vs. "hope is a tax I can't pay." | `SABLE_RIFT` |
+| A3-03c | III | sky/rescue-run | Sable's rescue-run reconciles the rift; the cynic believes out loud. | `SABLE_RECONCILED` |
 | A3-04 | III | Thornholt | Refugee haven; reunite with Tam (now responsible). | `TAM_REJOINED` |
 | A3-05 | III | Thornholt | Mira's faith crisis; support her to keep her trust. | `MIRA_REJOINED`; `MIRA_TRUST` (if supported) |
 | A3-06 | III | Thornholt | **[BR4]** Find & recruit Rookwise, or leave him. | `BR4_OPEN`; `ROOKWISE_RECRUITED` (if pursued) `±UNITY (+1)` |
@@ -190,6 +201,7 @@ On the dying sky-world of Aetheris, where floating islands sink one quiet inch a
 | A4-04 | IV | Wellspring chamber | The Warden wakes; truth revealed to the depth earned. | `WARDEN_AWAKE`; `WARDEN_TRUTH_WHOLE` (derived) |
 | A4-05 | IV | Wellspring chamber | Thane's grief laid bare; can be persuaded to stand down. | `THANE_PERSUADED` (if unity high) |
 | A4-06 | IV | Wellspring chamber | **THE FINAL CHOICE** — Share / Sleep / Take / Wake. | `FINAL_CHOICE` ∈ {`SHARE`,`SLEEP`,`TAKE`,`WAKE`} |
+| A4-06b | IV | Wellspring chamber | Bramble gives the last of itself (Share/Sleep/Take) or is made whole (Wake). | `BRAMBLE_SACRIFICE` (set iff `FINAL_CHOICE` ∈ {`SHARE`,`SLEEP`,`TAKE`}) |
 | A4-07 | IV | Wellspring chamber | Chosen ending plays out; the Song resolves. | `ENDING` ∈ {`A`,`B`,`C`,`D`} |
 
 ---

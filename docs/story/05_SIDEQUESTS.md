@@ -22,14 +22,15 @@ Each companion quest opens when that character has been in the party a while and
 ## CQ-WREN — "The Listening Stone"
 - **Member:** Wren (apprentice aether-tender; hidden Resonant; heart of the story).
 - **Unlocks:** Act III, returning to **Meadowmoor** after the Fading.
-- **Hook:** A floated lantern arrives on the wind from Meadowmoor with no message — only a strip of cloth from Wren's old master's coat. Wren wants to go home and finds the village darker, the lamp grey, and her master gone ahead into the Long Quiet while she was away.
+- **Hook:** A floated lantern arrives on the wind from Meadowmoor with no message — only a strip of cloth from Wren's old master's coat, tied to the handle the careful way Pell tied everything. Wren needs to go home. She finds the village dimmed and emptied — evacuated to The Hush when the lamp finally failed — and the keeper's house standing open, his keeping-journal still on the bench.
 - **Steps:**
-  1. Sail to a half-dimmed Meadowmoor; the old folk who stayed are tending one another by candlelight.
+  1. Sail to a half-dimmed, abandoned Meadowmoor; a few old folk who would not leave are tending one another by candlelight.
   2. **Listen** at the dead village lamp — Wren hears no Song at all, and panics that her own gift is failing.
-  3. Find her master's keeping-journal in the lamp-house; learn he spent his last steadiness calming the Hollow so the village could be evacuated, not relighting the lamp.
-  4. A drift of gentle Hollow gathers at the cold lamp, drawn to the last warmth — the villagers fear them.
+  3. Find her master's keeping-journal in the lamp-house; learn that, with the stone too far gone to relight, Pell got every soul out the plain keeper's way — driving off and out-waiting the gathering Hollow and stretching the dying stone's last charge by candle, cloth, and patience (no Song; Pell was never a Resonant) — before he walked to the boats with the last of them.
+  4. A drift of gentle Hollow gathers at the cold lamp, drawn to the last warmth — the few who stayed fear them.
   5. Wren must choose how to face them (the choice below) rather than fight.
-- **Choice / twist:** The twist is that the lamp **cannot** be saved — there is not enough aether left, and her master knew it. Wren chooses to **re-tune and calm the Hollow** (the kind, hard answer from the world bible) and lead them out to the dimming edge, OR to **Steady** the lamp for one last night so the village can say goodbye to their home by its light before they leave. Either way she accepts that stewardship sometimes means letting go gracefully, not "one magic fix."
+- **Continuity:** This quest pairs with the main-story Pell beats (**A3-02b/A3-02c**, his reunion and loss at The Hush). It is Wren's place to grieve the *home* and the man — and it reads gently whether the player visits before or after Pell's passing.
+- **Choice / twist:** The twist is that the lamp **cannot** be saved — there is not enough aether left, and her master knew it. Wren chooses to **re-tune and calm the Hollow** (the kind, hard answer from the world bible) and lead them out to the dimming edge, OR to **Steady** the lamp for one last night so the few who stayed can say goodbye to their home by its light before they leave. Either way she accepts that stewardship sometimes means letting go gracefully, not "one magic fix."
 - **Reward:**
   - *Story:* Wren stops fearing she must save everything alone; the journal's last line ("a keeper keeps people, not lamps") reframes her arc.
   - *Gameplay:* Signature ability **Keeper's Calm** — a party-wide Listen that reveals every Hollow and wellstone on a map and lets Wren pacify weak Hollow without combat. Gear: **Master's Tuning Fork** (boosts Steady duration).
@@ -91,13 +92,13 @@ Each companion quest opens when that character has been in the party a while and
 ## CQ-KESTREL — "The Names on the Wall"
 - **Member:** Kestrel (defecting Ascendancy sky-knight; duty → conscience; redemption).
 - **Unlocks:** Act III, after Kestrel is recruited (branch) and the party reaches **Cinderworks** territory post-Fading.
-- **Hook:** Kestrel learns her old knight-cohort is being sent on a "mercy harvest" — draining a still-inhabited island because Ascendancy math says its people can't be saved anyway. Her former squire, a teenager named Pell, is among the crew following orders Kestrel once gave.
+- **Hook:** Kestrel learns her old knight-cohort is being sent on a "mercy harvest" — draining a still-inhabited island because Ascendancy math says its people can't be saved anyway. Her former squire, a teenager named Finch, is among the crew following orders Kestrel once gave.
 - **Steps:**
   1. Infiltrate a Cinderworks harvester-dock (stealth/persuade, not slaughter — these are sincere people serving a wrong cause).
   2. Find the muster wall where Kestrel's name was struck off as "deserter"; nearby, the names of the island's families to be displaced.
-  3. Confront Pell, who believes Kestrel betrayed the code; debate duty vs. conscience.
+  3. Confront Finch, who believes Kestrel betrayed the code; debate duty vs. conscience.
   4. Reach the island ahead of the harvest and warn/evacuate its people with Sable's ship.
-- **Choice / twist:** Twist — Kestrel discovers the harvest order was signed in *her* old hand, from before she defected; she helped build this. Choice: **expose the order to Pell's whole cohort** (some defect with her — the harder, hopeful path) or **quietly stop this one harvest** and let Pell keep his post and his faith in the code. Exposing recruits an optional minor ally; the quiet path keeps Pell safe and loyal to Kestrel personally.
+- **Choice / twist:** Twist — Kestrel discovers the harvest order was signed in *her* old hand, from before she defected; she helped build this. Choice: **expose the order to Finch's whole cohort** (some defect with her — the harder, hopeful path) or **quietly stop this one harvest** and let Finch keep his post and his faith in the code. Exposing recruits an optional minor ally; the quiet path keeps Finch safe and loyal to Kestrel personally.
 - **Reward:**
   - *Story:* Kestrel forgives herself enough to act — her redemption stops being about her past and becomes about who she protects now.
   - *Gameplay:* Signature ability **Knight's Vow** (a guard stance that intercepts hits aimed at weaker party members — Wren especially). Gear: **Reforged Crest** (her old Ascendancy sigil, melted and re-struck; raises party morale/resistance to fear effects).
@@ -114,10 +115,10 @@ Each companion quest opens when that character has been in the party a while and
   2. Inside, restore three dormant memory-glyphs (gentle Listen/Shape puzzles).
   3. The glyphs reveal Bramble was built not as a tool but as a *companion* for a Skyborn child who was lost in the Sundering — Bramble's "purpose" was simply to love and be loved.
   4. A final glyph offers Bramble the choice to wake fully (gaining selfhood) or stay safely simple.
-- **Choice / twist:** Twist — Bramble was never a tool; it was *family*, grieving a child for a thousand years without the words. Choice: Wren can **help Bramble complete the Song** (Bramble becomes fully a person, gains will and the ability to refuse orders — even the party's) or **let Bramble keep the Song unfinished** by its own wish, choosing gentleness over more grief. Completing the Song is required for the secret Ending D thread (the Warden as partner).
+- **Choice / twist:** Twist — Bramble was never a tool; it was *family*, grieving a child for a thousand years without the words. Choice: Wren can **help Bramble complete the Song** (Bramble becomes fully a person, gains will and the ability to refuse orders — even the party's) or **let Bramble keep the Song unfinished** by its own wish, choosing gentleness over more grief. Completing the Song deepens Bramble into the whole, willing partner the secret Ending D is *felt through*, and lines up naturally with the deepest path — but it is **supporting flavor, not a hard gate**: Ending D's actual unlock is the `04` resolver's (`WARDEN_TRUTH_WHOLE AND ROOKWISE_RECRUITED AND MARROW_REDEEMED`).
 - **Reward:**
-  - *Story:* Bramble becomes the world's living conscience, able to speak the Skyborn's lost intent — pivotal lore for the endings.
-  - *Gameplay:* Signature ability **Maker's Memory** (Bramble can play a fragment of the full Song to fully restore one party member or briefly relight a dead zone for safe passage). Gear: **Completed Heart-Stone** (raises Bramble's resonance; required key item for Ending D).
+  - *Story:* Bramble becomes the world's living conscience, able to speak the Skyborn's lost intent — pivotal lore for the endings, and the heart through which the Act IV choice lands (A4-06b).
+  - *Gameplay:* Signature ability **Maker's Memory** (Bramble can play a fragment of the full Song to fully restore one party member or briefly relight a dead zone for safe passage). Gear: **Completed Heart-Stone** (raises Bramble's resonance; the in-fiction sign of a whole Bramble that accompanies Ending D — flavor that supports the path, not a gate; see `04`).
 - **Theme payoff:** Found family and personhood — the "thing" was always a someone, and being made useful was never the point.
 
 ---
@@ -228,7 +229,7 @@ Each companion quest opens when that character has been in the party a while and
 - **Rewards:**
   - **3 fragments:** **Resonant's Ear** — Listen range increased; reveals hidden fragment/quest sites on the map.
   - **5 fragments:** **Steadier Song** — Wren's Steady costs less and resists Songsickness longer.
-  - **7 fragments (complete):** **The Whole Song** — a once-per-area ability to fully relight a dimmed zone for safe travel, and the **key requirement for the secret Ending D** (the full Song is what wakes the Warden as a *partner* rather than a power source). Completing it also plays the game's full hopeful musical motif for the first time.
+  - **7 fragments (complete):** **The Whole Song** — a once-per-area ability to fully relight a dimmed zone for safe travel, and the full hopeful motif that **accompanies the secret Ending D** (in fiction, the whole Song is what wakes the Warden as a *partner* rather than a power source). This is **supporting flavor, not a hard gate** — Ending D's unlock is defined solely by `04`'s resolver (`WARDEN_TRUTH_WHOLE AND ROOKWISE_RECRUITED AND MARROW_REDEEMED`). Completing it also plays the game's full hopeful musical motif for the first time.
 - **Buildable note:** Fragments are simple collectible flags; the audio "fill" is a layered music stem keyed to the count. No new systems required.
 
 ---
@@ -256,7 +257,7 @@ Each companion quest opens when that character has been in the party a while and
 | CQ-TAM | One Good Spark | Companion | Hollowgate | II | After first relic dungeon; visit guild | Brightgear Stabilizer or Resonant Coil |
 | CQ-MIRA | The Bell That Lied | Companion | Stillmere | II–III | After first Stillmere visit | Ability: Steady Hands (cures Songsickness); Candle-Boat Censer |
 | CQ-KESTREL | The Names on the Wall | Companion | Cinderworks | III | After recruiting Kestrel (branch) | Ability: Knight's Vow; Reforged Crest |
-| CQ-BRAMBLE | The Unfinished Song | Companion | Verdance | III | Enough Song Fragments collected (MA-01) | Ability: Maker's Memory; Completed Heart-Stone (Ending D key) |
+| CQ-BRAMBLE | The Unfinished Song | Companion | Verdance | III | Enough Song Fragments collected (MA-01) | Ability: Maker's Memory; Completed Heart-Stone (supports Ending D / flavor) |
 | SQ-01 | The Last Inch | World (rescue) | Edge-island (near Meadowmoor) | I–II | Available early via Hollowgate | Tether-sheep mascot; supplies; sky-folk rep |
 | SQ-02 | Quiet the Quiet | World (Hollow-calming) | Hollowgate | II | Reach Hollowgate undermarket | Vendor discount; Wellstone Shard; lamp-moth follower |
 | SQ-03 | What the Mirror Kept | World (relic mystery) | Glasswastes | II | Meet wandering scholar | Bramble memory-fragment; Mirror-Ward charm |
@@ -265,13 +266,14 @@ Each companion quest opens when that character has been in the party a while and
 | SQ-06 | The Singing Door | World (puzzle) | Glasswastes | II–III | Find the humming vault (after SQ-03) | High-charge Wellstone; Verdance seed; Song-puzzle unlock |
 | SQ-07 | The Garden That Forgot to Stop | World (overgrowth) | Verdance | II–III | Enter Verdance interior | Lamp-herb harvest; vine-bridge shortcut |
 | SQ-08 | The Furnace and the Fed | World (moral choice) | Cinderworks | III | Reach Cinderworks post-Fading | Freed Resonant ally; Cinder-Forged gear; branch evidence |
-| MA-01 | Song Fragments | Mastery (collection) | All skylands | II–IV | Begin collecting fragments via Listen | Resonant's Ear → Steadier Song → The Whole Song (Ending D key) |
+| MA-01 | Song Fragments | Mastery (collection) | All skylands | II–IV | Begin collecting fragments via Listen | Resonant's Ear → Steadier Song → The Whole Song (supports Ending D / flavor) |
 | MA-02 | Relight the Lamps | Mastery (restoration) | All skylands | I–III | Restore Meadowmoor lamp (tutorial) first | Lamplighter's Boon → The Shared Light (pushes Ending A) |
 
 ---
 
 ## Continuity & scope notes (for the Editor)
 - **Canon respected:** no free aether (lamps are rebalanced/stretched, never magically refilled); Resonants are born not made; the Cinderworks quest (SQ-08) reuses the Ascendancy-rigs-burn-out-Resonants ruling as Marrow's gentle echo; the Skyborn-departed mystery is *planted, never settled* (SQ-03, SQ-06, CQ-BRAMBLE) and only the endings resolve it.
-- **Ending hooks:** MA-01 (full Song) + CQ-BRAMBLE gate **Ending D**; MA-02 (shared light) nudges **Ending A**; SQ-05/CQ-MIRA feed the Stillmere expose-vs-protect branch; SQ-08/CQ-KESTREL feed the Ascendancy/Kestrel branches.
+- **Ending hooks:** MA-01 (full Song) and CQ-BRAMBLE *accompany and support* **Ending D** as flavor — the **authoritative unlock lives only in `04`'s resolver** (`WARDEN_TRUTH_WHOLE AND ROOKWISE_RECRUITED AND MARROW_REDEEMED`); these quests are not hard gates. MA-02 (shared light) nudges **Ending A**; SQ-05/CQ-MIRA feed the Stillmere expose-vs-protect branch; SQ-08/CQ-KESTREL feed the Ascendancy/Kestrel branches.
+- **Revisitable skylands (timing rule):** All eight skylands are freely revisitable by ship for *side content* from when first reached; only the **main-quest** Stillmere reservoir/secret/gate-key beat gates at **A3-07** (`STILLMERE_UNLOCKED`). So Act II Stillmere-adjacent side content (CQ-MIRA, SQ-05, the Stillmere MA-01 fragment) is consistent, and CQ-WREN's Act III return to Meadowmoor follows the same global "side content stays revisitable" rule.
 - **Tone:** all loss is "the Long Quiet" / fading to light; no gore; antagonists are frightened or grieving, never cruel; every quest offers a kind, non-violent best answer.
 - **Buildability:** all quests reuse the eight canon skylands and existing systems (Listen/Steady/Shape, Hollow encounters, collectible flags, ship travel). No new maps or mechanics are required beyond what the brief and world bible already establish.

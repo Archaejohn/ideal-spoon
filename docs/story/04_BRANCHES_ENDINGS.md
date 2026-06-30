@@ -60,8 +60,8 @@ Deep in Thornholt's wrecks waits **Rookwise**, an exiled scholar of forbidden Sk
 
 | Choice | Path contents | Flags set |
 | --- | --- | --- |
-| **Recruit Rookwise** | Free him; he joins as the seventh party member. He can **reconstruct the memory-shard lost at BR1**, completing the Skyborn truth from a single shard. | `ROOKWISE_RECRUITED=true`; `+1 UNITY` |
-| **Leave him be** | Skip the wreck; the party of six continues. The lost shard stays lost. | `ROOKWISE_RECRUITED=false` |
+| **Recruit Rookwise** | Free him; he joins as an additional party member (the seventh if Kestrel was recruited, otherwise the sixth). He can **reconstruct the memory-shard lost at BR1**, completing the Skyborn truth from a single shard. | `ROOKWISE_RECRUITED=true`; `+1 UNITY` |
+| **Leave him be** | Skip the wreck; the party continues without him. The lost shard stays lost. | `ROOKWISE_RECRUITED=false` |
 
 **Merge (A3-11):** Optional and non-blocking. Recruiting Rookwise is the usual way to make `WARDEN_TRUTH_WHOLE` true on a one-island run, and is a prerequisite for Ending D. `BR4_RESOLVED=true`.
 
@@ -91,6 +91,21 @@ Deep in Thornholt's wrecks waits **Rookwise**, an exiled scholar of forbidden Sk
 | `ALLIES_RALLIED` | A3-11 | Multiple factions answered the call (unity). |
 | `MARROW_REDEEMED` / `MARROW_LOST` | A4-03 | Marrow's final resolution. |
 | `THANE_PERSUADED` | A4-05 | Thane stood down. |
+| `BRAMBLE_SACRIFICE` | A4-06b | Bramble gave the last of itself to complete/quiet the Song. |
+
+#### Emotional-thread flags (non-gating)
+
+These flags record the game's personal beats. **None of them feed the UNITY counter, the derived flags, or the ending resolver** — they are read only to trigger the matching scene flavor and callback lines. They never change which endings are offered.
+
+| Flag | Set at | Meaning |
+| --- | --- | --- |
+| `PELL_RITUAL_TAUGHT` | A1-06b | Wren has kept a light alone using Pell's ritual/saying. |
+| `PELL_FOUND` | A3-02b | Reunited with Keeper Pell at The Hush. |
+| `PELL_LOST` | A3-02c | Pell faded into the Long Quiet keeping the last lamp lit. |
+| `PELL_REMEMBERED` | A3-02c | Pell's thread is paid off in the finale (callback lines). |
+| `SABLE_RIFT` | A3-03b | The Wren-vs-Sable fracture opened. |
+| `SABLE_RECONCILED` | A3-03c | The fracture healed via Sable's rescue-run. |
+| `BRAMBLE_SACRIFICE` | A4-06b | See above; set on the Share/Sleep/Take paths only. |
 
 ### 3.2 The UNITY counter
 
@@ -124,6 +139,12 @@ FACTIONS_UNITED :=
 
 > `FACTIONS_UNITED` deliberately requires the Ascendancy defector (Kestrel), an aligned faith (Order allied or the truth shared), **and** broad goodwill (UNITY ≥ 5). It is the "best/hardest" state from the brief.
 
+```
+BRAMBLE_SACRIFICE := (FINAL_CHOICE in {SHARE, SLEEP, TAKE})   // computed at A4-06b, AFTER the choice
+```
+
+> `BRAMBLE_SACRIFICE` is an **outcome** flag, not a gate: it is derived from the choice the player already made, purely to drive the A4-06b / A4-07 scene flavor (Bramble gives the last of itself on Share/Sleep/Take; on the secret Wake path Bramble is instead made whole — already implied by `BRAMBLE_WHOLE`). It does **not** appear in any availability condition or in `resolveEnding`.
+
 ---
 
 ## 4. The endings
@@ -150,7 +171,7 @@ At **A4-06** the Warden presents the final choice. Which options are *offered* i
 
 **Final-choice presentation:** With the factions gathered behind her — sky-folk, the Order (allied or honest), and Ascendancy defectors — Wren asks the Warden not to hoard or hide the current but to *teach the world to share it.* The Warden offers to redistribute the Wellspring's aether evenly and slowly across every skyland, enough for all if all live within it.
 
-**How it plays out:** Wren tunes the Wellspring to a gentle, even pulse, and across the sky the dying lamps steady — not blazing, but *enough*, everywhere at once. No one city rises while others fall; the Ascendancy's harvesters are turned to charging-ships that carry light to the smallest islands. Thane, if persuaded (`THANE_PERSUADED`), lays down his office and helps; if not, he is gently outvoted by a world that has chosen another way. The party stands on a re-lit Hollowgate at dawn. The Song is heard whole and golden for the first time in the game.
+**How it plays out:** To complete the world-wide chord, the Song needs one last whole, freely-given note — and **Bramble** gives it (`BRAMBLE_SACRIFICE`), pouring the last of its small self into the Wellspring so the light can reach everyone ("I am not afraid"). Wren tunes the Wellspring to a gentle, even pulse, and across the sky the dying lamps steady — not blazing, but *enough*, everywhere at once. No one city rises while others fall; the Ascendancy's harvesters are turned to charging-ships that carry light to the smallest islands. Thane, if persuaded (`THANE_PERSUADED`), lays down his office and helps; if not, he is gently outvoted by a world that has chosen another way. The party stands on a re-lit Hollowgate at dawn. The Song is heard whole and golden for the first time in the game — and the family carries Bramble in it.
 
 **Theme:** *Saving the world means changing how we live together, not one magic fix.* Stewardship over triage; found family scaled up to a whole sky.
 
@@ -162,7 +183,7 @@ At **A4-06** the Warden presents the final choice. Which options are *offered* i
 
 **Final-choice presentation:** Wren judges that the current can no longer be safely fed, and that draining it — by anyone, for anyone — only spends the last of it faster. She asks the Warden to let the Wellspring sleep for good.
 
-**How it plays out:** One by one the great-lamps dim to a soft, final light and go still — gently, the way the world says of the dead that they "go into the **Long Quiet**." The skylands settle low and slow toward the mist, and a quieter, smaller life begins on the lands that remain: gardens by hand, ships by sail, no aether at all. It is a loss, mourned like a lost friend, but it is also peace — the Hollow fade away with the hunger that made them, and no one is sacrificed to lift anyone else. Bramble's chest-stone dims last; it says it is not afraid. The party watches a low, green world the way you watch a sunset.
+**How it plays out:** To settle the Song into a true rest rather than a sudden silence, **Bramble** offers the last of itself (`BRAMBLE_SACRIFICE`) — the final, gentle note that lets the current lie down for good. One by one the great-lamps dim to a soft, final light and go still — gently, the way the world says of the dead that they "go into the **Long Quiet**." The skylands settle low and slow toward the mist, and a quieter, smaller life begins on the lands that remain: gardens by hand, ships by sail, no aether at all. It is a loss, mourned like a lost friend, but it is also peace — the Hollow fade away with the hunger that made them, and no one is sacrificed to lift anyone else. Bramble's chest-stone dims last of all; it says it is not afraid. The party watches a low, green world the way you watch a sunset.
 
 **Theme:** The double meaning the brief protects — *the Long Quiet* as the gentle word for death and as a world choosing to let go with grace. Bittersweet, never bleak.
 
@@ -174,7 +195,7 @@ At **A4-06** the Warden presents the final choice. Which options are *offered* i
 
 **Final-choice presentation:** Wren (or, if she refuses, Thane at her shoulder) takes the Wellspring's current for the chosen few — to lift the great cities high and let the rest of the sky settle into the dark.
 
-**How it plays out:** The citadel-cities blaze and rise, brighter than ever, on a tide of stolen light — and below them the small islands slip quietly into the mist, lamps going grey one after another. The chosen are saved; the world is not. The final image is the Ascendant cities glittering alone above an empty grey sea, and a single small lamp — Wren's Keeper's Lamp — set down and left behind. No violence is shown; the cost is the silence. If Thane was persuadable but ignored, his is the loneliest face on the throne.
+**How it plays out:** Taking the current still costs the last whole note, and **Bramble** gives it (`BRAMBLE_SACRIFICE`) — but for this colder choice, so that it has the strength to wrench the light upward; the tool-that-became-a-person spends itself for an answer it grieves. The citadel-cities blaze and rise, brighter than ever, on a tide of stolen light — and below them the small islands slip quietly into the mist, lamps going grey one after another. The chosen are saved; the world is not. The final image is the Ascendant cities glittering alone above an empty grey sea, and a single small lamp — Wren's Keeper's Lamp — set down and left beside Bramble's stilled chest-stone. No violence is shown; the cost is the silence. If Thane was persuadable but ignored, his is the loneliest face on the throne.
 
 **Theme:** The brief's cautionary path. Hoarding called mercy is still abandonment. A sincere, tragic wrongness — what the heroes spent the whole game refusing.
 
