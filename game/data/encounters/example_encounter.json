@@ -1,0 +1,18 @@
+{
+  "id": "enc_a1_11_crane",
+  "enemies": [
+    { "enemy": "sleepless_crane", "count": 1, "slot": "center" }
+  ],
+  "formation": "single_back",
+  "flee_allowed": false,
+  "ambush": "none",
+  "victory": "all_enemies_down",
+  "defeat": "all_party_down",
+  "rewards": {
+    "xp": 450,
+    "items": [
+      { "item": "wellstone_shard", "chance_permille": 1000 }
+    ]
+  },
+  "seed_salt": 1111
+}

@@ -5,10 +5,17 @@
   "stats": { "hp": 1200, "atk": 70, "def": 40, "mag": 30, "res": 50, "spd": 18 },
   "weaknesses": ["resonance"],
   "resistances": ["physical"],
-  "ai": "boss_phased",
-  "abilities": ["crane_sweep", "hollow_screech"],
   "xp": 450,
   "loot": [
-    { "item": "wellstone_shard", "chance": 1.0 }
-  ]
+    { "item": "wellstone_shard", "chance_permille": 1000 }
+  ],
+  "ai": {
+    "policy": "boss_phased",
+    "aggression_permille": 700,
+    "abilities": [
+      { "ability": "crane_sweep", "weight": 60, "target_rule": "all_enemies" },
+      { "ability": "hollow_screech", "weight": 40, "target_rule": "lowest_hp",
+        "condition": { "type": "self_hp_below_permille", "value": 300 } }
+    ]
+  }
 }

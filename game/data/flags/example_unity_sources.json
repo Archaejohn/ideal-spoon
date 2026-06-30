@@ -1,0 +1,19 @@
+[
+  { "source_id": "u1", "summary": "Evacuate the BR1 island's refugees in time", "beat": ["A2-03", "A2-04"],
+    "gate_any": ["SAVED_GLASSWASTES_REFUGEES", "SAVED_VERDANCE_VILLAGERS"], "owner": "beat",
+    "_note": "Authored on two MUTUALLY-EXCLUSIVE beats (only one island is visited); applied at most once." },
+  { "source_id": "u2", "summary": "Free the conscripted Resonants", "beat": ["A2-06"],
+    "gate_any": ["CONSCRIPTS_FREED"], "owner": "beat" },
+  { "source_id": "u3", "summary": "Recruit Kestrel", "beat": ["A2-10"],
+    "gate_any": ["KESTREL_RECRUITED"], "owner": "beat" },
+  { "source_id": "u4", "summary": "Rescue The Hush survivors", "beat": ["A3-02"],
+    "gate_any": ["HUSH_SURVIVORS_SAVED"], "owner": "beat" },
+  { "source_id": "u5", "summary": "Recruit Rookwise", "beat": ["A3-06"],
+    "gate_any": ["ROOKWISE_RECRUITED"], "owner": "beat" },
+  { "source_id": "u6", "summary": "Resolve BR3 in a unifying way", "beat": ["A3-09"],
+    "gate_expr": { "any": ["ORDER_ALLIED", { "all": ["TRUTH_SHARED", "MIRA_TRUST"] }] }, "owner": "beat" },
+  { "source_id": "u7", "summary": "Reach Marrow", "beat": ["A3-10"],
+    "gate_any": ["MARROW_REACHED"], "owner": "beat" },
+  { "source_id": "u8", "summary": "Rally multiple factions at the gate", "beat": ["A3-11"],
+    "gate_any": ["ALLIES_RALLIED"], "owner": "beat" }
+]

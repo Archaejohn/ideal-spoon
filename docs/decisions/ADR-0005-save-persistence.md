@@ -43,29 +43,48 @@ Adopt **Option 3**. `SaveManager` (autoload) orchestrates; pure helpers do the w
 - **Periodic timer** — a heartbeat every ~30–60s as a backstop.
 
 Autosaves are **debounced** (a minimum interval, default ~3s, between disk writes) so rapid triggers
-don't stall I/O on low-end devices; lifecycle triggers **bypass debounce** and write immediately and
-synchronously (the app may be about to die). On the lifecycle path the write must complete before the
-handler returns (`OS` may suspend right after).
+don't stall I/O on low-end devices; lifecycle triggers **bypass debounce**. A lifecycle write first
+**cancels any pending debounced autosave** (coalescing — single-threaded GDScript means no true race,
+but the pending timer is explicitly cleared so the lifecycle write is the one that lands), then writes.
+
+**Durability guarantee differs by platform (stated honestly):**
+- **Native (Android):** the lifecycle write is **synchronous** — the temp-write + `fsync` + atomic
+  rename all complete *before the `_notification` handler returns*, so progress is durable even if the
+  OS suspends/kills the app immediately after. This is the full DoD-#13 guarantee on native.
+- **Web (Chromebook):** the file write is synchronous to the in-memory FS, but the flush to durable
+  storage (IndexedDB via `syncfs`, or OPFS) is **asynchronous and cannot be awaited inside a dying
+  handler** — see §(e). Web durability is therefore **best-effort with a small, bounded residual-loss
+  window**, achieved via earlier/more-reliable lifecycle events and a periodic flush, not a
+  "completes-before-return" promise. This is called out in PHASE2_OWNER_RULINGS #3.
 
 ### (b) Atomic write strategy
 
-`AtomicFileIO.write(path, bytes)`:
+`AtomicFileIO.write(path, bytes)` — **exact, ordered** (a good backup is never overwritten by a torn
+main):
 
-1. Write payload to `path.tmp`.
-2. `flush` + close.
-3. If a valid `path` already exists, copy it to `path.bak` (rotating backup) **before** replacing.
-4. `DirAccess.rename(path.tmp, path)` — atomic replace on the platform FS.
+1. Write payload + header + checksum to `path.tmp`.
+2. `flush` + `fsync` + close `path.tmp`.
+3. **Validate `path.tmp`** (re-read header + checksum). If invalid → abort, keep everything as-is, return `Err`.
+4. **Validate the *current* `path`** (header + checksum). **Only if it validates**, copy it to `path.bak`.
+   (A torn/corrupt main is *not* promoted — so the last good `.bak` survives.)
+5. `DirAccess.rename(path.tmp, path)` — atomic replace on the platform FS.
 
 `AtomicFileIO.read_validated(path)`:
 
-1. Read `path`; verify header (magic + version) and a stored **checksum** (e.g. a hash of the payload).
+1. Read `path`; verify header (magic + version) and the stored **checksum** (hash of the payload).
 2. On success → return dict.
 3. On missing/corrupt/checksum-fail → try `path.bak` the same way.
-4. If both fail → return `Err` (caller shows "couldn't load; starting fresh" only as a last resort).
+4. If both fail → return `Err` (the *caller* then tries the checkpoint pair before "start fresh" — see
+   §c recovery tier).
 
 Files (under `user://`): `save_main.sav`, `save_main.sav.bak`, `checkpoint.sav`,
 `checkpoint.sav.bak`, and `settings.cfg` (settings persisted separately so a save problem never loses
 audio/accessibility prefs, and vice-versa).
+
+**Replay-mode guard (every write path):** `AtomicFileIO`/`SaveManager` refuse to write `save_main.sav`
+(or its `.bak`) while `SaveManager` is in replay mode. This guard is checked in `autosave()`,
+`write_checkpoint()`, **and** `_notification()` — so a focus-out/close during a sandboxed ending replay
+can never persist the throwaway replay state over the real save (see ADR-0006).
 
 ### (c) Battle checkpoints
 
@@ -79,6 +98,10 @@ audio/accessibility prefs, and vice-versa).
   "risky-point" general: bosses, the gate-relay set-piece, the descent.
 - Because RNG cursors are captured, a restored battle is **reproducible** — the same encounter seed
   plays out identically unless the player acts differently (ADR-0009).
+- **Checkpoint as last-ditch recovery tier:** if `load_latest()` finds both `save_main.sav` and its
+  `.bak` corrupt, `SaveManager` next tries `checkpoint.sav`(+`.bak`) — a valid, usually very recent
+  state — before ever falling back to "start fresh." Players are sent to a new game only if *all four*
+  files fail validation.
 
 ### (d) Save schema, versioning & migration
 
@@ -89,15 +112,20 @@ The save payload is a dict produced by `SaveSerializer.to_dict(GameState)`:
   "save_version": 1,
   "magic": "AETHER",
   "playtime_secs": 4123.5,
-  "rng_state": { "master_seed": 123456789, "cursors": { "battle": 88, "loot": 12, "dance": 4, "story": 0 } },
+  // all six cursors saved so battle/ai/loot/dance/encounter selection + story are reproducible:
+  "rng_state": { "master_seed": 123456789,
+                 "cursors": { "battle": 88, "ai": 41, "loot": 12, "dance": 4, "encounter": 7, "story": 0 } },
   "story": {
     "current_beat_id": "A3-06",
-    "flags": { "RESONANT_REVEALED": true, "KESTREL_RECRUITED": true, "...": "..." },
+    "flags": { "RESONANT_REVEALED": true, "KESTREL_RECRUITED": true, "...": "..." },  // booleans only
     "unity": 4,
+    "unity_sources_applied": ["u1_br1_refugees", "u3_kestrel"],  // per-source idempotency (ADR-0003)
+    "choices": { "final_choice": "NONE", "ending": "NONE" },     // ENUM store — NOT booleans
     "endings_locked": false,
-    "applied_beats": ["A1-01", "A1-02", "..."]      // idempotency ledger for effect ops
+    "applied_beats": ["A1-01", "A1-02", "..."]      // per-beat idempotency ledger for effect ops
   },
   "party": [ { "id": "wren", "level": 14, "xp": 2310, "hp": 180, "breath": 4,
+               "cooldowns": { "kindling_chorus": 0 },
                "equipment": { "weapon": "masters_tuning_fork" }, "learned": ["listen","steady"] } ],
   "inventory": { "items": { "lamp_herb": 5, "wellstone_shard": 2 }, "key_items": ["keepers_lamp"] },
   "quests": { "SQ-PIGGY": "DONE", "CQ-MIRA": "ACTIVE" },
@@ -108,36 +136,61 @@ The save payload is a dict produced by `SaveSerializer.to_dict(GameState)`:
 }
 ```
 
+> Derived flags (`WARDEN_TRUTH_WHOLE`, `FACTIONS_UNITED`) are **not** stored — they are computed-on-read
+> from the underlying flags + frozen UNITY (ADR-0003), so there is one source of truth and replays can't
+> desync. `final_choice`/`ending` live under `story.choices` as enum strings, never in the boolean dict.
+
 - `save_version` is an integer bumped whenever the schema changes incompatibly.
 - `SaveMigrator.migrate(dict)` applies ordered, pure `v(n)→v(n+1)` steps until `dict.save_version`
-  equals the current `SAVE_VERSION`. Each migration is a small pure function with its own GUT test
-  using a frozen old-version fixture. Loading a save newer than the build is refused safely.
+  equals the current `SAVE_VERSION`. Each migration is a small pure function with its own GUT test using
+  a frozen old-version fixture. **Before** migrating, `SaveManager` writes a one-shot
+  `save_main.v{n}.bak` (the pre-migration original), and **after** migrating it **re-validates** the
+  resulting dict against the current schema before the first write of migrated data — so a buggy
+  migration cannot silently destroy the original save. Loading a save newer than the build is refused
+  safely.
 
 ### (e) Platform persistence
 
-- **Android:** `user://` maps to the app's private storage; atomic `rename` is supported. Writes on the
-  lifecycle hooks ensure progress survives backgrounding/kill/lock.
-- **Chromebook / web export:** Godot's web export backs `user://` with a persistent browser FS
-  (IDBFS over IndexedDB; OPFS on supporting builds). Because the in-memory FS is flushed to IndexedDB
-  asynchronously, after every web write `SaveManager` calls the engine's FS-sync hook
-  (`OS.has_feature("web")` → trigger `idbfs`/OPFS flush) so data reaches durable storage before the tab
-  is hidden/closed. The lifecycle hooks (`FOCUS_OUT`, `WM_CLOSE_REQUEST`) drive this sync on web too.
-- A small **integration test** (and the manual smoke test in #13) verifies a write-then-reload survives
-  on each target.
+- **Android (native):** `user://` maps to the app's private storage; atomic `rename` + `fsync` are
+  supported. Lifecycle-hook writes are **synchronous and durable before the handler returns**, so
+  progress survives backgrounding/kill/lock. Full DoD-#13 guarantee.
+- **Chromebook / web export — honest strategy (the async-flush reality):** Godot 4.x's web export backs
+  `user://` with **Emscripten IDBFS over IndexedDB**. (We **do not assume OPFS** — the build verifies
+  what the pinned Godot 4.x web export actually provides before relying on anything beyond IDBFS.) The
+  file write lands synchronously in the in-memory FS, but the durable flush is
+  `FS.syncfs(false, cb)` — **asynchronous with a callback that cannot be awaited inside a dying
+  `_notification` handler**. We therefore do **not** claim "completes before return" on web. Instead:
+  1. **Flush on the reliable web lifecycle events.** Hook the DOM `visibilitychange→hidden` and
+     `pagehide` events (these fire earlier and far more reliably than tab `close`, including when a
+     Chromebook is locked or the tab is backgrounded) and request a `syncfs` flush there, in addition to
+     Godot's `FOCUS_OUT`/`WM_CLOSE_REQUEST`.
+  2. **Bounded periodic flush.** Run a `syncfs` on a short timer (e.g. every ~10–15s) and immediately
+     after each gameplay write, so the durable lag — the window of state that exists in memory but not
+     yet in IndexedDB — is **bounded** to at most that interval.
+  3. **Document the residual-loss window.** Because the final flush before an abrupt tab-kill may not
+     complete, web durability is **best-effort with a bounded residual window** (≤ the periodic
+     interval, typically a few seconds), not a hard before-return guarantee. In practice the
+     visibilitychange flush captures nearly all real lock/close/background cases; only an instant
+     hard-kill mid-flush can lose the last few seconds — and never a *prior* committed beat/battle
+     transition. This residual window is recorded in PHASE2_OWNER_RULINGS #3.
+- A small **integration test** plus the manual smoke test in #13 verify a write-then-reload survives
+  tab-hide/close/reload on the web build, and a synchronous kill/relaunch on Android.
 
 ### SaveManager public API
 ```gdscript
-func autosave(reason: String) -> void          # debounced unless reason is a lifecycle reason
-func write_checkpoint(label: String) -> void    # "pre_battle"
+func autosave(reason: String) -> void          # debounced unless reason is a lifecycle reason; honors replay guard
+func write_checkpoint(label: String) -> void    # "pre_battle"; honors replay guard
 func restore_checkpoint(label: String) -> bool
 func has_checkpoint(label: String) -> bool
-func load_latest() -> bool                       # validate + recover-from-backup + migrate
+func load_latest() -> bool                       # validate; recover main→.bak→checkpoint→fresh; migrate
 func has_save() -> bool
 func delete_all() -> void                        # used by "New Game over existing" confirm
-func _notification(what: int) -> void            # lifecycle hooks
+func enter_replay_mode() -> void                 # stash real save dict; hard-block all save_main writes
+func exit_replay_mode() -> void                  # restore real save dict
+func _notification(what: int) -> void            # lifecycle hooks; coalesces pending debounce; honors replay guard
 signal saved(reason)
 signal loaded()
-signal save_recovered_from_backup()              # surfaced for QA logs (no network)
+signal save_recovered(source)                    # source ∈ {backup, checkpoint} — QA logs, no network
 ```
 
 ### Data captured
@@ -162,7 +215,11 @@ own lifecycle notifications is the engine-blessed way to catch background/lock/c
   new persistent field requires a serializer update and, if incompatible, a `save_version` bump +
   migration + test. This is enforced by a round-trip test that serializes a fully-populated state and
   asserts equality after `from_dict(to_dict(...))`.
-- Web durability depends on the FS-sync call after writes; the web build's smoke test must confirm it.
+- Web durability is **best-effort with a bounded residual window** (≤ the periodic `syncfs` interval),
+  not a before-return guarantee — an honest consequence of IDBFS's async flush. Native Android keeps the
+  full before-return guarantee. The web smoke test must confirm survival across visibilitychange/hide.
 - Debounce means the *very last* few seconds of pure overworld walking could be lost on a hard kill,
   but never a beat/battle/menu transition or a lifecycle event — acceptable and within #13.
+- The replay-mode guard is enforced on **all** write paths (autosave, checkpoint, lifecycle), so an
+  ending replay can never overwrite the real save even if the player backgrounds the app mid-replay.
 - Checkpoints occupy a second pair of files; storage cost is trivial.

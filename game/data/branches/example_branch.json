@@ -2,6 +2,7 @@
   "id": "BR1",
   "trigger_beat": "A2-02",
   "merge_beat": "A2-05",
+  "_note": "Single-owner: the branch OPTION owns the branch-identity flags. The in-scene UNITY sub-objective (SAVED_*_REFUGEES/_VILLAGERS) and its INC_UNITY are owned by the destination beat (A2-03/A2-04) so no flag/UNITY source is set in two places (ADR-0003).",
   "options": [
     {
       "id": "glasswastes",
@@ -9,8 +10,7 @@
       "effects": [
         { "op": "SET", "flag": "SAVED_GLASSWASTES" },
         { "op": "SET", "flag": "BRAMBLE_SHARD_DEPARTURE" },
-        { "op": "SET", "flag": "MIRA_RECRUITED" },
-        { "op": "INC_UNITY", "amount": 1, "if_flag": "SAVED_GLASSWASTES_REFUGEES" }
+        { "op": "SET", "flag": "MIRA_RECRUITED" }
       ],
       "goto": "A2-03"
     },
@@ -20,8 +20,7 @@
       "effects": [
         { "op": "SET", "flag": "SAVED_VERDANCE" },
         { "op": "SET", "flag": "BRAMBLE_SHARD_PROMISE" },
-        { "op": "SET", "flag": "MIRA_RECRUITED" },
-        { "op": "INC_UNITY", "amount": 1, "if_flag": "SAVED_VERDANCE_VILLAGERS" }
+        { "op": "SET", "flag": "MIRA_RECRUITED" }
       ],
       "goto": "A2-04"
     }

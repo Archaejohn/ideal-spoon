@@ -1,0 +1,13 @@
+{
+  "id": "A1-11",
+  "act": 1,
+  "location": "hollowgate_wreck",
+  "scene": "battle",
+  "branch": null,
+  "encounter": "enc_a1_11_crane",
+  "checkpoint": true,
+  "effects": [
+    { "op": "SET", "flag": "BOSS_CRANE_CLEARED" }
+  ],
+  "next": ["A1-12"]
+}

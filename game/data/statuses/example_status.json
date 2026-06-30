@@ -1,0 +1,10 @@
+{
+  "id": "songsick",
+  "name": "Songsickness",
+  "category": "ailment",
+  "duration_turns": 3,
+  "stack_rule": "REFRESH",
+  "tick_effect": { "type": "NONE" },
+  "atb_modifier_permille": 700,
+  "on_apply": { "block_resource": "BREATH" }
+}

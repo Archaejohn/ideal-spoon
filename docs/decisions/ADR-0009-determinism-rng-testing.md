@@ -46,30 +46,39 @@ stream forward to draw `n` (or the implementation reseeds and fast-forwards) so 
 class RngStream:
     func randi() -> int
     func randi_range(a: int, b: int) -> int
-    func randf() -> float
-    func chance(p: float) -> bool
+    func chance_permille(p: int) -> bool       # p in 0..1000 (integer; no float in outcomes)
+    func weighted_pick(weights: Array) -> int   # integer-weighted index (EnemyBrain, dance tables)
     func get_cursor() -> int
     func set_cursor(n: int) -> void
+    # randf() exists for COSMETIC-only use on the unsaved UI stream; outcome logic uses the integer API.
 ```
 
-- **Injection:** logic classes (`BattleEngine`, `DamageFormula`, loot, `PENGUIN_DANCE`) receive an
-  `RngStream` as a constructor/parameter argument — never reach for a global. Tests pass a `FakeRng`
-  (scripted sequence) or a fixed-seed real stream.
+The six saved streams are `battle` (damage/crit/accuracy/loot rolls), `ai` (EnemyBrain selection),
+`loot`, `dance` (Penguin Dance table), `encounter` (encounter/enemy selection), and `story`. Keeping
+`ai` separate from `battle` means enemy decision rolls never shift damage reproducibility.
+
+- **Injection:** logic classes (`BattleEngine`, `DamageFormula`, `EnemyBrain`, loot, `PENGUIN_DANCE`)
+  receive an `RngStream` as a constructor/parameter argument — never reach for a global. Tests pass a
+  `FakeRng` (scripted sequence) or a fixed-seed real stream.
 - **Saved with the run:** `export_state()` is stored in the save (ADR-0005) and in checkpoints/replay
   snapshots, so restoring a checkpoint or replaying an ending continues the exact same RNG.
 
 ### Determinism guarantees & rules
 
-1. **Integer math** in all battle/leveling formulas (ADR-0004) — no float accumulation that can diverge
-   across Android/Chromebook/web. Floats only for cosmetic/animation, never for outcomes.
+1. **Integer math** in all outcome-affecting formulas (ADR-0004) — damage, healing, **ATB advance and
+   status `atb_modifier_permille` (turn order is an outcome)**, level/XP curves, and all probabilities
+   (integer permille). No float accumulation that can diverge across Android/Chromebook/web. Floats only
+   for cosmetic/animation, never for outcomes.
 2. **No wall-clock / OS entropy in logic.** Logic modules must not call `Time.*`, `OS.*`, global
    `randi/randf`, or `randomize()`. A **guard test** (`tests/unit/test_no_nondeterminism.gd`) greps the
-   `battle/`, `story/`, `save/`, `inventory/`, `leveling/` sources and fails on any such reference.
-3. **Stable ordering.** Turn ties and any iteration that affects outcomes use deterministic keys
-   (stable indices), never `Dictionary` iteration order or unordered sets.
-4. **Stream discipline.** Battle outcomes draw only from `"battle"`; loot from `"loot"`; Piggy's dance
-   from `"dance"`; encounter selection from `"encounter"`. Cosmetic randomness (idle wobble, particle)
-   uses a throwaway *unsaved* UI stream that never affects state.
+   `battle/` (incl. `enemy_ai.gd`), `story/`, `save/`, `inventory/`, `leveling/` sources and fails on
+   any such reference.
+3. **Stable ordering.** Turn ties, AI target ties (`lowest_hp`/`highest_threat`), and any iteration that
+   affects outcomes use deterministic keys (stable indices), never `Dictionary` iteration order.
+4. **Stream discipline.** Damage/accuracy/crit/loot from `"battle"`; enemy choices from `"ai"`; Piggy's
+   dance from `"dance"`; encounter/enemy selection from `"encounter"`; loot tables from `"loot"`.
+   Cosmetic randomness (idle wobble, particle) uses a throwaway *unsaved* UI stream that never affects
+   state.
 
 ### Module-boundary guard (supports ARCHITECTURE §3)
 
@@ -82,31 +91,35 @@ coordinators, `ui/`, or `overworld/` — keeping the headless core pure and the 
 game/tests/
 ├── unit/                         # headless logic — the ≥80% coverage target
 │   ├── battle/
-│   │   ├── test_damage_formula.gd
-│   │   ├── test_turn_scheduler.gd      # ordering, ties, haste/slow
-│   │   ├── test_status_engine.gd       # apply/tick/expire/stack rules; Songsickness
-│   │   └── test_battle_engine.gd       # full fights with fixed seed; win/lose/flee
+│   │   ├── test_damage_formula.gd      # integer dmg/heal; accuracy/miss; weakness/crit; min-1
+│   │   ├── test_turn_scheduler.gd      # INTEGER ATB ordering, ties (SPD→index), permille haste/slow
+│   │   ├── test_status_engine.gd       # apply/tick/expire/stack rules; Songsickness; permille modifier
+│   │   ├── test_enemy_ai.gd            # EnemyBrain: condition/weight/target rules; boss phases; FakeRng
+│   │   └── test_battle_engine.gd       # full fights (fixed battle+ai seed); win/lose/flee; retarget/fizzle
 │   ├── story/
-│   │   ├── test_flag_store.gd          # set/get; UNITY monotonic + freeze at A3-13
-│   │   ├── test_flag_ops.gd            # effect-op interpreter; idempotency ledger
+│   │   ├── test_flag_store.gd          # set/get; UNITY monotonic + freeze at A3-13; enum choices round-trip
+│   │   ├── test_flag_view.gd           # FlagView typed props + computed-on-read derived flags
+│   │   ├── test_flag_ops.gd            # effect ops; per-beat + per-source-id idempotency (no double-UNITY)
 │   │   ├── test_story_graph.gd         # every branch merges at its named beat; spine reachable
-│   │   ├── test_derived_flags.gd       # WARDEN_TRUTH_WHOLE, FACTIONS_UNITED truth tables
-│   │   ├── test_ending_resolver.gd     # GOLDEN: resolve + offered_options for all gating combos
-│   │   └── test_replay_planner.gd      # divergence reconstruction validity (ADR-0006)
+│   │   ├── test_derived_flags.gd       # WARDEN_TRUTH_WHOLE, FACTIONS_UNITED truth tables (computed)
+│   │   ├── test_ending_resolver.gd     # GOLDEN: resolve + offered_options for all gating combos (FlagView)
+│   │   └── test_replay_planner.gd      # faithful + synthesized reconstruction; derive step; offerable
 │   ├── save/
-│   │   ├── test_save_serializer.gd     # round-trip equality on a fully-populated state
-│   │   ├── test_save_migrator.gd       # v(n)->v(n+1) with frozen fixtures
-│   │   └── test_atomic_io.gd           # temp+rename; corruption→backup recovery
+│   │   ├── test_save_serializer.gd     # round-trip equality incl. choices/quests/cooldowns/cursors
+│   │   ├── test_save_migrator.gd       # v(n)->v(n+1) with frozen fixtures; pre-migration backup; re-validate
+│   │   ├── test_atomic_io.gd           # write order; validate-BEFORE-backup; corruption→.bak→checkpoint
+│   │   └── test_replay_guard.gd        # replay mode blocks autosave + checkpoint + LIFECYCLE writes
 │   ├── inventory/  test_inventory.gd
-│   ├── leveling/   test_level_system.gd
-│   ├── data/       test_content_validation.gd   # loads ALL game/data through validators
+│   ├── leveling/   test_level_system.gd          # data-authored XP curve + integer stat growth + caps
+│   ├── data/       test_content_validation.gd    # loads ALL game/data; refs incl. encounter/level_curve;
+│   │                                             #   domain rules: 8 source_ids, single-owner, no derived in requires
 │   ├── test_no_nondeterminism.gd
 │   └── test_module_boundaries.gd
 ├── integration/
 │   ├── test_scene_router.gd            # beat→state mapping, hook firing (stub loader)
 │   ├── test_checkpoint_roundtrip.gd    # start battle → lose → restored to pre-battle
 │   ├── test_story_playthrough.gd       # walk the ledger headless along a chosen branch
-│   └── test_save_lifecycle.gd          # autosave triggers fire on the right events
+│   └── test_save_lifecycle.gd          # autosave triggers fire on the right events; debounce/lifecycle coalesce
 └── helpers/
     ├── fake_rng.gd                     # scripted RngStream for exact control
     ├── mem_fs.gd                       # in-memory file IO for atomic-write tests
@@ -116,15 +129,22 @@ game/tests/
 
 ### Must-test list (maps to DoD #4/#9/#13/#14)
 
-- **Battle math** — damage/heal with weakness/crit/variance under fixed seed; min-1 floor; integer
-  stability.
+- **Battle math** — damage/heal with accuracy/miss, weakness/crit/variance under fixed seed; min-1
+  floor; integer stability; retarget-on-dead and fizzle.
+- **Enemy AI** — `EnemyBrain` picks the expected ability+target per condition/weight/target_rule under a
+  `FakeRng`; boss phase transitions at hp thresholds; `basic`/`caster`/`boss_phased` policies.
+- **Encounters** — load + validate (enemy/item refs exist); flee-allowed gating; reward override.
 - **Status & turn ordering** — apply/tick/expire, stack rules, Songsickness ATB penalty; ready-queue
-  ordering and tie-breaks; haste/slow.
-- **Leveling & inventory** — XP→level curve, stat growth; add/remove/equip/stack limits.
-- **Save/load + checkpoint** — full round-trip equality; **battle-checkpoint restore** returns to
-  pre-battle; **migration** N→N+1; **corruption → backup recovery**.
+  ordering and tie-breaks; **integer permille** haste/slow (no float).
+- **Leveling & inventory** — data-authored XP→level curve, integer stat growth, caps/overrides;
+  add/remove/equip/stack limits.
+- **Save/load + checkpoint** — full round-trip equality (incl. `choices`/`quests`/`cooldowns`/all six
+  cursors); **battle-checkpoint restore** returns to pre-battle; **migration** N→N+1 with pre-migration
+  backup + post-migration re-validate; **corruption → `.bak` → checkpoint recovery** (validate-before-
+  backup never destroys a good `.bak`); **replay-mode guard blocks every write path incl. lifecycle**.
 - **Story graph & flags** — every ledger beat's flag/UNITY effects; UNITY monotonic + frozen at A3-13;
-  each branch's outcomes and merge; Kestrel-recruit dependency on `KESTREL_DOUBT`.
+  **single-owner / per-source-id idempotency proves UNITY can't double-count**; each branch's outcomes
+  and merge; Kestrel-recruit dependency on `KESTREL_DOUBT`; enum `final_choice`/`ending` round-trip.
 - **Derived flags** — `WARDEN_TRUTH_WHOLE` (both-shards OR Rookwise+one-shard); `FACTIONS_UNITED`
   (unity≥5 AND Kestrel AND (Order OR truth)).
 - **`resolveEnding` (GOLDEN, exhaustive)** — for the relevant flag/UNITY/choice combinations: Sleep→B
@@ -133,7 +153,9 @@ game/tests/
   ungated option; non-gating flags (Piggy/emotional/`BRAMBLE_SACRIFICE`) provably never change a result.
 - **Ending replay** — completing once unlocks B+C; reaching A4-06 with each gate satisfied unlocks A/D;
   `ReplayPlanner.build_state` (faithful and canonical) yields an **offerable, valid** A4-06 state and
-  `resolve` returns the correct letter from it.
+  `resolve` returns the correct letter from it; **synthesized states set only underlying flags and
+  derive `WARDEN_TRUTH_WHOLE`/`FACTIONS_UNITED`** (a synthesized Ending-D state has real shards +
+  Rookwise + Marrow, never a directly-set derived flag) — the same validation a real run passes.
 - **Determinism guards** — no `Time/OS/randi/randf` in logic; module boundaries respected.
 - **Content validation** — all shipped `game/data` passes schema/reference/domain validation.
 

@@ -86,33 +86,69 @@ static func build_state(ending_id: int, stored_snapshot) -> Dictionary:
     if stored_snapshot != null:
         s = stored_snapshot.duplicate(true)          # faithful: the run that earned it
     else:
-        s = _canonical_state_for(ending_id)          # synthesized minimal valid locked state
+        s = _canonical_state_for(ending_id)          # synthesized: sets UNDERLYING flags only
     s.story.current_beat_id = "A4-06"
-    s.story.endings_locked = true                    # UNITY frozen; derived flags computed
-    # invariant: the target option must be offered from this state
-    assert(EndingResolver.offered_options(_flags(s), s.story.unity).has(_choice_for(ending_id)))
+    s.story.endings_locked = true                    # UNITY frozen
+    # Build the SAME FlagView a real run uses — derived flags are COMPUTED here, never stored:
+    var v := FlagView.from_dict(s.story.flags, s.story.unity)
+    # invariant (regression guard): the target option must be offered from this state
+    assert(EndingResolver.offered_options(v).has(_choice_for(ending_id)))
     return s
+
+# Synthesized canonical state: set the UNDERLYING flags from data/endings/<id>.requires, then let the
+# derive step (FlagView) compute WARDEN_TRUTH_WHOLE / FACTIONS_UNITED. NEVER sets a derived flag.
+static func _canonical_state_for(ending_id: int) -> Dictionary:
+    var req := ContentDB.ending(_id_str(ending_id)).requires   # underlying flags + unity_min only
+    var flags := {}
+    for f in req.flags_all: flags[f] = true                    # e.g. ROOKWISE_RECRUITED, MARROW_REDEEMED
+    if req.has("flags_any") and req.flags_any.size() > 0:
+        flags[req.flags_any[0]] = true                          # e.g. one shard (DEPARTURE or PROMISE)
+    var unity = max(req.get("unity_min", 0), 0)
+    # ...default finale party/inventory/location loadout...
+    return { "story": { "flags": flags, "unity": unity, "choices": {"final_choice":"NONE","ending":"NONE"} } }
 ```
 
 - **Faithful path** (tiers 1–2): the stored `divergence_snapshots[ending_id]` is the exact
   `GameState.snapshot()` captured **on entry to A4-06** in the completed run — full flags, UNITY (locked),
   party, inventory, location, and RNG cursors. Replaying it reproduces that run's finale precisely
   (RNG-deterministic, ADR-0009).
-- **Canonical path** (synthetic, optional): `_canonical_state_for` reads `data/endings/<id>.json`'s
-  `requires` block and sets exactly those gating flags + UNITY (and the implied A4-03/A4-05 outcomes)
-  to the minimum that makes the option offered, plus a default party/inventory loadout for the finale.
+- **Canonical path** (synthetic): `_canonical_state_for` reads `data/endings/<id>.requires` — which is
+  authored **entirely in underlying flags** (never derived ones) — sets exactly those underlying flags +
+  `unity_min`, and then the builder **re-runs the derive step via `FlagView`** to compute
+  `WARDEN_TRUTH_WHOLE`/`FACTIONS_UNITED`. This is the critical fix: a derived flag is **never set
+  directly**, so a synthesized Ending-D state cannot contain the contradiction "WARDEN_TRUTH_WHOLE=true
+  but no shards." `data/endings/D.requires` is therefore
+  `{ flags_all:[ROOKWISE_RECRUITED, MARROW_REDEEMED], flags_any:[BRAMBLE_SHARD_DEPARTURE,
+  BRAMBLE_SHARD_PROMISE] }` — from which the derive step computes `WARDEN_TRUTH_WHOLE=true` exactly as a
+  real run would.
 
-In **both** paths the builder asserts (and tests verify) that
-`EndingResolver.offered_options(flags, unity)` contains the target choice — i.e. the reconstructed
-state is a **valid** story-graph/flag state for that ending. The resolver used is the *same one* from
-ADR-0003; replay never has its own copy of the ending rules.
+In **both** paths the builder asserts (and tests verify) that `EndingResolver.offered_options(v)`
+contains the target choice — i.e. the reconstructed state passes the **same** validation a real run does
+and the **same** ADR-0003 resolver returns exactly the intended ending. Replay never has its own copy of
+the ending rules, and the `requires` schema cannot express a derived flag (ADR-0007), so the only way to
+satisfy a derived gate is to set its underlying flags and recompute — by construction.
 
 ### Sandboxed replay session
 
-Replay runs in a **separate, throwaway `GameState`** (a "replay session"); the player's real save is
-**never overwritten** by a replay. On finishing the replayed ending the game returns to Crossroads and
-discards the replay state. (`SaveManager` will not autosave over `save_main.sav` while in replay mode;
-it may use a distinct `replay.sav` for crash-safety within the replay only.)
+`GameState` is an autoload **singleton**, so a replay does not instantiate a second one. The mechanism:
+
+```
+StoryDirector.start_replay(ending_id):
+  SaveManager.enter_replay_mode()          # 1) stash the REAL save dict in memory; HARD-BLOCK all
+                                            #    writes to save_main.sav on EVERY path (autosave,
+                                            #    checkpoint, AND _notification lifecycle) — ADR-0005
+  GameState.from_dict(ReplayPlanner.build_state(ending_id, snapshot_or_null))
+  SceneRouter.goto(CUTSCENE, {beat: "A4-06"})   # play A4-06 → A4-06b → A4-07
+on replay exit (ending shown or player quits):
+  SaveManager.exit_replay_mode()           # restore the stashed REAL save dict into GameState
+  SceneRouter.goto(CROSSROADS)
+```
+
+The player's real save is **never overwritten** by a replay because the no-save guard covers **every**
+write path — crucially the **lifecycle `_notification` path** (a focus-out/background mid-replay is the
+most likely unexpected write, and it is blocked). For crash-safety *within* a replay, SaveManager may use
+a distinct `replay.sav`; it never touches `save_main.sav`(+`.bak`) while in replay mode. Exiting replay
+restores the stashed real-save dict, so the live singleton is returned to the player's true progress.
 
 ### Persistence
 
@@ -138,5 +174,10 @@ letter. A sandboxed replay protects the player's real progress.
 - Adding a new ending later would mean a new `data/endings/` entry, a resolver update (ADR-0003), and a
   replay test — but the divergence-point machinery is unchanged.
 - Tests (ADR-0009) must cover: completing once unlocks B+C; reaching A4-06 with each gate satisfied
-  unlocks A/D; `build_state` (faithful and canonical) always yields an offerable, valid state; and the
-  resolver returns A/B/C/D correctly for each reconstructed state.
+  unlocks A/D; `build_state` (faithful and canonical) always yields an offerable, valid state with
+  derived flags **computed** (a synthesized Ending-D state has real shards/Rookwise/Marrow, never a
+  directly-set `WARDEN_TRUTH_WHOLE`); the resolver returns A/B/C/D correctly for each reconstructed
+  state; and the replay-mode guard blocks a simulated lifecycle write from clobbering the real save.
+- `data/endings/*.requires` is authored **only in underlying flags** (the validator rejects a derived
+  flag name there), so the synthesized path can never manufacture a contradictory state — the derive
+  step is the single way a derived gate becomes true.

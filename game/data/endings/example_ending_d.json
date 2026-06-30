@@ -1,0 +1,11 @@
+{
+  "id": "D",
+  "name": "The Wandering Star",
+  "final_choice": "WAKE",
+  "divergence_beat": "A4-06",
+  "requires": {
+    "flags_all": ["ROOKWISE_RECRUITED", "MARROW_REDEEMED"],
+    "flags_any": ["BRAMBLE_SHARD_DEPARTURE", "BRAMBLE_SHARD_PROMISE"]
+  },
+  "epilogue_set": "ending_d_wandering_star"
+}

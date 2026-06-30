@@ -13,19 +13,21 @@ content here **without touching `.gd` files**.
 | `branches/` | `BR1–BR4` definitions (options, per-option effects, merge beat). | ADR-0007 *Branch* |
 | `flags/` | `flags.json` registry (gating vs. non-gating) + `unity_sources.json` (the eight `+1` sources). | ADR-0003, ADR-0007 |
 | `items/` | Consumables, weapons, armor, accessories, key items. | ADR-0007 *Item* |
-| `enemies/` | Enemy stat blocks, weaknesses, abilities, loot. | ADR-0004, ADR-0007 *Enemy* |
-| `abilities/` | Party + enemy abilities (cost, targeting, effects). | ADR-0004, ADR-0007 *Ability* |
-| `statuses/` | Status effects (duration, stacking, ATB modifiers). | ADR-0004, ADR-0007 *Status* |
+| `enemies/` | Enemy stat blocks, weaknesses, abilities, loot, **`ai` policy block** (EnemyBrain). | ADR-0004, ADR-0007 *Enemy* |
+| `encounters/` | Battle definitions: enemy list/formation, flee/ambush, rewards (referenced by `beat.encounter`). | ADR-0004, ADR-0007 *Encounter* |
+| `abilities/` | Party + enemy abilities (cost, `cooldown_turns`, targeting, effects). | ADR-0004, ADR-0007 *Ability* |
+| `statuses/` | Status effects (duration, stacking, **integer-permille** ATB modifier). | ADR-0004, ADR-0007 *Status* |
 | `party/` | Playable members' base stats, growth, learned abilities. | ADR-0007 *Party member* |
 | `dialogue/` | Dialogue line sets keyed by a beat's `dialogue_set`. | ADR-0007 *Dialogue* |
 | `quests/` | `CQ-*/SQ-*/MA-*` quest definitions. | ADR-0007 *Quest* |
 | `endings/` | The four endings (`A/B/C/D`) + `requires` (for replay reconstruction). | ADR-0006, ADR-0007 *Ending* |
-| `level_curves/` | XP→level tables and stat growth curves. | ADR-0004 |
+| `level_curves/` | XP→level tables and **integer** stat-growth curves (referenced by `party.growth`). | ADR-0004, ADR-0007 *Level curve* |
 | `schema/` | Human-readable field-by-field specs (mirror of ADR-0007) used by validators and authors. | ADR-0007 |
 
 Example files in this tree (`example_*.json`) are real, valid records using **canonical story IDs**
-(beat `A1-04`, enemy `sleepless_crane`, Wren's `steady`, `lamp_herb`, branch `BR1`, ending `A`) — copy
-them as starting templates.
+(beats `A1-04` + `A1-11`, enemy `sleepless_crane`, encounter `enc_a1_11_crane`, Wren's `steady`,
+`lamp_herb`, branch `BR1`, endings `A` + `D`, status `songsick`, curve `support_curve`) — copy them as
+starting templates.
 
 ## IDs are the contract (reuse, never invent)
 
