@@ -13,8 +13,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-; Core singletons registered as we build them (see ADRs in docs/decisions).
-; GameState="*res://src/core/game_state.gd"
+; Registered in dependency order (ARCHITECTURE §2). Thin coordinators / data only.
+Log="*res://src/core/log.gd"
+RngService="*res://src/core/rng_service.gd"
+EventBus="*res://src/core/event_bus.gd"
+ContentDB="*res://src/data/content_db.gd"
+SettingsService="*res://src/core/settings_service.gd"
+GameState="*res://src/core/game_state.gd"
 
 [display]
 
