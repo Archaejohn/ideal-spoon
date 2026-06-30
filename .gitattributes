@@ -1,0 +1,19 @@
+# Normalize line endings. Scripts and engine/text files use LF so they run on Linux CI.
+* text=auto eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.gd text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.godot text eol=lf
+*.json text eol=lf
+*.svg text eol=lf
+*.md text eol=lf
+
+# Binary assets
+*.png binary
+*.ogg binary
+*.wav binary
+*.ttf binary
+*.otf binary
