@@ -1,0 +1,11 @@
+{
+  "id": "X9-99",
+  "act": 9,
+  "location": "nowhere",
+  "scene": "cutscene",
+  "branch": null,
+  "effects": [
+    { "op": "FROOBLE", "flag": "NOT_A_REAL_OP" }
+  ],
+  "next": ["X9-99b"]
+}
