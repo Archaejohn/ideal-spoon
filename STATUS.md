@@ -19,7 +19,12 @@
   - ADR-0001 (tech stack), ADR-0002 (repo & remote).
 
 ## In flight
-- **Phase 1 — Story bible** on branch `story/story-bible`: world, factions, cast, themes, main beats, branch map, side quests, multiple endings + 1-page summary.
+- **Phase 1 — Story bible** on branch `story/story-bible`. Writers' room active:
+  - `00_BRIEF.md` — committed (Owner). The binding creative anchor.
+  - `01_WORLD.md` — Worldbuilder (Opus) in progress.
+  - Next (parallel, after world): Character Writer → `02_CHARACTERS.md`; Plot Architect → `03_MAIN_STORY.md` + `04_BRANCHES_ENDINGS.md`; Quest Designer → `05_SIDEQUESTS.md`.
+  - Then: Script Writers → `06_SCRIPT_KEY_SCENES.md`; Editor → `07_CONTINUITY_NOTES.md`; Reviewers → `08_REVIEW.md`.
+  - Then Owner assembles `STORY_BIBLE.md` + `SUMMARY.md` → **human story gate**.
 
 ## Next steps
 1. Present 1-page story summary → **STOP for human "approved"** (the single human gate).
