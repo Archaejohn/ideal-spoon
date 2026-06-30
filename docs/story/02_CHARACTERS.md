@@ -264,6 +264,27 @@ The heart of *Aetherbound* is a patchwork family assembled from the wreckage of 
 
 ---
 
+# Levity & running gags (the comedy engine)
+
+> *Aetherbound is melancholy at its roots — loss, a dying world, a fracture. That heart only lands if it is set against real, frequent **JOY**: wins that feel like wins, warm laughter, and kind comedy. This is the **comedy contract** for writers and designers. The one rule: comedy is **kind, never cruel** — we laugh *with* the family, never punch down; no meanness, no profanity; 6th-grade-friendly. Humor is the light that makes the dark readable.*
+
+**Tam — "it exploded in a useful direction" (the backfire-then-triumph gag).** Tam's inventions are a running joke with a beating heart: the gadget sputters, backfires, drops the buns, singes an eyebrow — and then, at the moment it matters most, it *works,* gloriously. The comedy is the backfire; the triumph is the payoff. Run it light early (the getaway ward-gadget at **A1-06a**; the juggling gauntlet at **A2-10b**) and cash it in big in Act III (**A3-04b**: *"IT WORKED AND IT BARELY EXPLODED! BEST ONE YET!"*). Catchphrase shape: *"Okay okay okay — so it exploded, BUT, hear me out —"* Never let a backfire actually hurt anyone; it is slapstick-safe, always.
+
+**Bramble — learning to make a joke (a comedy arc that becomes touching).** Bramble starts perfectly, deadpan **literal** — it answers idioms at face value, takes figures of speech apart, and genuinely does not understand why anyone is laughing (*"I do not understand why you are laughing"* — A1-10). Across the game it *studies* humor the way it studies a broken relic, trying to restore it: it notices joy is allowed (A2-10b: *"I did not know light was allowed to be only glad"*), attempts a joke with the timing slightly off but earnest (A3-04b: *"The odds were the joke"*), keeps a literal scorecard of its own progress (*"I am four festivals from funny. I am keeping count."*), and — only in the warmest payoff — finally lands one clean (Ending D: *"I have arrived."*). The arc is funny **and** moving: a made thing learning to be silly is a made thing becoming a person. We never mock Bramble; we root for it.
+
+**Sable — dry one-liners (the deflector).** Sable is the deadpan engine: she undercuts danger and feeling alike with a fast, wry crack (*"A magic kid, a broken robot, and a missing god. Climb aboard, we're clearly going to live forever."*). Her comedy is armor — and the running joke under it is that she *secretly funds and loves* the very things she razzes (Tam's gadgets: *"Don't tell the kid I funded the coupler. Reputation."*). When Sable's snark drops and she just **grins,** it's earned and it means something.
+
+**Recurring bits (sprinkle, never overuse):**
+- **"That was not a complaint."** Kestrel says the warm thing in clipped military denial, then disowns it. A reusable beat for her slow thaw.
+- **The third-hand gauntlet.** Tam's clockwork extra hand is a sight-gag generator — juggling, over-gesturing, handing people things at the worst moment, applauding by itself.
+- **Sun-bread.** The comfort-food prop that shows up at every good moment (festivals, wins, quiet nights). When sun-bread appears, something warm is happening.
+- **"Two taps, a breath, all's well."** Pell's ritual is mostly tender, but it also becomes the family's gentle catch-all (*"did you do the tap thing?"*) — a warm callback, not a punchline.
+- **Mira's "carefully kind" understatement.** She can be quietly, precisely funny in a healer's bedside-manner way (*"That's the most honest sermon I've heard in years. And a child gave it."*).
+
+**Where the joy lives (designer map).** Structured HIGHS to protect in the schedule, against the melancholy: the getaway & first flight (**A1-06a**), the Relighting festival (**A2-10b**), the Act III haven victory (**A3-04b**), and the soaring payoffs of Endings A and D. These are the *exhales* — fund them, keep them, and let the Song **SOAR** through them (see `01_WORLD.md` §8 victory fanfare). Aim for emotional **range**: the player should whoop on the getaway and dance at the festival, so the Sundering and the goodbyes cut all the way down.
+
+---
+
 # Casting notes for art & music
 
 A central simple melody — **"the Song"** — anchors the score (heard whole and golden in safe places, thin near the Fading, fragmentary from Bramble, fully resolved at the best ending). Each character is a *variation* on or counterpoint to it.

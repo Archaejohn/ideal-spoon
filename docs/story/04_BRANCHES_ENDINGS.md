@@ -95,11 +95,14 @@ Deep in Thornholt's wrecks waits **Rookwise**, an exiled scholar of forbidden Sk
 
 #### Emotional-thread flags (non-gating)
 
-These flags record the game's personal beats. **None of them feed the UNITY counter, the derived flags, or the ending resolver** — they are read only to trigger the matching scene flavor and callback lines. They never change which endings are offered.
+These flags record the game's personal beats — its lows **and** its highs. **None of them feed the UNITY counter, the derived flags, or the ending resolver** — they are read only to trigger the matching scene flavor and callback lines. They never change which endings are offered.
 
 | Flag | Set at | Meaning |
 | --- | --- | --- |
 | `PELL_RITUAL_TAUGHT` | A1-06b | Wren has kept a light alone using Pell's ritual/saying. |
+| `FIRST_FLIGHT_WON` | A1-06a | The party outwitted the Ascendancy and won the getaway; first flight as a thrill/triumph. |
+| `RELIGHTING_SHARED` | A2-10b | The party joined/made possible the Relighting festival (the joyful calm before the storm). |
+| `HAVEN_RELIT` | A3-04b | The party relit a refugee haven and re-tuned its Hollow swarm to cheers (Act III "we did it"). |
 | `PELL_FOUND` | A3-02b | Reunited with Keeper Pell at The Hush. |
 | `PELL_LOST` | A3-02c | Pell faded into the Long Quiet keeping the last lamp lit. |
 | `PELL_REMEMBERED` | A3-02c | Pell's thread is paid off in the finale (callback lines). |

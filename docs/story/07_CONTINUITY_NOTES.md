@@ -37,6 +37,7 @@
 - **The eight canon skylands** — identical set and spellings in `01` §1 and `05` (How-to-read). `03` and `06` use only these.
 - **Beat IDs** — every beat ID tagged in `06` (A1-01, A1-04, A1-06, A1-10, A2-07…A2-10, A2-12, A3-08…A3-10, A4-06, A4-07) matches `03`'s Beat Ledger exactly. `05` quests reference real skylands/acts.
 - **Heart-pass beat additions (consistent)** — the new beats **A1-06b** (Pell's habit), **A3-02b/A3-02c** (Pell reunion + loss at The Hush), **A3-03b/A3-03c** (Sable–Wren fracture + reconcile), and **A4-06b** (Bramble steps forward) are scripted in `06` and present in `03`'s Beat Ledger with their flags. They slot **between** existing beats and **renumber nothing**; no existing beat ID was changed or removed.
+- **Light & Triumph beat additions (consistent)** — the new beats **A1-06a** (the getaway / first flight, `FIRST_FLIGHT_WON`), **A2-10b** (the Relighting festival, `RELIGHTING_SHARED`), and **A3-04b** (haven relit / swarm re-tuned, `HAVEN_RELIT`) are scripted in `06` and present in `03`'s Beat Ledger. They slot **between** existing beats (A1-06↔A1-06b · A2-10↔A2-11 · A3-04↔A3-05) and **renumber nothing**; their flags are non-gating (see C7). No existing beat ID was changed or removed.
 - **Flag names** — all flags used in `06` (`SABLE_RECRUITED`, `TAM_RECRUITED`, `HAS_KEEPERS_LAMP`, `BRAMBLE_RECRUITED`, `KESTREL_DOUBT`/`KESTREL_PURSUER`, `BOSS_MARROW_CLEARED`, `DRAIN_PLAN_KNOWN`, `BR2_RESOLVED`, `KESTREL_RECRUITED`, `SECOND_SUNDERING`, `DRIFTWING_LOST`, `ORDER_SECRET_LEARNED`, `ORDER_SECRET_EXPOSED`+`TRUTH_SHARED`/`ORDER_ALLIED`, `MARROW_REACHED`/`MARROW_REDEEMED`, `FINAL_CHOICE`) match `03`'s ledger and `04`'s flag model.
 - **Endings unlock logic** — `04` §4 (availability table + resolver pseudocode) is internally consistent with `03`'s A4-06 options and `06`'s A4-06/A4-07 scripted gates. Sleep/Take always offered (game always completable); Share gated on `FACTIONS_UNITED`; Wake (secret) gated on `WARDEN_TRUTH_WHOLE AND ROOKWISE_RECRUITED AND MARROW_REDEEMED`. `WARDEN_TRUTH_WHOLE` correctly requires Rookwise on a single-island run (only one shard obtainable via BR1) — the redundancy with the explicit `ROOKWISE_RECRUITED` clause is harmless.
 - **Branch trigger/merge beats** — BR1 (A2-02→A2-05), BR2 (A2-07→A2-10), BR3 (A3-09→A3-11), BR4 (A3-06→A3-11) agree between `03` (branch table + ledger) and `04`.
@@ -109,6 +110,8 @@
 
 **Heart-pass flags (non-gating — they do NOT feed UNITY, the derived flags, or the ending resolver; they only drive scene flavor and callback lines):** `PELL_RITUAL_TAUGHT` (A1-06b) · `PELL_FOUND` (A3-02b) · `PELL_LOST` + `PELL_REMEMBERED` (A3-02c) · `SABLE_RIFT` (A3-03b) · `SABLE_RECONCILED` (A3-03c) · `BRAMBLE_SACRIFICE` (A4-06b; set **iff** `FINAL_CHOICE` ∈ {`SHARE`,`SLEEP`,`TAKE`} — an outcome flag derived from a choice already committed, never a gate). No existing flag name or ending-unlock condition was changed.
 
+**Light & Triumph flags (non-gating — same rule: they do NOT feed UNITY, the derived flags, or `resolveEnding`; flavor/callback only):** `FIRST_FLIGHT_WON` (A1-06a) · `RELIGHTING_SHARED` (A2-10b) · `HAVEN_RELIT` (A3-04b). These mark the game's structured HIGHS and are deliberately separate from the eight UNITY sources (which are unchanged at eight). No existing flag name or ending-unlock condition was changed.
+
 ---
 
 ## D. Open issues for the Owner
@@ -141,6 +144,20 @@ A "heart pass" added/strengthened four emotional threads **without touching the 
 2. **Bramble** is the finale's fulcrum (new **A4-06b**): it gives the last of itself in Endings A/B/C ("I am not afraid") and is instead made **whole** only on secret Ending D. New non-gating flag `BRAMBLE_SACRIFICE`.
 3. **Sable vs. Wren** fracture-and-reconcile (new **A3-03b/A3-03c**) dramatizes hoarding-vs-sharing between two who love each other.
 4. **A3-10 safety re-stage** (`06`): all ledge/jump/fall imagery removed; Marrow now *gives up* / surrenders to the Hollow-quiet and is reached by "one note." Redemption and mirror preserved.
+
+---
+
+## F. Light & Triumph pass (Lead Writer)
+
+A "light & triumph" pass added real **highs** and a comedy engine to give the story emotional **range** (so the lows land harder and the journey is genuinely fun) — **without touching the engine contract** (no existing beat ID, flag, UNITY source, derived flag, or ending-unlock condition changed):
+
+1. **Act I getaway as a WIN** — new **A1-06a** "The getaway": the party outwits/outruns the Ascendancy cutters, the Driftwing dives free, and first flight is pure wonder (Tam whoops; Wren laughs; Sable grins). The A1-06 goodbye is preserved intact. New non-gating flag `FIRST_FLIGHT_WON`.
+2. **Act II marquee joy** — new **A2-10b** "The Relighting": a Hollowgate festival the party made possible (Wren steadied the great-lamp) — floating lanterns, sun-bread, dancing, Bramble's first festival, pair-moments (Mira & Wren, Sable & Tam, Kestrel if recruited) — the calm-before-the-storm peak that makes A2-12 devastating. New non-gating flag `RELIGHTING_SHARED`.
+3. **Act III "WE DID IT" victory** — new **A3-04b** "Light in the grey": Tam's reunion joy + a gadget backfire-then-triumph, Wren re-tunes a Hollow swarm, the haven's lamp blazes back to cheers — light breaking the melancholy. New non-gating flag `HAVEN_RELIT`.
+4. **Comedy engine** — a "Levity & running gags" section added to `02` (Tam's backfire-then-triumph; Bramble's literal-mindedness slowly learning to joke; Sable's dry one-liners; recurring bits: "that was not a complaint," the third-hand gauntlet, sun-bread). Kind comedic exchanges sprinkled into new **and** existing `06` scenes (A1-10, A2-10) — kind, never cruel.
+5. **Soaring payoffs + music** — Ending A amplified with a sky-wide dawn celebration (lanterns, cheers, fanfare) layered over Bramble's gentle fade (triumph AND grief held at once); Ending D keeps its hopeful grin and pays off Bramble's joke-arc (its first clean landed joke). `01` §8 gains a **victory fanfare** and the Song **soaring** on triumphs/festivals; `01` §6 Relighting enriched as a marquee joy scene.
+
+All three new beats slot between existing beats and renumber nothing. The three new flags are non-gating flavor (see C7): they do **not** feed UNITY, the derived flags, or `resolveEnding`. The melancholy threads (the heart pass, §E) are fully intact — this pass adds contrast, not subtraction.
 
 ---
 

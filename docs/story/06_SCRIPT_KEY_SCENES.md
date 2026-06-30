@@ -12,6 +12,7 @@
 - **Branch forks** are labeled with the branch ID (BR2, BR3) and the flag each fork sets.
 - **`(parenthetical)`** beside a name is a quick acting note.
 - **The Song motif** = the central melody from `01_WORLD.md` §8 / `02_CHARACTERS.md` casting notes. "Whole and golden" = safe; "thin/faltering" = Fading; "fragments" = Bramble; "silence and static" = Marrow.
+- **Victory fanfare / "soaring"** = the Song's motif lifted into a bright, full, joyful statement (brass + chimes), used on hard-won triumphs and at festivals — the musical HIGH that pays off every time the Song faltered below (see `01_WORLD.md` §8).
 
 Voice quick-key (match exactly):
 **Wren** earnest, listening, asks more than declares · **Sable** dry, fast, deflecting · **Tam** excitable, tumbling, course-correcting · **Mira** gentle, precise, measured · **Kestrel** formal, clipped, military · **Bramble** fragmented-poetic, images and gaps · **Thane** measured, sorrowful, reasonable · **Marrow** hollow, hushed, aching · **Warden** calm, ancient, questioning.
@@ -254,6 +255,70 @@ TAM: (beat) No. But I'm gonna say it anyway. That's what you do.
 
 ---
 
+# 3a. A1-06a — THE GETAWAY — OPEN SKY OFF MEADOWMOOR
+
+> *Act I's triumphant HIGH. The escape is a WIN — they outwit and outrun the Ascendancy, the Driftwing leaps free, and first flight is pure wonder. The A1-06 goodbye stays; this is the thrill that earns it. Sets `FIRST_FLIGHT_WON`. Music: the Song's first notes turn into a soaring victory fanfare.*
+
+```
+[EXTERIOR — OPEN SKY off Meadowmoor. The Driftwing is barely clear of the dock when a horn BLARES behind: three slate-grey Ascendancy CUTTERS peel off the harvester and give chase, fast and sharp. The chase is ON. MUSIC: tense, then building — a thrill, not a dread.]
+```
+
+SABLE: (at the wheel, suddenly *alive* in a way we haven't seen) Okay. NOW it's my kind of morning. (over her shoulder) Everybody hold onto something that isn't me.
+
+TAM: (clutching the rail, thrilled and terrified at once) They're gaining! They're DEFINITELY gaining! That's bad, right? That feels bad —
+
+SABLE: (grinning) That's 'cause you fly in straight lines, Brightgear. Straight lines are for folks who *want* to get caught.
+
+```
+[Sable throws the Driftwing into a stomach-dropping dive between two drifting islands. The cutters follow, clumsier, scraping the islands' edges. WREN grips the rail, Keeper's Lamp tight to her chest — and despite the fear, the wind in her face does something to her.]
+```
+
+WREN: (eyes shut, a quick Listen — a soft ring spreads) Sable — *left!* There's a fast wind-road off the left, I can hear it pulling —
+
+SABLE: (delighted) The kid's a compass! Left it is —
+
+```
+[A cutter clips an island's rim and falls back. TAM hauls his clattering homemade ward-gadget up onto the rail with both hands and his clockwork third hand.]
+```
+
+TAM: Okay okay okay — my ward-thing — it's supposed to scramble their lift-stones — it has NEVER once worked right, but if there was EVER a —
+
+```
+[He cranks it. It sputters. Sparks. And then — for ONCE — it WORKS: a pop of harmless blue light wobbles the lead cutter's keel and sends it spinning gently off course. Tam stares at the gadget, then at the sky, then throws BOTH fists up.]
+```
+
+TAM: IT WORKED! DID YOU SEE THAT — IT ACTUALLY — (already deflating into honesty) okay that is NEVER happening again but DID YOU SEE IT?!
+
+SABLE: (laughing now, really laughing) Don't question it, kid! Hold on — cloud-bank!
+
+```
+[The Driftwing plunges into a towering gold cloud-bank. White mist, muffled silence — the cutters lose them. Then the ship BURSTS out the far side into open, endless, sunlit sky, alone and free, the glowing wind-roads glittering away to the horizon in every direction.]
+
+[MUSIC: the Song's first three notes BLOOM into a soaring brass-and-chime VICTORY FANFARE — the first big HIGH of the game. The whole sky opens up, gold and impossibly wide.]
+```
+
+TAM: (whooping, arms thrown out into the wind) WE MADE IT! We actually — Wren, we're FLYING! Like *really* flying!
+
+WREN: (and for the first time since the lamp died, she laughs — a real, startled, delighted laugh, hair streaming, throat-stone glowing soft and warm, not afraid) ...It's so *big.* Tam — I never knew it was so big.
+
+```
+[SABLE glances back at the two kids laughing at her rail, and the perpetual half-smirk softens into something she would deny under torture: a real, warm grin.]
+```
+
+SABLE: (to herself, gruff and fond) ...A magic kid and a box of bolts. (the grin holding) We're clearly going to live forever.
+
+WREN: (calling over the wind, still glowing) Sable — thank you. For not leaving us.
+
+SABLE: (eyes forward, grin staying) Rule one on my ship, kid: nobody gets left behind. (beat) ...don't make me regret saying it out loud.
+
+```
+[The Driftwing banks onto a glittering wind-road and SOARS. The fanfare resolves warm and high. For one bright moment, before all the hard things come, they simply WON — and they know it.]
+
+[>>> FLAG SET: FIRST_FLIGHT_WON = true. CUT to nightfall / A1-06b.]
+```
+
+---
+
 # 3b. A1-06b — THE KEEPER'S HABIT — THE SKY-ROADS (FIRST NIGHT)
 
 > *A small, quiet beat that makes Pell a thread, not a memory. Plants his ritual + saying as the things the finale will pay off. Sets `PELL_RITUAL_TAUGHT`.*
@@ -353,6 +418,16 @@ BRAMBLE: (a long pause — searching, failing) ...gone. That word too. (looks do
 WREN: (soft) Bramble. The green things that grow back, even in the dark. Can I call you Bramble?
 
 BRAMBLE: (the chest-stone pulses, pleased — a fragment of the Song plays, one note more complete than before) ...Bramble. Yes. I will keep that one. I will not lose that one.
+
+```
+[TAM creeps closer, completely unable to help himself.]
+```
+
+TAM: (hushed, thrilled) Hey — Bramble — you know things, right? Skyborn things? What's the most valuable thing in this whole wreck?
+
+BRAMBLE: (turning its lamp-eyes on him, perfectly literal, no humor at all) ...You. You are made mostly of water and worry. Both are very rare, this far down. (a beat, studying his face) I do not understand why you are laughing.
+
+TAM: (laughing despite everything) I have no idea, buddy. But keep doing that.
 
 ```
 [Wren sways — Songsickness, the first taste. Her vision greys for a second; she steadies on Tam's shoulder. The throat-stone is dim now from what she gave.]
@@ -555,6 +630,10 @@ KESTREL: (drawing her blade — and grounding it point-down in surrender, the fo
 
 KESTREL: (catching herself, the dry human note) ...That was not a complaint.
 
+BRAMBLE: (helpfully, deadpan, tilting its head at her) ...It registered as a complaint. (a beat) But I have observed that humans say the cold thing and mean the warm thing. (almost proud of the discovery) You meant the warm thing. Welcome, sad knight.
+
+KESTREL: (caught entirely off guard — a single startled breath that is very nearly a laugh) ...I see the child keeps strange and excellent company.
+
 WREN: (small smile) We'd be glad to have you. (gently) What changed your mind?
 
 KESTREL: You did. The child's hope. (almost embarrassed by the word) If something that small can still believe the world's worth defending — then I can carry a shield for it.
@@ -587,6 +666,94 @@ KESTREL: (a flicker — that lands somewhere) ...Fly, child.
 [She turns and walks back into the smoke — still Ascendancy, still loyal, but a seed planted. She will return in Act III as a sympathetic officer at the gate. The party flies.]
 
 [>>> FLAGS SET: BR2_RESOLVED = true; KESTREL_RECRUITED = false. (No second recruitment window — this fork owns the outcome.) CUT toward A2-11.]
+```
+
+---
+
+# 5b. A2-10b — THE RELIGHTING — HOLLOWGATE (THE CALM BEFORE THE STORM)
+
+> *The marquee JOY scene. A town Relighting festival the party made possible — floating lanterns, sun-bread, music, dancing, the whole found family laughing together. Bramble's first festival; pair-moments. The emotional peak that makes A2-12 devastating. Sets `RELIGHTING_SHARED`. Music: the Song SOARING, whole and golden, woven into a warm festival reel. (Comes after Kestrel resolves, before the race to the gate-relay.)*
+
+```
+[EXTERIOR — HOLLOWGATE, DUSK. Before the desperate run to the gate-relay, the party puts in at the hub. Wren has spent the afternoon steadying the city's faltering great-lamp — and Hollowgate, defiant and grateful, has thrown its RELIGHTING festival a whole season early. The patchwork city glows: paper lanterns strung crane-arm to crane-arm, charged to drift up on the warm air. Music everywhere — fiddles, pipes, a stamping reel. The smell of sun-bread. People dancing on the bridge-chains. For one night the dying sky throws a party, and it is beautiful.]
+
+[MUSIC: the Song's motif, but SOARING — whole and golden, woven into a foot-stamping festival reel. The exact opposite of the Fading's thin silence.]
+```
+
+SABLE: (leaning on a rail with a fistful of sun-bread, watching the lanterns rise) Huh. (to Wren) Steady one cranky old great-lamp and the whole town loses its mind. (a rare, easy smile) Look at 'em.
+
+WREN: (watching the lanterns, the Keeper's Lamp warm at her throat) They just needed an excuse, I think. To be happy on purpose. (soft) Pell would've loved this. He always said the light's not for using up. It's for nights like this.
+
+```
+[A floating lantern drifts up past them. Wren cups her hands under it the way she cups a flame — and lets it go.]
+```
+
+## Pair-moment — BRAMBLE'S FIRST FESTIVAL
+
+```
+[BRAMBLE stands very still in the middle of all the motion, optic-eyes tilting up at the rising lanterns, chest-stone pulsing in time with the reel. TAM crouches beside it.]
+```
+
+TAM: First festival, huh, buddy? What do you think?
+
+BRAMBLE: (slow wonder) The makers built light to *work.* To lift. To warm. To carry. (watching a lantern climb) ...These do no work at all. They are only *glad.* (a long pause) I did not know light was allowed to be only glad.
+
+TAM: (grinning) Yeah. That's kind of the best part.
+
+BRAMBLE: (filing it away, deadpan) ...Then I will add "glad" to the list of things light is for. It was a short list. (beat) Now it is one longer. (beat) Tam. Was that a joke?
+
+TAM: (delighted) Almost! That was an *almost!* We'll get you there!
+
+BRAMBLE: (pleased, watching the lanterns) ...I am keeping count.
+
+## Pair-moment — SABLE & TAM
+
+```
+[Across the square, TAM is showing off his clockwork third-hand gauntlet to a delighted knot of festival kids — it is juggling sun-bread, mostly successfully. SABLE drifts over, arms crossed, half-smirk on.]
+```
+
+TAM: (to the kids) — and THIS one I built MYSELF, from a real pre-Sundering coupler, do you have any idea what that's worth? Don't answer —
+
+SABLE: (dry) 'Bout two dropped buns and a singed eyebrow, last I counted.
+
+TAM: (not missing a beat, gauntlet still juggling) The eyebrow was a PROTOTYPE.
+
+SABLE: (a snort — then quieter, almost fond, slipping a fresh bun onto the gauntlet's tray as she passes) ...Don't tell the kid I'm the one funded that coupler. (beat) I've got a reputation.
+
+TAM: (spinning around, the bread scattering everywhere) You DID?! I KNEW the guild didn't just hand me —
+
+SABLE: (already walking off into the crowd) Tell nobody. I'll deny it. Eat your bun.
+
+## Pair-moment — MIRA & WREN (and KESTREL, if recruited)
+
+```
+[A quieter corner. MIRA and WREN sit on a crate watching the dancing, two mugs of something warm between them, a lantern's glow on their faces.]
+```
+
+MIRA: (gentle) I was taught the Relighting was a prayer. "Tune the year bright; the makers will hear." (watching the dancers) But tonight... I think I just like the *lanterns.* Is that allowed, do you think?
+
+WREN: (a beat late, listening to the music) ...My master said you don't keep a light by praying at it. You keep it by being there. (small smile) Maybe the prayer was always just people deciding to be there. Together. On purpose.
+
+MIRA: (a soft, surprised laugh) ...That is the most honest sermon I have heard in years. And a fourteen-year-old gave it. (she bumps Wren's shoulder, warm)
+
+```
+[IF KESTREL_RECRUITED: KESTREL stands stiffly at the very edge of the dancing, plainly never having attended a single festival in her soldier's life. As Sable passes she shoves a sun-bread into Kestrel's hands.]
+```
+
+KESTREL: (holding the bread like it might be a test of loyalty) I do not... dance. The Ascendancy did not hold festivals. We held *drills.*
+
+WREN: (grinning, standing, holding out a hand) Then you're going to be *terrible* at this. Come on. Being terrible at it is the whole point.
+
+KESTREL: (a long pause — then, the smallest thing, she sets down her blade and takes the offered hand) ...One dance. For the record, this is tactically unnecessary.
+
+WREN: (pulling her into the reel) Noted.
+
+```
+[The whole found family swept into the dancing and the lantern-light and the soaring Song — laughing, clumsy, warm, ALIVE. Hold on it. This is everything they have to lose. The CAMERA pulls up and up, past the rising lanterns, until the bright glad city is one warm gold spark in the darkening sky.]
+
+[MUSIC: the Song hits its highest, fullest, most JOYFUL statement of the whole first half of the game — and holds it — then, as the camera keeps rising, it thins, just slightly, into the wind. The first cold breath of what's coming.]
+
+[>>> FLAG SET: RELIGHTING_SHARED = true. CUT toward A2-11 (racing the drain) → A2-12. The party flies out of the warm light and into the dark, not knowing what waits.]
 ```
 
 ---
@@ -865,6 +1032,76 @@ SABLE: (pulling her into a one-armed captain's hug, finally) Good. (quiet, the r
 [The MUSIC resolves at last — Sable's shanty-swing and its tender refrain finding the major key, warm and whole. The cynic is a believer, and it cost her something real to get here.]
 
 [>>> FLAG SET: SABLE_RECONCILED = true. The two anchors of the family, back to back at the rail, holding the whole sky up between them. CUT toward A3-04 / onward.]
+```
+
+---
+
+# 6d. A3-04b — LIGHT IN THE GREY — THORNHOLT HAVEN
+
+> *Act III's clear "WE DID IT" victory — light breaking through the melancholy. Reunion joy (Tam: a whoop, a hug, a gadget triumph), a re-tuned Hollow swarm, a relit haven, cheers from the rescued, Sable's grin. The lows land harder because of beats like this. Opens off the Tam reunion (A3-04). Sets `HAVEN_RELIT`. Music: the Song climbing back out of the grey into a soaring victory fanfare. Tone: earned joy, NOT denial — they all know the gate still looms.*
+
+```
+[EXTERIOR — THORNHOLT, the salvager shantytown turned overcrowded refugee haven. Grey, patched, packed with frightened families — but loud and alive. TAM is reunited here (A3-04): the instant the party comes up the ramp, he barrels into them.]
+```
+
+TAM: (a flat-out RUN, arms wide, gauntlet flailing) WREN! WREN, you're ALIVE — I KNEW it, I TOLD everybody — (crashing into a hug with Wren and Bramble) — okay I cried a little but I TOLD everybody —
+
+WREN: (squeezed breathless, laughing and teary at once) Tam — Tam, I can't — *breathe* —
+
+TAM: (not letting go) Nope! New rule! Hugs first, breathing SECOND! (pulling back, beaming, then instantly Tam again) Okay so you HAVE to see what I've been building, the haven's great-lamp is dying and I almost have a fix, it only catches fire a *little* now —
+
+SABLE: (arriving behind, dry, but her eyes are bright at the sight of him) "A little." There's the responsible quartermaster I was promised.
+
+```
+[ALARM-BELLS. The haven's great-lamp — the only thing holding back the grey — GUTTERS hard. At the dimming edges a bold HOLLOW SWARM stirs and drifts inward, toward the last warmth and the crowded families. People cry out. This is the fight.]
+```
+
+KESTREL: (if present — instantly shield up, stepping between the swarm and the crowd) Get the families behind me. MOVE.
+
+TAM: (already sprinting for the lamp-platform) My fix can hold the lamp — it's a coupler, it pools every spare wellstone in the haven and the ship's reserve straight into the great-lamp — no new aether, just *all of ours, together* — Wren, if you can buy me ninety seconds —
+
+## The win
+
+```
+[A set-piece — three heroes each doing what only they can, together:]
+[ — KESTREL (or SABLE, if Kestrel was not recruited) holds the line, a wall between the swarm and the children.]
+[ — TAM cranks his contraption onto the great-lamp's cradle. It sparks, bucks, and BACKFIRES — a gout of harmless smoke, the gag — and his face falls.]
+```
+
+TAM: (covered in soot) ...okay. That was supposed to be the part where it works. That was DEFINITELY supposed to be the part where it works —
+
+WREN: (calm, stepping to the lamp, hands cupping the dim stone) Then I'll buy you more than ninety seconds. (to the swarm, gentle, unafraid) Hey. Hey — I know. I know you're cold. Come here. *Listen.*
+
+```
+[>>> Instead of fighting, WREN RE-TUNES the swarm — the kind, hard answer. She HUMS the Song; the gold reaches out and steadies the bold Hollow mid-drift. They slow, gentle, and settle like calmed animals. And in the quiet she makes, Tam re-seats his fix —]
+```
+
+TAM: (frantic, then —) wait — wait — THERE — that's the coupling —
+
+```
+[ — and the contraption CATCHES. Every spare wellstone in the haven and the ship's reserve pours its charge through the coupler at once — not new light, *shared* light — and the haven's great-lamp ROARS back to full gold, brighter than it has been since the Fading, pouring out across the packed, upturned, terrified faces of the refugees —]
+
+[ — and the whole haven ERUPTS in a CHEER. Strangers grab each other. Children point at the gold. The grey, for one whole street, is GONE.]
+
+[MUSIC: the Song surges up out of the thin grey into a full, soaring VICTORY FANFARE — light winning, out loud, for the first time since the cataclysm.]
+```
+
+TAM: (both fists up, soot-black and radiant, the running gag paying off at last) IT WORKED! IT WORKED AND IT BARELY EXPLODED! BEST ONE YET!
+
+SABLE: (grabbing the back of his vest and hauling him into a rough one-armed hug, GRINNING ear to ear) That it did, quartermaster. (to Wren, the grin not budging) And YOU — calmed a whole swarm without throwing one punch. (shaking her head, fierce and proud) Kid, the sky does not deserve you.
+
+WREN: (breathless, glowing, looking at the cheering crowd, the gold light, her family) ...We did it. (a real, disbelieving laugh) We actually — we made it *brighter.* Here. In the grey. (the thing she needed to know) We can make it brighter.
+
+BRAMBLE: (watching the cheering crowd — then, carefully, attempting its first real JOKE, the timing not quite right but TRYING) ...Tam. Your machine works one time in ten. (beat) Tonight was the one. (a longer beat) ...That was the joke. The odds were the joke.
+
+TAM: (throwing his arm around the little construct, overjoyed) Buddy. BUDDY. That was an ACTUAL joke! Look at you! We're getting you there!
+
+BRAMBLE: (pleased, filing it away) ...I am four festivals from funny. (beat) I am still keeping count.
+
+```
+[The found family, lit gold in a grey world, in the middle of a cheering rescued town. They know the gate still waits. But tonight they WON — and for once they let themselves feel it, all the way.]
+
+[>>> FLAG SET: HAVEN_RELIT = true. CUT toward A3-05 / onward.]
 ```
 
 ---
@@ -1191,6 +1428,8 @@ WARDEN: (the light blooming) ...Then together you shall. Tune with me, little Re
 
 [MONTAGE across the sky: dying lamps on a hundred islands STEADY — not blazing, just *enough,* everywhere at once, gold creeping back into grey edges. The Ascendancy's harvester-fleet is re-rigged into charging-ships carrying light to the smallest, poorest islands. No city rises above another.]
 
+[AND THEN — THE CELEBRATION. As the gold reaches each island, the people answer it. A sky-wide dawn party kindles island to island: floating lanterns rise in their thousands (the Relighting, everywhere at once), bells ring, sun-bread is broken, strangers and rescued refugees CHEER and dance on the bridges and the decks. We glimpse the towns the party saved — the Hush survivors, the Thornholt haven, the BR1 island — all lit, all glad, all aloft. MUSIC: the VICTORY FANFARE blooms full and soaring across the whole sky, the Song carried up on ten thousand voices — the biggest, brightest sound in the game.]
+
 [THANE — IF THANE_PERSUADED: he sets the small dead grey lamp-stone of his lost home down gently on the Wellspring's rim, and for the first time, lets it go. If NOT persuaded: he stands at the back, outvoted by a world that chose another way, watching the dawn he didn't believe was possible.]
 ```
 
@@ -1209,7 +1448,7 @@ BRAMBLE: (the last fragment, at peace) No. You *tend* it. All of it. Together. (
 WREN: (whisper) Even after.
 
 ```
-[FINAL IMAGE: the party stands on a re-lit Hollowgate at dawn, the whole sky warm with even, gentle gold behind them. Wren holds the Keeper's Lamp in her cupped hands — one light among thousands now, all of them lit — and tucked beside it, Bramble's stilled, smiling chest-stone, carried home. The Song holds its full, hopeful resolution, and in it, if you listen, one small music-box note rings on inside the chord — Bramble, in all of it. FADE TO GOLD.]
+[FINAL IMAGE: the party stands on a re-lit Hollowgate at dawn — and around them the whole city is CELEBRATING, lanterns rising, crowds cheering the dawn they were promised would never come, the bells of a saved sky ringing out. The whole horizon is warm with even, gentle gold. Wren stands quiet at the center of all that joy, holding the Keeper's Lamp in her cupped hands — one light among thousands now, all of them lit — and tucked beside it, Bramble's stilled, smiling chest-stone, carried home. The triumph is enormous and out-loud; the grief is small and private and held in two hands; and the scene holds BOTH at once. The Song resolves full and soaring and hopeful — and in it, if you listen, one small music-box note rings on inside the chord — Bramble, in all of it. FADE TO GOLD.]
 ```
 
 ---
@@ -1312,7 +1551,11 @@ SABLE: (dry, grinning, the cynic fully a believer) A magic kid, a fixed-up robot
 
 TAM: (gleeful, third-hand gauntlet flashing) Course is "that way"! The exciting way! I'll get more specific in, like, ninety seconds!
 
-WREN: (softly, to the open sky, the bravest and most hopeful she's ever been) Keeper Pell — the lamp's still lit. We're still aloft. (beat) And we're going to go find out why.
+BRAMBLE: (whole now, chest-stone ringing bright — and at last it lands a real joke, clean, the timing finally perfect) ...In ninety seconds we will have gone the wrong way for ninety seconds. (a beat — then, delighted with itself) *That* was the joke. (to Tam, triumphant) I counted. I am no longer four festivals from funny. I have arrived.
+
+TAM: (whooping) HE MADE A JOKE! A REAL ONE! Did everybody — did everybody HEAR that?!
+
+WREN: (laughing, wiping her eyes, then softly to the open sky, the bravest and most hopeful she's ever been) Keeper Pell — the lamp's still lit. We're still aloft. (beat) And we're going to go find out why.
 
 ```
 [The Song does not resolve — it *opens,* like a door, into something new and unfinished and full of promise. The ship sails off the edge of the known map toward the wandering star. A hopeful, mysterious, sequel-shaped horizon. FADE TO BRIGHT WHITE — and one last clear chime of the complete Song.]

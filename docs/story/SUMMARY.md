@@ -16,6 +16,12 @@
 
 **Branching & endings (diverge → merge, fully mapped & deterministic):** four branch points (which dying island to save; whether the knight Kestrel defects; expose or protect the Order's secret; recruit the scholar Rookwise) feed a "unity" model that gates **four distinct endings** — **A** *The Shared Dawn* (share the light; best, hardest, must unite the world), **B** *The Long Quiet* (let the Wellspring sleep; bittersweet peace), **C** *The Ascendant Throne* (take the power for a few; cautionary), and the secret **D** *The Wandering Star* (wake the Warden as a partner and sail off the edge of the sky to find the vanished makers).
 
+**Where it soars (highs make the lows land):**
+- **Triumph & wonder** — Act I ends on an exhilarating *getaway* and Wren's first laugh, not just a goodbye; first flight is pure wonder.
+- **A joyful peak before the fall** — the whole found family throws a lantern-lit **Relighting festival**: dancing, sun-bread, Bramble's first festival ("I did not know light was allowed to be only *glad*"), Kestrel's one reluctant dance ("tactically unnecessary"). Then the cataclysm hits — and it hurts *because* you just danced.
+- **Light wins in the grey** — Act III has real victories: a town relit to cheers, a Hollow swarm gently calmed.
+- **It's actually fun** — a running comedic engine: Tam's gloriously unreliable inventions, Bramble haltingly learning to make a joke, Sable's deadpan. Endings A and D pay off in sky-wide celebration.
+
 **Where the heart lands:**
 - A **personal loss** — Wren's mentor **Keeper Pell** keeps the last lamp lit by hand so a refugee convoy can escape, and fades gently into "the Long Quiet." His ritual ("two taps, a breath — *all's well*") and the lamp he gave her carry through to the ending.
 - A **real family rift** — cynical Sable and hopeful Wren actually break over "hope is a tax I can't pay," and heal — the whole theme fought between two people who love each other.
