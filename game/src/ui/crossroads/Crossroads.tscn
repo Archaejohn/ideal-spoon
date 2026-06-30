@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr0ssr0adsaeth01"]
+
+[ext_resource type="Script" path="res://src/ui/crossroads/crossroads.gd" id="1_crossroads"]
+
+[node name="Crossroads" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_crossroads")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.08, 0.12, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "The Crossroads"
+horizontal_alignment = 1
+
+[node name="Unlocked" type="Label" parent="Center/VBox"]
+layout_mode = 2
+modulate = Color(0.72, 0.76, 0.84, 1)
+text = "No endings unlocked yet."
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="Center/VBox"]
+layout_mode = 2
+text = "Back to Title"

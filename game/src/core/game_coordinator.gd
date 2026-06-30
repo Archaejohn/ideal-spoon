@@ -112,6 +112,29 @@ func advance_story() -> bool:
 		return false
 	return r != null and bool(r.value)
 
+## Resolve the OPEN branch by choosing `option_id` (the Dialogue/branch UI calls this). Applies the
+## option's effects and routes to its goto via the StoryDirector (which drives the scene_intent to
+## the merge path). Returns true on success. No-op if no branch is open or the option is unknown.
+func choose_branch(option_id: String) -> bool:
+	if _director == null:
+		return false
+	var bid: String = _director.current_branch_id()
+	if bid == "":
+		_log("warn", "choose_branch('%s'): no branch open" % option_id)
+		return false
+	var r: Result = _director.choose(bid, option_id)
+	if r != null and r.is_err():
+		_log("warn", "choose_branch: %s" % r.error)
+		return false
+	return true
+
+## The option ids the open branch currently offers (for the choice UI). [] when no branch is open.
+func offered_branch_options() -> Array:
+	if _director == null:
+		return []
+	var bid: String = _director.current_branch_id()
+	return _director.offered_options(bid) if bid != "" else []
+
 ## Start the fight for `encounter_id` against the live GameState party. Called by the Battle
 ## scene's _ready (which reads the encounter from SceneRouter.current_ctx) and by tests. Remembers
 ## the current beat as the pre-battle resume unit, then drives BattleController.start — which

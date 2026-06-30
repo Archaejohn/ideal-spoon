@@ -1,0 +1,19 @@
+{
+  "id": "hollow_skirmish",
+  "enemies": [
+    { "enemy": "hollow_husk", "count": 1, "slot": "center" }
+  ],
+  "formation": "single_back",
+  "flee_allowed": true,
+  "ambush": "none",
+  "victory": "all_enemies_down",
+  "defeat": "all_party_down",
+  "rewards": {
+    "xp": 30,
+    "items": [
+      { "item": "lamp_herb", "chance_permille": 500 }
+    ]
+  },
+  "seed_salt": 2222,
+  "_note": "R3b-2 minor fleeable wreck skirmish (a loose Hollow Husk). flee_allowed=true so the FLEE action is reachable; loot chance 500 exercises the idempotent (single) loot roll. Not on the slice spine -- used to verify the menu FLEE path and rewards-once."
+}

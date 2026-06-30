@@ -1,0 +1,15 @@
+{
+  "id": "SLICE-HELP",
+  "act": 1,
+  "location": "hollowgate",
+  "scene": "dialogue",
+  "branch": null,
+  "effects": [],
+  "next": ["SLICE-WRECK"],
+  "dialogue_set": "slice_help",
+  "dialogue": [
+    { "speaker": "wren", "line": "Hold still -- two taps, a breath. There. You're free." },
+    { "speaker": "tam", "line": "He says the wreck's hatch is round the gantry. We lost a minute, but we made a friend. Worth it." }
+  ],
+  "_note": "R3b-2 BR-SLICE option 'help' target. Sets SLICE_HELPED_DOCKHAND (via the branch option). Converges on SLICE-WRECK."
+}

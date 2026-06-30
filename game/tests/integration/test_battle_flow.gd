@@ -37,7 +37,7 @@ func after_each() -> void:
 # --- WIN ---
 
 func test_full_battle_win_checkpoints_grants_rewards_and_advances() -> void:
-	assert_true(GameCoordinator.advance_story(), "Enter the wreck: SLICE-START -> SLICE-BATTLE")
+	_advance_to_battle()
 	assert_eq(GameState.current_beat_id, "SLICE-BATTLE", "at the battle beat")
 	assert_true(_routed.has(BATTLE_SCENE), "routed to the Battle scene")
 
@@ -63,7 +63,7 @@ func test_full_battle_win_checkpoints_grants_rewards_and_advances() -> void:
 # --- LOSE ---
 
 func test_full_battle_lose_restores_checkpoint_and_routes_back_not_title() -> void:
-	GameCoordinator.advance_story()   # -> SLICE-BATTLE
+	_advance_to_battle()              # drive the slice spine to SLICE-BATTLE
 	RngService.seed_run(999)
 	GameCoordinator.start_battle("sleepless_crane")
 	assert_true(SaveManager.has_checkpoint("pre_battle"), "pre-battle checkpoint written at start")
@@ -88,6 +88,18 @@ func test_full_battle_lose_restores_checkpoint_and_routes_back_not_title() -> vo
 	assert_false(_routed.has(TITLE_SCENE), "never game-overs to the Title")
 
 # --- driver / helpers ---
+
+## Drive the slice spine from the fresh run to the SLICE-BATTLE beat: opening cutscene -> Hollowgate
+## (TOWN) -> the dockside branch (take 'help') -> the wreck (MERGE) -> the battle. Mirrors the verbs
+## the Dialogue/Location scenes use (advance_story / choose_branch).
+func _advance_to_battle() -> void:
+	assert_eq(GameState.current_beat_id, "SLICE-START", "fresh run at the opening")
+	assert_true(GameCoordinator.advance_story(), "opening -> Hollowgate")
+	assert_true(GameCoordinator.advance_story(), "Hollowgate -> the dockside fork")
+	assert_eq(GameCoordinator.director().current_branch_id(), "BR-SLICE", "branch open at the docks")
+	assert_true(GameCoordinator.choose_branch("help"), "choose a branch option")
+	assert_true(GameCoordinator.advance_story(), "option beat -> the wreck (merge)")
+	assert_true(GameCoordinator.advance_story(), "wreck -> the battle")
 
 ## Step the fight to completion. `action_for` is called for each ready PLAYER actor and returns
 ## a BattleAction to queue (or null to let the engine auto-defend). Mirrors the WAIT-mode UI loop.

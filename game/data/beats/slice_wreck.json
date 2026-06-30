@@ -1,0 +1,10 @@
+{
+  "id": "SLICE-WRECK",
+  "act": 1,
+  "location": "hollowgate_wreck",
+  "scene": "dungeon",
+  "branch": null,
+  "effects": [],
+  "next": ["SLICE-BATTLE"],
+  "_note": "R3b-2 branch MERGE beat. Both BR-SLICE arms reconverge here -- the Hollowgate wreck (DUNGEON). Its continue affordance descends into the wreck and advances to SLICE-BATTLE (the Sleepless Crane)."
+}

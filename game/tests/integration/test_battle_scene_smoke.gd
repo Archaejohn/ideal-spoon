@@ -30,7 +30,13 @@ func after_each() -> void:
 	_rmrf(_save_dir)
 
 func test_battle_scene_boots_and_builds_cards() -> void:
-	GameCoordinator.advance_story()         # -> SLICE-BATTLE, sets SceneRouter ctx (encounter)
+	# Drive the slice spine to SLICE-BATTLE (sets the SceneRouter ctx encounter for the scene).
+	GameCoordinator.advance_story()         # opening -> Hollowgate
+	GameCoordinator.advance_story()         # Hollowgate -> dockside branch
+	GameCoordinator.choose_branch("hurry")  # resolve the fork
+	GameCoordinator.advance_story()         # option -> wreck (merge)
+	GameCoordinator.advance_story()         # wreck -> SLICE-BATTLE
+	assert_eq(GameState.current_beat_id, "SLICE-BATTLE", "drove the spine to the battle beat")
 	RngService.seed_run(2024)
 	var scene = BattleScene.instantiate()
 	add_child_autofree(scene)               # _ready runs synchronously: reads ctx + starts battle

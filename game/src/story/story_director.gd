@@ -25,6 +25,8 @@ const SCENE_TO_STATE := {
 	"branch": "CUTSCENE",
 	"battle": "BATTLE",
 	"overworld": "OVERWORLD",
+	"town": "TOWN",
+	"dungeon": "DUNGEON",
 	"ending": "CUTSCENE",
 }
 

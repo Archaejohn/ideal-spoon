@@ -2,11 +2,17 @@
   "id": "SLICE-AFTER",
   "act": 1,
   "location": "hollowgate",
-  "scene": "overworld",
+  "scene": "dialogue",
   "branch": null,
   "effects": [
     { "op": "SET", "flag": "SLICE_BOSS_CLEARED" }
   ],
   "next": [],
-  "_note": "R3b-1 post-battle beat. Reached only after a WIN. Sets SLICE_BOSS_CLEARED (a marker R3b-2 can branch on). The escape-upward scene + Act-1 continuation are R3b-2."
+  "dialogue_set": "slice_after",
+  "dialogue": [
+    { "speaker": "wren", "line": "It's quiet now. Not gone -- quiet. The wreck's lamp is ours to tend." },
+    { "speaker": "tam", "line": "We did it, Wren. First flight, first fight. Sable's going to pretend she isn't proud." },
+    { "speaker": "wren", "line": "The lamp is lit. We're aloft. All's well. ...For now." }
+  ],
+  "_note": "R3b-2 slice closing cutscene. Reached only after a battle WIN. Sets SLICE_BOSS_CLEARED and ends the vertical slice. Terminal (next[]): the Dialogue scene routes back to the Title on completion."
 }

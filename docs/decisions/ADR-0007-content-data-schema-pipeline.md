@@ -79,11 +79,12 @@ validator under `src/data/validators/` and a human-readable spec under `game/dat
 | `id` | str | canonical beat id (`A1-04`). |
 | `act` | int | 1–4. |
 | `location` | id | skyland/location id. |
-| `scene` | enum(`dialogue`,`battle`,`overworld`,`cutscene`,`branch`,`ending`) | which scene type to route to. |
+| `scene` | enum(`dialogue`,`battle`,`overworld`,`town`,`dungeon`,`cutscene`,`branch`,`ending`) | which scene type to route to. `town`/`dungeon` route to the reusable Location scene (R3b-2). |
 | `branch?` | id | branch id if this beat is a branch node (`BR1`…). |
 | `effects` | arr<obj> | ordered effect ops (ADR-0003): `SET`/`INC_UNITY`/`LOCK_ENDINGS`/`SET_FINAL_CHOICE`/`RECORD_ENDING`. |
 | `next` | arr<id> | successor beat ids (single-element on the linear spine). |
-| `dialogue_set?` | id | dialogue lines to play. |
+| `dialogue_set?` | id | external dialogue-line-set id (`data/dialogue/`). |
+| `dialogue?` | arr<obj> | **inline** dialogue (R3b-2): ordered `{ speaker:str, line:str }` objects the Dialogue scene renders for a `dialogue`/`cutscene` beat. Validated for shape (non-empty speaker + line). A lightweight alternative to a separate `dialogue_set` file for short scripted beats. |
 | `encounter?` | id | enemy encounter for `scene:"battle"`. |
 | `checkpoint?` | bool | force a save checkpoint on entry (bosses/set-pieces). |
 

@@ -1,0 +1,10 @@
+{
+  "id": "SLICE-HOLLOWGATE",
+  "act": 1,
+  "location": "hollowgate",
+  "scene": "town",
+  "branch": null,
+  "effects": [],
+  "next": ["SLICE-DOCKS"],
+  "_note": "R3b-2. Arrival at Hollowgate (TOWN). A navigable location; its continue affordance advances the spine to the dockside choice (SLICE-DOCKS)."
+}
