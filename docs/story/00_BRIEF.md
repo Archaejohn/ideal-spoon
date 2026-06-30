@@ -64,5 +64,10 @@ Write full dialogue + cutscene direction for the key beats (openings, recruitmen
 ## Deliverables in docs/story/
 - `01_WORLD.md` (Worldbuilder) · `02_CHARACTERS.md` (Character Writer) · `03_MAIN_STORY.md` (Plot Architect) · `04_BRANCHES_ENDINGS.md` (Plot Architect) · `05_SIDEQUESTS.md` (Quest Designer) · `06_SCRIPT_KEY_SCENES.md` (Script Writers) · `07_CONTINUITY_NOTES.md` (Editor) · `08_REVIEW.md` (Age/Quality Reviewers) · `STORY_BIBLE.md` (index, Owner) · `SUMMARY.md` (1-page, Owner).
 
+## Canon rulings (Owner — binding; resolve worldbuilder's open questions)
+1. **The Skyborn were one people.** In the Sundering they did not all die — most **departed** (stepped out of the world to somewhere else); some were lost. In-world it stays a mystery, but canon is: one people, mostly *elsewhere*. This powers the secret Ending D ("find the vanished Skyborn").
+2. **Resonants are born, rare; they cannot be manufactured.** The Ascendancy **conscripts** natural Resonants and tries to *force/augment* the Song with wellstone rigs — which fails tragically, causing Songsickness and hollowing. **This is exactly what broke Marrow** (a conscripted Resonant burned out by the Ascendancy's rigs). Strong, non-graphic moral stakes for the Cinderworks.
+3. **"The Long Quiet" double meaning is intentional** — the gentle word for death *and* the name of Ending B (the Wellspring sleeping forever, the world settling into a gentler Long Quiet). Keep the thematic rhyme.
+
 ## Naming guardrails (originality)
 No names, places, items, or plot lifted from existing IP. If a name feels close to a known franchise, change it. Keep names pronounceable for a 10-year-old.
