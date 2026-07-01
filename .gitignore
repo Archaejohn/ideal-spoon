@@ -25,3 +25,11 @@ Thumbs.db
 
 # Generated AI reference images (build inputs, not shipped). Keep locally.
 art/refs/
+
+# Art R&D: heavy generated outputs + throwaway animation-prototype projects (keep local, not in git)
+art/_render/
+art/pixel_anim/candidates/
+tools/art/mesh_deform/
+tools/art/skeletal_demo/
+tools/art/skeletal_walk/
+art/pixel_anim/ComfyUI*

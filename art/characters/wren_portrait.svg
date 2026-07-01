@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Aetherbound — Character Portrait: WREN (secret lamp-keeper, age 14)
+  Authored layered vector portrait. Godot rasterizes this SVG on import.
+  Style: soft-painterly + clean closed silhouettes (see docs/art/STYLE_GUIDE.md).
+  Lighting contract: warm lamp-light (right / lampstone) vs cool sky-rim (left).
+  Palette is canonical HEX from STYLE_GUIDE.md §2.
+  Canvas 1024x1024. Eye-line at ~38% from top (y~390) per portrait spec §5.5.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+
+  <defs>
+    <!-- ============ SKY / ATMOSPHERE ============ -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#7FC4E8"/>   <!-- Sky High -->
+      <stop offset="0.55" stop-color="#A9DCF2"/>   <!-- Sky Mid  -->
+      <stop offset="1"    stop-color="#D6EEF9"/>   <!-- Sky Pale -->
+    </linearGradient>
+    <!-- soft ambient warm glow rising from the lampstone region behind the figure -->
+    <radialGradient id="bgWarmGlow" cx="0.5" cy="0.66" r="0.55">
+      <stop offset="0"   stop-color="#FFE9A8" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#FFD56A" stop-opacity="0.22"/>
+      <stop offset="1"   stop-color="#FFD56A" stop-opacity="0"/>
+    </radialGradient>
+    <!-- gentle corner vignette to seat the figure -->
+    <radialGradient id="vignette" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.6" stop-color="#3E5A73" stop-opacity="0"/>
+      <stop offset="1"   stop-color="#3E5A73" stop-opacity="0.14"/>
+    </radialGradient>
+
+    <!-- ============ SKIN ============ -->
+    <!-- lit from upper-right warm, cooling to lower-left -->
+    <linearGradient id="skinGrad" x1="0.15" y1="0.1" x2="0.85" y2="1">
+      <stop offset="0"   stop-color="#FBE0C2"/>   <!-- warm highlight -->
+      <stop offset="0.5" stop-color="#F4D2B0"/>   <!-- Skin Light -->
+      <stop offset="1"   stop-color="#DBAE84"/>   <!-- warm shadow side -->
+    </linearGradient>
+    <radialGradient id="cheekBlush" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E89A78" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#E89A78" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="neckGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D9A878"/>
+      <stop offset="1" stop-color="#C99566"/>
+    </linearGradient>
+
+    <!-- ============ HAIR (Wheat Gold) ============ -->
+    <linearGradient id="hairBackGrad" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0"   stop-color="#E6B85A"/>
+      <stop offset="0.6" stop-color="#D9A23E"/>
+      <stop offset="1"   stop-color="#B57A2A"/>   <!-- amber depth -->
+    </linearGradient>
+    <linearGradient id="hairFrontGrad" x1="0.25" y1="0" x2="0.75" y2="1">
+      <stop offset="0"   stop-color="#F6D886"/>   <!-- catch-light -->
+      <stop offset="0.45" stop-color="#E6C46A"/>  <!-- Wheat Gold -->
+      <stop offset="1"   stop-color="#CF992F"/>   <!-- Lamp Amber-ish shadow -->
+    </linearGradient>
+    <linearGradient id="hairSideGrad" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0"   stop-color="#EBC868"/>
+      <stop offset="1"   stop-color="#C68B2C"/>
+    </linearGradient>
+
+    <!-- ============ COAT (Canvas / Sailcloth) ============ -->
+    <linearGradient id="coatGrad" x1="0.1" y1="0.1" x2="0.9" y2="1">
+      <stop offset="0"   stop-color="#EFE3C9"/>   <!-- lit canvas -->
+      <stop offset="0.5" stop-color="#E4D5B7"/>   <!-- Canvas base -->
+      <stop offset="1"   stop-color="#C3AC81"/>   <!-- canvas shadow -->
+    </linearGradient>
+    <linearGradient id="coatShadeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9A8260" stop-opacity="0.0"/>
+      <stop offset="1" stop-color="#9A8260" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="shirtGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3EAD2"/>
+      <stop offset="1" stop-color="#DFD0AE"/>
+    </linearGradient>
+    <radialGradient id="brassBtn" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0"   stop-color="#E6B45E"/>
+      <stop offset="0.6" stop-color="#C8923E"/>   <!-- Brass -->
+      <stop offset="1"   stop-color="#8A5E26"/>   <!-- Brass Shadow -->
+    </radialGradient>
+
+    <!-- ============ LAMP-STONE (the signature aether glow) ============ -->
+    <radialGradient id="lampHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#FFF3D0" stop-opacity="0.95"/>
+      <stop offset="0.28" stop-color="#FFD56A" stop-opacity="0.70"/>
+      <stop offset="0.62" stop-color="#F2922B" stop-opacity="0.22"/>
+      <stop offset="1"    stop-color="#F2922B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lampStone" cx="0.42" cy="0.34" r="0.7">
+      <stop offset="0"    stop-color="#FFF6DA"/>   <!-- hot core -->
+      <stop offset="0.35" stop-color="#FFE08A"/>
+      <stop offset="0.7"  stop-color="#FFC64B"/>   <!-- Aether Gold -->
+      <stop offset="1"    stop-color="#E07E1C"/>   <!-- Aether Amber edge -->
+    </radialGradient>
+    <!-- warm light the stone casts up onto chin / neck / chest -->
+    <radialGradient id="warmCast" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFEFC2" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#FFEFC2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ==================================================================== -->
+  <!-- BACKGROUND                                                           -->
+  <!-- ==================================================================== -->
+  <g id="background">
+    <rect x="0" y="0" width="1024" height="1024" fill="url(#skyGrad)"/>
+    <!-- soft drifting cloud band, very low contrast -->
+    <ellipse cx="270" cy="300" rx="230" ry="44" fill="#F3FAFD" opacity="0.35"/>
+    <ellipse cx="760" cy="230" rx="200" ry="38" fill="#F3FAFD" opacity="0.30"/>
+    <rect x="0" y="0" width="1024" height="1024" fill="url(#bgWarmGlow)"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- HAIR — BACK MASS (behind head & shoulders)                           -->
+  <!-- ==================================================================== -->
+  <g id="hair-back">
+    <path fill="url(#hairBackGrad)" d="
+      M 512,150
+      C 384,150 306,232 292,372
+      C 285,486 298,572 330,668
+      C 350,712 432,712 452,650
+      L 572,650
+      C 592,712 674,712 694,668
+      C 726,572 739,486 732,372
+      C 718,232 640,150 512,150 Z"/>
+    <!-- cool sky rim-light catching the left edge of the hair -->
+    <path fill="#D6EEF9" opacity="0.5" d="
+      M 300,360 C 292,470 300,560 326,650
+      C 314,558 308,460 318,372
+      C 312,366 306,362 300,360 Z"/>
+    <!-- warm rim-light on the right edge -->
+    <path fill="#FFE9A8" opacity="0.45" d="
+      M 724,360 C 732,470 724,560 698,650
+      C 710,558 716,460 706,372
+      C 712,366 718,362 724,360 Z"/>
+    <!-- deep amber strand shadow at the partings -->
+    <path fill="#A66E22" opacity="0.45" d="
+      M 360,470 C 356,560 364,620 392,656 C 372,600 368,520 372,460 Z"/>
+    <path fill="#A66E22" opacity="0.45" d="
+      M 664,470 C 668,560 660,620 632,656 C 652,600 656,520 652,460 Z"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- COAT — patched oversized canvas coat                                 -->
+  <!-- ==================================================================== -->
+  <g id="coat">
+    <!-- coat body -->
+    <path fill="url(#coatGrad)" d="
+      M 120,1024
+      L 138,772
+      C 150,672 222,624 322,608
+      C 402,596 452,592 512,592
+      C 572,592 622,596 702,608
+      C 802,624 874,672 886,772
+      L 904,1024 Z"/>
+
+    <!-- broad form shadow on the cool (left) side -->
+    <path fill="#9A8260" opacity="0.38" d="
+      M 120,1024 L 138,772 C 150,676 214,628 300,610
+      C 250,648 214,712 208,800 L 220,1024 Z"/>
+    <!-- soft fold shadows under the collar -->
+    <path fill="#9A8260" opacity="0.30" d="
+      M 430,720 C 410,800 408,900 420,1000 L 470,1000
+      C 458,900 460,808 478,732 Z"/>
+    <path fill="#9A8260" opacity="0.30" d="
+      M 596,720 C 616,800 618,900 606,1000 L 556,1000
+      C 568,900 566,808 548,732 Z"/>
+
+    <!-- darker coat-opening behind the shirt so the open jacket reads clearly -->
+    <path fill="#B79C6E" opacity="0.7" d="
+      M 452,600 L 512,548 L 572,600 L 560,840 L 464,840 Z"/>
+    <!-- inner shirt: warm cream V at the chest -->
+    <path fill="url(#shirtGrad)" d="
+      M 470,612 L 512,562 L 554,612 L 544,824 L 480,824 Z"/>
+    <path fill="#C9B488" opacity="0.35" d="M 512,612 L 544,824 L 512,824 Z"/>
+    <!-- centre front placket seam -->
+    <path fill="none" stroke="#9A8260" stroke-width="3" opacity="0.5" d="M 512,612 L 512,824"/>
+
+    <!-- ===== collar / lapels (pointed canvas collar) ===== -->
+    <g id="collar">
+      <!-- left lapel -->
+      <path fill="url(#coatGrad)" d="
+        M 470,602 C 422,606 372,634 346,700
+        C 336,726 338,752 360,766
+        C 404,724 444,676 486,634 Z"/>
+      <path fill="#9A8260" opacity="0.30" d="
+        M 470,602 C 440,616 404,648 380,694 C 412,664 446,632 486,634 Z"/>
+      <!-- right lapel (lit side, warmer) -->
+      <path fill="url(#coatGrad)" d="
+        M 554,602 C 602,606 652,634 678,700
+        C 688,726 686,752 664,766
+        C 620,724 580,676 538,634 Z"/>
+      <path fill="#FFEFC2" opacity="0.28" d="
+        M 554,602 C 584,616 620,648 644,694 C 612,664 578,632 538,634 Z"/>
+      <!-- collar inner edge contour (the open neckline) -->
+      <path fill="none" stroke="#8A7350" stroke-width="5" stroke-linecap="round" opacity="0.7"
+        d="M 486,634 C 444,676 404,724 360,766 M 538,634 C 580,676 620,724 664,766"/>
+      <!-- lapel fold ridge highlight -->
+      <path fill="none" stroke="#F1E6CC" stroke-width="3" stroke-linecap="round" opacity="0.6"
+        d="M 480,640 C 446,680 412,724 372,762 M 544,640 C 578,680 612,724 652,762"/>
+    </g>
+
+    <!-- ===== chest pockets (two, with flaps + buttons) ===== -->
+    <g id="pocket-left">
+      <rect x="300" y="788" width="150" height="150" rx="14" fill="url(#coatGrad)"/>
+      <rect x="300" y="788" width="150" height="150" rx="14" fill="#9A8260" opacity="0.16"/>
+      <path fill="none" stroke="#9A8260" stroke-width="4" opacity="0.5" d="M 300,802 h150"/>
+      <!-- flap -->
+      <path fill="url(#coatGrad)" d="M 296,786 L 454,786 L 444,838 C 376,852 332,852 306,838 Z"/>
+      <path fill="none" stroke="#9A8260" stroke-width="3.5" opacity="0.55"
+        d="M 296,786 L 454,786 L 444,838 C 376,852 332,852 306,838 Z"/>
+      <circle cx="375" cy="822" r="9" fill="url(#brassBtn)"/>
+    </g>
+    <g id="pocket-right">
+      <rect x="574" y="788" width="150" height="150" rx="14" fill="url(#coatGrad)"/>
+      <rect x="574" y="788" width="150" height="150" rx="14" fill="#FFEFC2" opacity="0.10"/>
+      <path fill="none" stroke="#9A8260" stroke-width="4" opacity="0.5" d="M 574,802 h150"/>
+      <path fill="url(#coatGrad)" d="M 570,786 L 728,786 L 718,838 C 650,852 606,852 580,838 Z"/>
+      <path fill="none" stroke="#9A8260" stroke-width="3.5" opacity="0.55"
+        d="M 570,786 L 728,786 L 718,838 C 650,852 606,852 580,838 Z"/>
+      <circle cx="649" cy="822" r="9" fill="url(#brassBtn)"/>
+    </g>
+
+    <!-- ===== little canvas patches (she patches her oversized coat) ===== -->
+    <g id="patches">
+      <!-- upper-left chest patch -->
+      <rect x="258" y="700" width="64" height="56" rx="10" fill="#D8C49A" opacity="0.85"
+        transform="rotate(-8 290 728)"/>
+      <rect x="258" y="700" width="64" height="56" rx="10" fill="none" stroke="#B49E72"
+        stroke-width="2.5" stroke-dasharray="6 5" transform="rotate(-8 290 728)"/>
+      <!-- lower-right patch on the coat skirt -->
+      <rect x="700" y="930" width="72" height="62" rx="10" fill="#D8C49A" opacity="0.85"
+        transform="rotate(6 736 961)"/>
+      <rect x="700" y="930" width="72" height="62" rx="10" fill="none" stroke="#B49E72"
+        stroke-width="2.5" stroke-dasharray="6 5" transform="rotate(6 736 961)"/>
+    </g>
+
+    <!-- ===== centre placket buttons ===== -->
+    <g id="placket-buttons">
+      <circle cx="512" cy="892" r="11" fill="url(#brassBtn)"/>
+      <circle cx="512" cy="978" r="11" fill="url(#brassBtn)"/>
+    </g>
+
+    <!-- cool sky rim-light on the far-left coat edge -->
+    <path fill="#D6EEF9" opacity="0.4" d="
+      M 138,772 C 150,690 200,648 270,624 C 220,664 188,720 178,790 L 168,1024 L 140,1024 Z"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- NECK                                                                 -->
+  <!-- ==================================================================== -->
+  <g id="neck">
+    <path fill="url(#neckGrad)" d="
+      M 464,512 L 460,616 L 564,616 L 560,512
+      C 542,544 482,544 464,512 Z"/>
+    <!-- soft contact shadow of the jaw on the neck -->
+    <path fill="#B07A57" opacity="0.45" d="
+      M 466,516 C 484,548 540,548 558,516
+      C 548,556 476,556 466,516 Z"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- HEAD / FACE                                                          -->
+  <!-- ==================================================================== -->
+  <g id="head">
+    <!-- ears -->
+    <path fill="url(#skinGrad)" d="M 372,372 C 350,368 340,392 348,420 C 356,444 374,448 384,436 Z"/>
+    <path fill="url(#skinGrad)" d="M 652,372 C 674,368 684,392 676,420 C 668,444 650,448 640,436 Z"/>
+    <path fill="#B07A57" opacity="0.5" d="M 362,386 C 356,402 358,418 368,428 C 362,412 362,398 366,388 Z"/>
+    <path fill="#B07A57" opacity="0.5" d="M 662,386 C 668,402 666,418 656,428 C 662,412 662,398 658,388 Z"/>
+
+    <!-- face base silhouette -->
+    <path fill="url(#skinGrad)" d="
+      M 512,238
+      C 600,238 646,300 650,372
+      C 653,430 644,470 624,500
+      C 600,532 558,548 512,548
+      C 466,548 424,532 400,500
+      C 380,470 371,430 374,372
+      C 378,300 424,238 512,238 Z"/>
+
+    <!-- core cheek/jaw shadow on the cool (left) side -->
+    <path fill="#B07A57" opacity="0.32" d="
+      M 400,500 C 384,470 374,430 376,374
+      C 378,420 392,470 414,500 C 430,520 452,532 478,540
+      C 448,538 420,524 400,500 Z"/>
+    <!-- forehead/temple soft shade under the bangs -->
+    <path fill="#B07A57" opacity="0.22" d="
+      M 388,340 C 430,360 594,360 636,340 C 600,372 424,372 388,340 Z"/>
+
+    <!-- cheek blush -->
+    <ellipse cx="436" cy="452" rx="40" ry="26" fill="url(#cheekBlush)"/>
+    <ellipse cx="588" cy="452" rx="40" ry="26" fill="url(#cheekBlush)"/>
+
+    <!-- warm rim-light tracing the lit (right) jaw + cool rim on the left -->
+    <path fill="#FFEFC2" opacity="0.5" d="
+      M 648,372 C 651,430 642,470 622,500 C 636,468 642,426 638,374 Z"/>
+    <path fill="#D6EEF9" opacity="0.45" d="
+      M 376,372 C 373,430 382,470 402,500 C 388,468 382,426 386,374 Z"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- FACE — features                                                      -->
+  <!-- ==================================================================== -->
+  <g id="face">
+    <!-- eyebrows: soft, gentle arcs -->
+    <path fill="none" stroke="#A9763F" stroke-width="9" stroke-linecap="round" d="
+      M 408,352 C 432,338 466,338 486,348"/>
+    <path fill="none" stroke="#A9763F" stroke-width="9" stroke-linecap="round" d="
+      M 538,348 C 558,338 592,338 616,352"/>
+
+    <!-- ===== eyes (large, warm amber, friendly) ===== -->
+    <g id="eye-left">
+      <path fill="#FBF4E8" d="
+        M 414,392 C 430,374 466,374 482,390 C 470,414 426,414 414,392 Z"/>
+      <circle cx="448" cy="394" r="21" fill="#7A4E22"/>
+      <radialGradient id="irisL" cx="0.5" cy="0.4" r="0.6">
+        <stop offset="0" stop-color="#D49A48"/>
+        <stop offset="0.6" stop-color="#9A6328"/>
+        <stop offset="1" stop-color="#5E3A18"/>
+      </radialGradient>
+      <circle cx="448" cy="394" r="21" fill="url(#irisL)"/>
+      <circle cx="448" cy="396" r="9.5" fill="#3A2614"/>
+      <circle cx="442" cy="388" r="5" fill="#FFF6E6" opacity="0.95"/>
+      <!-- upper lash line -->
+      <path fill="none" stroke="#5E3A1E" stroke-width="6.5" stroke-linecap="round" d="
+        M 412,390 C 432,372 468,372 486,388"/>
+    </g>
+    <g id="eye-right">
+      <path fill="#FBF4E8" d="
+        M 542,390 C 558,374 594,374 610,392 C 598,414 554,414 542,390 Z"/>
+      <circle cx="576" cy="394" r="21" fill="#7A4E22"/>
+      <radialGradient id="irisR" cx="0.5" cy="0.4" r="0.6">
+        <stop offset="0" stop-color="#D49A48"/>
+        <stop offset="0.6" stop-color="#9A6328"/>
+        <stop offset="1" stop-color="#5E3A18"/>
+      </radialGradient>
+      <circle cx="576" cy="394" r="21" fill="url(#irisR)"/>
+      <circle cx="576" cy="396" r="9.5" fill="#3A2614"/>
+      <circle cx="570" cy="388" r="5" fill="#FFF6E6" opacity="0.95"/>
+      <path fill="none" stroke="#5E3A1E" stroke-width="6.5" stroke-linecap="round" d="
+        M 538,388 C 556,372 592,372 612,390"/>
+    </g>
+
+    <!-- nose: soft shadow + tiny highlight -->
+    <path fill="#B07A57" opacity="0.42" d="
+      M 504,418 C 498,442 492,456 504,464 C 514,470 522,468 524,460
+      C 520,452 516,440 516,420 Z"/>
+    <path fill="#FBE0C2" opacity="0.7" d="M 506,430 C 504,446 506,456 512,460 C 510,448 510,438 512,430 Z"/>
+
+    <!-- mouth: gentle closed smile -->
+    <path fill="none" stroke="#9A5E44" stroke-width="6" stroke-linecap="round" d="
+      M 478,498 C 498,512 526,512 546,498"/>
+    <path fill="#E89878" opacity="0.55" d="
+      M 484,503 C 502,516 522,516 540,503 C 522,512 502,512 484,503 Z"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- HAIR — FRONT (bangs + side locks framing the face)                   -->
+  <!-- ==================================================================== -->
+  <g id="hair-front">
+    <!-- left side lock sweeping down past the cheek -->
+    <path fill="url(#hairSideGrad)" d="
+      M 372,300 C 330,360 312,470 322,576 C 338,632 372,648 398,632
+      C 380,560 378,470 392,398 C 400,356 392,322 372,300 Z"/>
+    <!-- right side lock -->
+    <path fill="url(#hairSideGrad)" d="
+      M 652,300 C 694,360 712,470 702,576 C 686,632 652,648 626,632
+      C 644,560 646,470 632,398 C 624,356 632,322 652,300 Z"/>
+
+    <!-- main bangs / fringe across the forehead with a soft off-centre part -->
+    <path fill="url(#hairFrontGrad)" d="
+      M 512,168
+      C 416,168 350,214 332,316
+      C 326,348 338,372 364,376
+      C 372,344 392,322 420,312
+      C 426,346 442,366 474,372
+      C 480,338 492,318 514,314
+      C 536,318 548,338 554,372
+      C 586,366 602,346 608,312
+      C 636,322 656,344 664,376
+      C 690,372 702,348 696,316
+      C 678,214 612,168 512,168 Z"/>
+
+    <!-- strand separations (deeper amber, soft & subtle so they read as hair not horns) -->
+    <path fill="#C68B2C" opacity="0.28" d="
+      M 430,336 C 422,352 420,366 426,378 C 418,366 416,348 424,334 Z"/>
+    <path fill="#C68B2C" opacity="0.28" d="
+      M 594,336 C 602,352 604,366 598,378 C 606,366 608,348 600,334 Z"/>
+    <path fill="#C68B2C" opacity="0.22" d="
+      M 512,332 C 507,350 507,362 512,374 C 517,362 517,350 512,332 Z"/>
+
+    <!-- catch-light along the top of the fringe -->
+    <path fill="#F8E29A" opacity="0.7" d="
+      M 430,210 C 480,184 560,184 606,212 C 556,200 470,200 430,210 Z"/>
+    <!-- cool sky glint on the left fringe edge -->
+    <path fill="#D6EEF9" opacity="0.4" d="
+      M 336,318 C 330,348 340,370 360,376 C 346,366 340,346 344,320 Z"/>
+  </g>
+
+  <!-- ==================================================================== -->
+  <!-- LAMP-STONE — the signature aether glow at her throat                 -->
+  <!-- ==================================================================== -->
+  <g id="lampstone-glow">
+    <!-- large soft warm light cast onto the chest/shirt -->
+    <ellipse cx="512" cy="700" rx="165" ry="120" fill="url(#warmCast)" opacity="0.85"/>
+    <!-- warm light lifting onto the chin / underside of the face -->
+    <ellipse cx="512" cy="540" rx="120" ry="64" fill="url(#warmCast)" opacity="0.8"/>
+    <!-- the glowing halo -->
+    <circle cx="512" cy="672" r="120" fill="url(#lampHalo)"/>
+  </g>
+
+  <g id="lampstone-cord">
+    <!-- leather cord around the neck -->
+    <path fill="none" stroke="#6B4E3D" stroke-width="6" stroke-linecap="round" d="
+      M 468,560 C 480,604 498,634 512,648 C 526,634 544,604 556,560"/>
+    <path fill="none" stroke="#8A6A52" stroke-width="2.5" stroke-linecap="round" opacity="0.8" d="
+      M 470,562 C 482,604 499,632 512,646"/>
+    <!-- little cord knot / cap above the stone -->
+    <ellipse cx="512" cy="652" rx="11" ry="9" fill="#6B4E3D"/>
+  </g>
+
+  <g id="lampstone">
+    <!-- the amber stone (teardrop) -->
+    <path fill="url(#lampStone)" d="
+      M 512,656
+      C 540,658 556,684 556,710
+      C 556,742 536,766 512,766
+      C 488,766 468,742 468,710
+      C 468,684 484,658 512,656 Z"/>
+    <!-- bright inner core -->
+    <ellipse cx="506" cy="704" rx="16" ry="22" fill="#FFF6DA" opacity="0.85"/>
+    <!-- crisp specular glint -->
+    <ellipse cx="500" cy="694" rx="6" ry="9" fill="#FFFFFF" opacity="0.9"/>
+    <!-- warm edge contour (never black) -->
+    <path fill="none" stroke="#C76A14" stroke-width="2.5" opacity="0.6" d="
+      M 512,656 C 540,658 556,684 556,710 C 556,742 536,766 512,766
+      C 488,766 468,742 468,710 C 468,684 484,658 512,656 Z"/>
+  </g>
+
+  <!-- gentle overall vignette to finish -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#vignette)"/>
+
+</svg>

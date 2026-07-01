@@ -6,8 +6,9 @@
 - **Original runtime start (Phase 0):** 2026-06-30T07:29:58Z
 - **Timer RESET by Owner after story approval — new window start:** 2026-06-30T13:55:00Z
 - **Hard checkpoint (4h30m of new window):** 2026-06-30T18:25:00Z (5h window ends ~18:55Z)
-- **Current phase:** Phase 3 — Vertical slice **COMPLETE** (all merged, 141 tests green, slice playable end-to-end). **Phase 4 — Full production** is next.
-- **Latest runtime window start:** 2026-06-30T13:55:00Z (Owner reset); resumed work 18:44Z. main builds + 141 tests green; nothing in flight.
+- **Current phase:** Phase 3 slice **COMPLETE & merged** (141 tests green, playable). Then **Phase 4 ART-PIPELINE R&D** (this session, 2026-07-01) → **pixel-art pipeline PROVEN** (full N/S/E/W walk), **pending formal lock** (pixel style guide + palette + ADR) before Phase 4 production proper.
+- **➡️ FULL CONTEXT: see `docs/SESSION_HANDOFF.md` and `CLAUDE.md`.** Working branch: `feat/phase4-art-pipeline` (art tooling + this handoff). No open PRs.
+- **Art direction (Owner):** pixel art, SNES / FF VI / Secret of Mana. Reliable pipeline = Flux.2 Klein (local ComfyUI :8000) generate + **edit** (ReferenceLatent, preserves character) + per-frame review + master-palette lock. Tools in `tools/art/`.
 - **Story gate:** ✅ APPROVED by Owner. Story is locked; it is the game we build.
 - **Remote:** https://github.com/Archaejohn/ideal-spoon.git (origin) — push verified. Story merged to main (PR #1).
 
@@ -28,12 +29,15 @@
   - R3b-2 (PR #7): dialogue/cutscene UI, Location (town/dungeon) scenes, Crossroads stub; real slice micro-arc with **one diverging/merging branch**; fixed H1 (dialogue rendered blank — node-path bug found in review). **141 tests green; slice completable end-to-end on both branch arms.**
 
 ## In flight
-- **Nothing in flight.** Phase 3 complete; main releasable at 141 tests green.
+- **Art-pipeline R&D (branch `feat/phase4-art-pipeline`):** pixel pipeline proven; **awaiting Owner go-ahead to LOCK it** (write pixel `STYLE_GUIDE.md` + master palette + art ADR, retire painterly guide, merge branch). Nothing else in flight; `main` releasable at 141 tests.
 
-## Next steps (RESUME HERE — Phase 4: Full production)
-The big loop — turn the locked story bible into the full game. Parallelizable (use **`isolation:"worktree"`** for concurrent engineers/artists):
-1. **Content authoring (data):** convert the whole story (03 beat ledger A1-01..A4-07 + the heart/triumph/Piggy beats, 04 branches/endings, 05 side quests, 06 dialogue) into ContentDB data — all beats, branches, dialogue, quests, items, enemies, abilities, encounters, level curves. Flip ContentDB to strict validation as each act closes.
-2. **Art (Art Quality Loop):** Art Director writes `docs/art/STYLE_GUIDE.md`; then per-asset SVG → independent critic (≥8/10) → completeness → Art Director ship. All characters/enemies/environments/UI; replace ALL placeholders. Whole-game cohesion gate.
+## Next steps (RESUME HERE)
+**0. Lock the art pipeline (if Owner approves):** pixel `docs/art/STYLE_GUIDE.md` + `docs/art/PALETTE.*` + art ADR (pixel raster; Flux.2 gen+edit+review+palette-lock; no rigging; ComfyUI-local); fix North base pendant-on-back; merge `feat/phase4-art-pipeline`.
+
+**Then Phase 4 — Full production.** The big loop — turn the locked story bible into the full game (use **`isolation:"worktree"`** for concurrent agents):
+1. **Content authoring (data):** convert the whole story (03 beat ledger A1-01..A4-07 + heart/triumph/Piggy beats, 04 branches/endings, 05 side quests, 06 dialogue) into ContentDB data — beats, branches, dialogue, quests, items, enemies, abilities, encounters, level curves. Flip ContentDB to strict validation as each act closes.
+2. **Art (pixel pipeline + Art Quality Loop):** per-asset via `tools/art/comfy_gen.py`+`comfy_edit.py` → review ≥8/10 → master-palette lock. Cast/enemies/tiles/portraits + the walk-set template; replace all placeholders; whole-game cohesion gate.
+2b. **Skyway overworld map (Owner design intent):** progressively-opening FF-style map of skylands you pilot between (unlock via story flags; enter towns/dungeons; Second Sundering reshapes it). Write an ADR + build in Phase 4.
 3. **Audio:** original soundtrack (the "Song" motif system + per-area/mood) + SFX; cohesive.
 4. **Systems/UI completion:** full menus (inventory, party, equipment, status), world map/travel, settings (incl. ATB wait/active + timer), full Crossroads ending-replay (ADR-0006 reconstruction), credits.
 5. **Loop:** implement→test→review→merge→integrate→playtest→fix; Architect repeatedly asks "is the game complete per DoD?" Keep looping while no.
